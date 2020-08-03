@@ -1,0 +1,68 @@
+{
+    "key": "group_5cd065b6e9fef",
+    "title": "Schema",
+    "fields": [
+        {
+            "key": "field_5cd065d5ba501",
+            "label": "Schema Type",
+            "name": "type",
+            "type": "select",
+            "instructions": "Please select the Schema which best relates to this item. Learn more here: https:\/\/schema.org\/docs\/schemas.html",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "show_in_graphql": 1,
+            "choices": {
+                "Event": "Event",
+                "Restaurant": "Restaurant",
+                "LandmarksOrHistoricalBuildings": "LandmarksOrHistoricalBuildings",
+                "TouristAttraction": "TouristAttraction",
+                "TouristDestination": "TouristDestination",
+                "Place": "Place",
+                "LocalBusiness": "LocalBusiness",
+                "Accommodation": "Accommodation",
+                "Apartment": "Apartment",
+                "House": "House",
+                "Hotel": "Hotel"
+            },
+            "default_value": [],
+            "allow_null": 1,
+            "multiple": 0,
+            "ui": 0,
+            "return_format": "value",
+            "ajax": 0,
+            "placeholder": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "experiences"
+            }
+        ],
+        [
+            {
+                "param": "taxonomy",
+                "operator": "==",
+                "value": "experience_taxonomy"
+            }
+        ]
+    ],
+    "menu_order": 1,
+    "position": "acf_after_title",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "",
+    "show_in_graphql": 0,
+    "graphql_field_name": "schemaOrg",
+    "modified": 1595941038
+}

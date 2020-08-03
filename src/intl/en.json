@@ -1,0 +1,18 @@
+{
+  "containers.LocaleToggle.de": "de",
+  "containers.LocaleToggle.en": "en",
+  "containers.LocaleToggle.it": "it",
+  "containers.SearchProvider.filters.BedroomsFilter.label": "Bedrooms",
+  "containers.SearchProvider.filters.BedroomsFilter.set.label": "{value, plural, =0 {Bedrooms} one {1 bedroom} other {{value} bedrooms}}",
+  "containers.SearchProvider.filters.GuestsFilter.label": "Guests",
+  "containers.SearchProvider.filters.GuestsFilter.set.label": "{value, plural, =0 {Guests} one {1 guest} other {{value} guests}}",
+  "containers.SearchProvider.filters.PriceFilter.label": "Price",
+  "containers.SearchProvider.filters.PriceFilter.set.label": "Price",
+  "containers.SearchProvider.filters.adults.filterLabel": "Adults",
+  "containers.SearchProvider.filters.bedrooms.filterLabel": "Bedrooms",
+  "containers.SearchProvider.filters.children.filterLabel": "Children",
+  "containers.SearchProvider.filters.guests.filterLabel": "Guests",
+  "containers.SearchProvider.filters.infants.filterLabel": "Infants",
+  "containers.SearchProvider.filters.pets.filterLabel": "Pets",
+  "containers.SearchProvider.filters.price.filterLabel": "Price"
+}

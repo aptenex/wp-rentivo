@@ -1,0 +1,62 @@
+{
+	"name": "aptenex/rentivo-simba",
+	"description": "Here is a short description of the plugin.",
+	"type": "project",
+	"license": "GPL-3.0-or-later",
+	"authors": [
+		{
+			"name": "Rentivo",
+			"email": "support@rentivo.com",
+			"homepage": "https://www.rentivo.com/",
+			"role": "Developer"
+		},
+		{
+			"name": "TourKick LLC (Clifford Paulick)",
+			"email": "tko@tourkick.com",
+			"homepage": "https://tourkick.com/",
+			"role": "Developer"
+		}
+	],
+	"require": {
+		"php": ">=7.1.0",
+		"tgmpa/tgm-plugin-activation": "~2.6"
+	},
+	"minimum-stability": "stable",
+	"archive": {
+		"exclude": [
+			"!vendor/*",
+			"*.babel.js",
+			"*.env",
+			"*.local",
+			"*.test",
+			"*.zip",
+			"/.all-contributorsrc",
+			"/.babelrc",
+			"/.gitattributes",
+			"/.github",
+			"/.gitignore",
+			"/.phpcs.xml",
+			"/.phpunit.result.cache",
+			"/.travis.yml",
+			"/.wordpress-org",
+			"/README.md",
+			"/composer.json",
+			"/composer.lock",
+			"/composer.phar",
+			"/development/",
+			"/logs/",
+			"/node_modules/",
+			"/phpcs.xml",
+			"/phpunit.xml"
+		]
+	},
+	"autoload": {
+		"psr-4": {
+			"Rentivo_Simba\\": "src/"
+		}
+	},
+	"config": {
+		"archive-format": "zip",
+		"optimize-autoloader": true
+	}
+}

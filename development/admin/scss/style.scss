@@ -1,0 +1,12 @@
+$color: #f03;
+
+@import "style-editor";
+
+body {
+
+}
+
+// Remove Customizer button
+a.button.customize {
+	display: none;
+}
