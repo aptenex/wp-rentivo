@@ -12,6 +12,15 @@ if ( ! class_exists( Acf::class ) ) {
 
         public function init() {
 
+            $optionsSiteConfig = get_field('site_config', 'options');
+            if($optionsSiteConfig) {
+                $siteConfig = json_decode($optionsSiteConfig);
+                $api = $siteConfig->site->api;
+                if($api->googleApiKey) {
+                    acf_update_setting('google_api_key', $api->googleApiKey);
+                }
+            }
+
             if( function_exists('acf_add_options_page') ) {
 
                 // Add parent.
@@ -145,6 +154,15 @@ if ( ! class_exists( Acf::class ) ) {
 
 
         }
+
+        /*
+        public function acf_google_map_api( $api ){
+
+            $api['key'] = 'xxx';
+
+            return $api;
+
+        }*/
 
 	}
 }

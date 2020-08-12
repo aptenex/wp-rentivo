@@ -13,6 +13,145 @@ if ( ! class_exists( WPGraphQl::class ) ) {
 
         }
 
+        public function support_custom_acf_fields($supported_fields) {
+            array_push($supported_fields, 'map_bbox');
+            return $supported_fields;
+        }
+
+        public function register_custom_acf_fields($field_config, $type_name, $field_name, $config) {
+
+            $acf_field = isset( $config['acf_field'] ) ? $config['acf_field'] : null;
+            $acf_type  = isset( $acf_field['type'] ) ? $acf_field['type'] : null;
+            if ($acf_type == 'map_bbox') {
+
+                $field_type_name = 'ACF_GoogleMap_BoundingBox';
+
+                $fields = [
+                    'streetAddress' => [
+                        'type'        => 'String',
+                        'description' => __( 'The street address associated with the map', 'wp-graphql-acf' ),
+                        'resolve'     => function( $root ) {
+                            return isset( $root['address'] ) ? $root['address'] : null;
+                        },
+                    ],
+                    'latitude'      => [
+                        'type'        => 'Float',
+                        'description' => __( 'The latitude associated with the map', 'wp-graphql-acf' ),
+                        'resolve'     => function( $root ) {
+                            return isset( $root['lat'] ) ? $root['lat'] : null;
+                        },
+                    ],
+                    'longitude'     => [
+                        'type'        => 'Float',
+                        'description' => __( 'The longitude associated with the map', 'wp-graphql-acf' ),
+                        'resolve'     => function( $root ) {
+                            return isset( $root['lng'] ) ? $root['lng'] : null;
+                        },
+                    ],
+                ];
+
+                // ACF 5.8.6 added more data to Google Maps field value
+                // https://www.advancedcustomfields.com/changelog/
+                if (\acf_version_compare(acf_get_db_version(), '>=', '5.8.6')) {
+                    $fields += [
+                        'streetName' => [
+                            'type'        => 'String',
+                            'description' => __( 'The street name associated with the map', 'wp-graphql-acf' ),
+                            'resolve'     => function( $root ) {
+                                return isset( $root['street_name'] ) ? $root['street_name'] : null;
+                            },
+                        ],
+                        'streetNumber' => [
+                            'type'        => 'String',
+                            'description' => __( 'The street number associated with the map', 'wp-graphql-acf' ),
+                            'resolve'     => function( $root ) {
+                                return isset( $root['street_number'] ) ? $root['street_number'] : null;
+                            },
+                        ],
+                        'city' => [
+                            'type'        => 'String',
+                            'description' => __( 'The city associated with the map', 'wp-graphql-acf' ),
+                            'resolve'     => function( $root ) {
+                                return isset( $root['city'] ) ? $root['city'] : null;
+                            },
+                        ],
+                        'state' => [
+                            'type'        => 'String',
+                            'description' => __( 'The state associated with the map', 'wp-graphql-acf' ),
+                            'resolve'     => function( $root ) {
+                                return isset( $root['state'] ) ? $root['state'] : null;
+                            },
+                        ],
+                        'stateShort' => [
+                            'type'        => 'String',
+                            'description' => __( 'The state abbreviation associated with the map', 'wp-graphql-acf' ),
+                            'resolve'     => function( $root ) {
+                                return isset( $root['state_short'] ) ? $root['state_short'] : null;
+                            },
+                        ],
+                        'postCode' => [
+                            'type'        => 'String',
+                            'description' => __( 'The post code associated with the map', 'wp-graphql-acf' ),
+                            'resolve'     => function( $root ) {
+                                return isset( $root['post_code'] ) ? $root['post_code'] : null;
+                            },
+                        ],
+                        'country' => [
+                            'type'        => 'String',
+                            'description' => __( 'The country associated with the map', 'wp-graphql-acf' ),
+                            'resolve'     => function( $root ) {
+                                return isset( $root['country'] ) ? $root['country'] : null;
+                            },
+                        ],
+                        'countryShort' => [
+                            'type'        => 'String',
+                            'description' => __( 'The country abbreviation associated with the map', 'wp-graphql-acf' ),
+                            'resolve'     => function( $root ) {
+                                return isset( $root['country_short'] ) ? $root['country_short'] : null;
+                            },
+                        ],
+                        'placeId' => [
+                            'type'        => 'String',
+                            'description' => __( 'The country associated with the map', 'wp-graphql-acf' ),
+                            'resolve'     => function( $root ) {
+                                return isset( $root['place_id'] ) ? $root['place_id'] : null;
+                            },
+                        ],
+                        'zoom' => [
+                            'type'        => 'String',
+                            'description' => __( 'The zoom defined with the map', 'wp-graphql-acf' ),
+                            'resolve'     => function( $root ) {
+                                return isset( $root['zoom'] ) ? $root['zoom'] : null;
+                            },
+                        ],
+                    ];
+                }
+
+                $fields += [
+                    'coordinates' => [
+                        'type'        => 'String',
+                        'description' => __( 'Coordinates', 'wp-graphql-acf' ),
+                        'resolve'     => function( $root ) {
+                            return isset( $root['coordinates'] )  ? json_encode($root['coordinates']) : null;
+                        },
+                    ]
+                ];
+
+                register_graphql_object_type(
+                    $field_type_name,
+                    [
+                        'description' => __( 'Google Map (Bounding Box) field', 'wp-graphql-acf' ),
+                        'fields'      => $fields,
+                    ]
+                );
+                $field_config['type'] = $field_type_name;
+
+            }
+
+
+            return $field_config;
+        }
+
         public function register_endpoints() {
             if( function_exists('register_graphql_field') and function_exists('register_graphql_object_type') and function_exists('pll_languages_list') ) {
 

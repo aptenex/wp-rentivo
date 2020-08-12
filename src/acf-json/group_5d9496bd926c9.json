@@ -197,6 +197,27 @@
                     "prepend": "",
                     "append": "",
                     "maxlength": ""
+                },
+                {
+                    "key": "field_5f310d8e3483d",
+                    "label": "Bounding Box",
+                    "name": "bounding_box",
+                    "type": "map_bbox",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "show_in_graphql": 1,
+                    "font_size": 14,
+                    "height": "",
+                    "center_lat": "",
+                    "center_lng": "",
+                    "zoom": "",
+                    "coordinates": ""
                 }
             ]
         },
@@ -282,5 +303,5 @@
     "description": "",
     "show_in_graphql": 1,
     "graphql_field_name": "collection",
-    "modified": 1595941044
+    "modified": 1597222425
 }

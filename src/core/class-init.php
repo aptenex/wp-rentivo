@@ -123,6 +123,7 @@ if ( ! class_exists( Init::class ) ) {
 			$assets = new Admin\Assets();
 			$acf = new Admin\Acf();
 			$users = new Admin\Users();
+            $wpGraphQl = new Frontend\WPGraphQl();
 
 			// Set up user stuff (including new roles)
             $this->loader->add_action( 'admin_init', $users, 'set_user_roles' );
@@ -158,6 +159,9 @@ if ( ! class_exists( Init::class ) ) {
 			$this->loader->add_filter( 'acf/location/rule_types', $acf, 'pageOptions_rule_types' );
 			$this->loader->add_filter( 'acf/location/rule_values/page_type', $acf, 'pageOptions_rules_values' );
 			$this->loader->add_filter( 'acf/location/rule_match/page_type', $acf, 'pageOptions_rules_match', 10, 4 );
+
+            // GraphQl
+            $this->loader->add_filter( 'wpgraphql_acf_supported_fields', $wpGraphQl, 'support_custom_acf_fields' );
 		}
 
 		/**
@@ -183,6 +187,7 @@ if ( ! class_exists( Init::class ) ) {
             // GraphQl
             $this->loader->add_action( 'graphql_register_types', $wpGraphQl, 'register_endpoints' );
             $this->loader->add_action( 'plugins_loaded', $wpGraphQl, 'testStuff' );
+            $this->loader->add_filter( 'wpgraphql_acf_register_graphql_field', $wpGraphQl, 'register_custom_acf_fields', 10, 4 );
 
 			// Enqueue plugin's front-end assets
 			$this->loader->add_action( 'wp_enqueue_scripts', $assets, 'enqueue_styles' );
