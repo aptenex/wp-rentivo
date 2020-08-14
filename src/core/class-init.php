@@ -179,6 +179,7 @@ if ( ! class_exists( Init::class ) ) {
 			$assets = new Frontend\Assets();
 			$polylang = new Frontend\Polylang();
             $wpGraphQl = new Frontend\WPGraphQl();
+            $simbaApi = new Frontend\WPRentivoSimbaAPI();
 
 			// Polylang...
             $this->loader->add_action( 'init', $polylang, 'modify_taxonomy', 11 );
@@ -188,6 +189,9 @@ if ( ! class_exists( Init::class ) ) {
             $this->loader->add_action( 'graphql_register_types', $wpGraphQl, 'register_endpoints' );
             $this->loader->add_action( 'plugins_loaded', $wpGraphQl, 'testStuff' );
             $this->loader->add_filter( 'wpgraphql_acf_register_graphql_field', $wpGraphQl, 'register_custom_acf_fields', 10, 4 );
+
+            // Simba API
+            $this->loader->add_action('rest_api_init', $simbaApi, 'register_endpoints');
 
 			// Enqueue plugin's front-end assets
 			$this->loader->add_action( 'wp_enqueue_scripts', $assets, 'enqueue_styles' );
