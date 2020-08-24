@@ -123,7 +123,11 @@ if ( ! class_exists( Init::class ) ) {
 			$assets = new Admin\Assets();
 			$acf = new Admin\Acf();
 			$users = new Admin\Users();
+            $scripts = new Admin\Scripts();
             $wpGraphQl = new Frontend\WPGraphQl();
+
+
+            $this->loader->add_action( 'after_setup_theme', $scripts, 'run_scripts' );
 
 			// Set up user stuff (including new roles)
             $this->loader->add_action( 'admin_init', $users, 'set_user_roles' );
