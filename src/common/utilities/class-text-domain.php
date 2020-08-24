@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 if ( ! class_exists( TextDomain::class ) ) {
 	class TextDomain {
-		public function __w($string, $textdomain = 'rentivo-simba') {
+		public static function __w($string, $textdomain = 'rentivo-simba') {
             if(function_exists('pll__')) {
                 return pll__($string);
             } else {
@@ -17,7 +17,7 @@ if ( ! class_exists( TextDomain::class ) ) {
             }
         }
 
-        public function _xw($string, $context = null, $textdomain = 'rentivo-simba') {
+        public static function _xw($string, $context = null, $textdomain = 'rentivo-simba') {
             if(function_exists('pll__')) {
                 return pll__($string);
             } else {
