@@ -15,7 +15,7 @@
                 "class": "",
                 "id": ""
             },
-            "default_value": "[]",
+            "default_value": "{\r\n     \"redirects\": [\r\n\r\n     ]\r\n}",
             "placeholder": "",
             "mode": "javascript",
             "theme": "monokai"
@@ -40,5 +40,5 @@
     "description": "",
     "show_in_graphql": 1,
     "graphql_field_name": "redirectsConfig",
-    "modified": 1598268737
+    "modified": 1598269726
 }
