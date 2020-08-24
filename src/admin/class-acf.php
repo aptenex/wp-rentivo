@@ -54,6 +54,16 @@ if ( ! class_exists( Acf::class ) ) {
                 ));
 
                 // Add sub page.
+                $child = acf_add_options_sub_page(array(
+                    'page_title'  => __('Redirects'),
+                    'menu_title'  => __('Redirects'),
+                    'parent_slug' => $parent['menu_slug'],
+                    'show_in_graphql' => true
+                    //'menu_slug'       => 'config-settings',
+                    //'show_in_graphql' => true
+                ));
+
+                // Add sub page.
                 /*
                 $child = acf_add_options_sub_page(array(
                     'page_title'  => __('Footer'),

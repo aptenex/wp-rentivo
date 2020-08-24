@@ -179,6 +179,17 @@ if ( ! class_exists( WPGraphQl::class ) ) {
                     ],
                 ] );
 
+
+                register_graphql_object_type( 'Redirects', [
+                    'description' => __( "Redirects", 'rentivo-simba' ),
+                    'fields' => [
+                        'redirectsString' => [
+                            'type' => 'String',
+                            'description' => __( 'Stringified redirects', 'rentivo-simba' ),
+                        ]
+                    ],
+                ] );
+
                 register_graphql_field( 'RootQuery', 'translations', [
                     'description' => __( 'Get the site translations', 'rentivo-simba' ),
                     'type' => [ 'list_of' => 'Translation' ],
@@ -220,6 +231,17 @@ if ( ! class_exists( WPGraphQl::class ) ) {
                         $optionsSiteConfig = get_field('site_config', 'options');
                         return [
                             'configString' => $optionsSiteConfig
+                        ];
+                    }
+                ] );
+
+                register_graphql_field( 'RootQuery', 'redirects', [
+                    'description' => __( 'Get the sites redirects', 'rentivo-simba' ),
+                    'type' => 'Redirects',
+                    'resolve' => function() {
+                        $optionsSiteConfig = get_field('redirects', 'options');
+                        return [
+                            'redirectsString' => $optionsSiteConfig
                         ];
                     }
                 ] );
