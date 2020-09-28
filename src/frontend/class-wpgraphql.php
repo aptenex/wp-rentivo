@@ -209,15 +209,33 @@ if ( ! class_exists( WPGraphQl::class ) ) {
                             }
                         }
 
-                        if(count($data) == 0 and count($languages) == 1) {
-                            $localePieces = explode("_", $languages[0]);
-                            $code = $localePieces[0];
+                        if(count($data) == 0) {
+
+                            $defaultCode = pll_default_language('slug');
+
+                            //$localePieces = explode("_", $languages[0]);
+                            //$code = $localePieces[0];
 
                             $translationWithoutLocale = get_field('translations', 'options');
-                            array_push($data, [
-                                'translationsString' => $translationWithoutLocale,
-                                'lang' => $code
-                            ]);
+                            $translationDecoded = json_decode($translationWithoutLocale, true);
+
+                            if($translationWithoutLocale and is_array($translationDecoded)) {
+                                if(count($translationDecoded) == count($translationDecoded, COUNT_RECURSIVE)) {
+                                    // Just default language
+                                    array_push($data, [
+                                        'translationsString' => $translationWithoutLocale,
+                                        'lang' => $defaultCode
+                                    ]);
+                                } else {
+                                    // Multi-dimensional
+                                    foreach($translationDecoded as $key => $value) {
+                                        array_push($data, [
+                                            'translationsString' => json_encode($value),
+                                            'lang' => $key
+                                        ]);
+                                    }
+                                }
+                            }
                         }
 
                         return $data;
