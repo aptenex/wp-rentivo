@@ -1,0 +1,62 @@
+{
+    "key": "group_5f983054036f3",
+    "title": "Options: Custom HTML, CSS & JavaScript",
+    "fields": [
+        {
+            "key": "field_5f9830633960f",
+            "label": "Custom HTML (Head Tag)",
+            "name": "headCustomHTML",
+            "type": "acf_code_field",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "<style type=\"text\/css\">\r\n\t\/* Custom CSS *\/\r\n\t\r\n<\/style>\r\n\r\n<script type=\"text\/javascript\">\r\n\t\/\/ Custom JS\r\n\t\r\n<\/script>",
+            "placeholder": "",
+            "mode": "htmlmixed",
+            "theme": "monokai"
+        },
+        {
+            "key": "field_5f9a95e6380c1",
+            "label": "Custom HTML (Closing Body Tag)",
+            "name": "closingBodyCustomHTML",
+            "type": "acf_code_field",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "<script type=\"text\/javascript\">\r\n\t\/\/ Custom JS\r\n\t\r\n<\/script>",
+            "placeholder": "",
+            "mode": "htmlmixed",
+            "theme": "monokai"
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "options_page",
+                "operator": "==",
+                "value": "acf-options-html-css-js"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "",
+    "show_in_graphql": 0,
+    "graphql_field_name": "customHTML",
+    "modified": 1603966957
+}
