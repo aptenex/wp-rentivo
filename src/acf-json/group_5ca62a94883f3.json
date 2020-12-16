@@ -66,6 +66,85 @@
                     "wpml_cf_preferences": 1
                 },
                 {
+                    "key": "field_5f9bfbecf1a51",
+                    "label": "Map Item",
+                    "name": "map_item",
+                    "type": "group",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_5ca62feb0da2e",
+                                "operator": "!=empty"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "show_in_graphql": 1,
+                    "layout": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_5f9be4988ee98",
+                            "label": "Show on Search Map",
+                            "name": "on_search_map",
+                            "type": "true_false",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_5ca62feb0da2e",
+                                        "operator": "!=empty"
+                                    }
+                                ]
+                            ],
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "show_in_graphql": 1,
+                            "message": "",
+                            "default_value": 1,
+                            "ui": 0,
+                            "ui_on_text": "",
+                            "ui_off_text": ""
+                        },
+                        {
+                            "key": "field_5f9be4c08ee99",
+                            "label": "Show on Property Map",
+                            "name": "on_property_map",
+                            "type": "true_false",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_5ca62feb0da2e",
+                                        "operator": "!=empty"
+                                    }
+                                ]
+                            ],
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "show_in_graphql": 1,
+                            "message": "",
+                            "default_value": 1,
+                            "ui": 0,
+                            "ui_on_text": "",
+                            "ui_off_text": ""
+                        }
+                    ]
+                },
+                {
                     "key": "field_5ca63423ea5df",
                     "label": "Address",
                     "name": "address",
@@ -953,5 +1032,5 @@
     "description": "",
     "show_in_graphql": 1,
     "graphql_field_name": "extraFields",
-    "modified": 1595941048
+    "modified": 1604481571
 }
