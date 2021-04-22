@@ -13,8 +13,8 @@ if ( ! class_exists( CustomTaxonomies::class ) ) {
 	class CustomTaxonomies {
 
 	    public function __construct() {
-            add_action( 'init', array($this, 'register_experience_taxonomy'), 1 );
-            add_action( 'init', array($this, 'register_experience_tags'), 1 );
+	        add_action( 'init', array($this, 'register_experience_taxonomy'), 1 );
+	        add_action( 'init', array($this, 'register_experience_tags'), 1 );
         }
 
         /**
@@ -57,15 +57,14 @@ if ( ! class_exists( CustomTaxonomies::class ) ) {
                 'graphql_single_name' => 'ExperienceType',
                 'graphql_plural_name' => 'ExperienceTypes',
             );
-            register_taxonomy('experience_taxonomy', array('experiences'), $args);
 
+            register_taxonomy('experience_taxonomy', array('experiences'), $args);
         }
 
         /**
          * Register experience tags
          */
         public function register_experience_tags() {
-
             $labels = array(
                 'name' => TextDomain::_xw('Experience Tags'),
                 'singular_name' => TextDomain::_xw('Experience Tag'),

@@ -46,6 +46,8 @@ if ( ! class_exists( Init::class ) ) {
 			$this->define_public_hooks();
 			$this->register_shortcodes();
 
+            $activityMonitor = new Admin\ActivityMonitor();
+            $this->loader->add_filter( 'gatsby_pre_log_action_monitor_action', $activityMonitor, 'filter_activity_actions', 10, 2 );
 
 			new Admin\CustomPostTypes();
             new Admin\CustomTaxonomies();
@@ -126,7 +128,6 @@ if ( ! class_exists( Init::class ) ) {
             $scripts = new Admin\Scripts();
             $wpGraphQl = new Frontend\WPGraphQl();
 
-
             $this->loader->add_action( 'after_setup_theme', $scripts, 'run_scripts' );
 
 			// Set up user stuff (including new roles)
@@ -185,6 +186,8 @@ if ( ! class_exists( Init::class ) ) {
             $wpGraphQl = new Frontend\WPGraphQl();
             $simbaApi = new Frontend\WPRentivoSimbaAPI();
 
+            //$wpGraphQlHTMLEntities = new Frontend\HTMLEntities();
+
 			// Polylang...
             $this->loader->add_action( 'init', $polylang, 'modify_taxonomy', 11 );
             $this->loader->add_action( 'rest_api_init', $polylang, 'json_api_languages' );
@@ -201,6 +204,7 @@ if ( ! class_exists( Init::class ) ) {
 			$this->loader->add_action( 'wp_enqueue_scripts', $assets, 'enqueue_styles' );
 			$this->loader->add_action( 'wp_enqueue_scripts', $assets, 'enqueue_scripts' );
 
+            //$wpGraphQlHTMLEntities->init();
 
             //echo '<pre>';
             //print_r(get_post_custom(284));
