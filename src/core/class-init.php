@@ -42,9 +42,9 @@ if ( ! class_exists( Init::class ) ) {
 			$this->set_locale();
 			$this->define_common_hooks();
 			$this->define_customizer_hooks();
+            $this->register_shortcodes();
 			$this->define_admin_hooks();
 			$this->define_public_hooks();
-			$this->register_shortcodes();
 
             $activityMonitor = new Admin\ActivityMonitor();
             $this->loader->add_filter( 'gatsby_pre_log_action_monitor_action', $activityMonitor, 'filter_activity_actions', 10, 2 );
@@ -122,6 +122,8 @@ if ( ! class_exists( Init::class ) ) {
 				return;
 			}
 
+            do_shortcode('[web_config param="1"]');
+
 			$assets = new Admin\Assets();
 			$acf = new Admin\Acf();
 			$users = new Admin\Users();
@@ -136,7 +138,6 @@ if ( ! class_exists( Init::class ) ) {
 			// Enqueue plugin's admin assets
 			$this->loader->add_action( 'admin_enqueue_scripts', $assets, 'enqueue_styles' );
 			$this->loader->add_action( 'admin_enqueue_scripts', $assets, 'enqueue_scripts' );
-
 
             // Settings
             $settings = new Admin\Settings();
@@ -167,6 +168,9 @@ if ( ! class_exists( Init::class ) ) {
 
             // GraphQl
             $this->loader->add_filter( 'wpgraphql_acf_supported_fields', $wpGraphQl, 'support_custom_acf_fields' );
+
+            // Custom page/apps
+            new Admin\WebConfigPage();
 		}
 
 		/**

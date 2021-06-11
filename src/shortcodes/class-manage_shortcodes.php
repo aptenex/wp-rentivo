@@ -19,6 +19,7 @@ if ( ! class_exists( Manage_Shortcodes::class ) ) {
 		 */
 		public $shortcode_classes = [
 			'TK_Request',
+            'Setup_Wizard'
 		];
 
 		/**

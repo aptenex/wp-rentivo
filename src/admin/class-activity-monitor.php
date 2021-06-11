@@ -10,7 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 if ( ! class_exists( ActivityMonitor::class ) ) {
 	class ActivityMonitor {
 	    public function filter_activity_actions($null, $log_data) {
-            if ($log_data['graphql_single_name'] == 'none') {
+            if (strpos(strtolower($log_data['title']), 'post type') !== false) {
                 return false;
             }
 

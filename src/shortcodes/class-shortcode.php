@@ -146,7 +146,11 @@ abstract class Shortcode {
 	 * @param array  $atts    The raw attributes from the shortcode.
 	 * @param string $content The raw value from using an enclosing (not self-closing) shortcode.
 	 */
-	public function init_shortcode( array $atts = [], string $content = '' ) {
+	public function init_shortcode( $atts = [], string $content = '' ) {
+        if (is_string($atts)) {
+            $atts = [];
+        }
+
 		return $this->process_shortcode( $this->get_atts( $atts ), $content );
 	}
 

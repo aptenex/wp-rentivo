@@ -26,6 +26,37 @@ if ( ! class_exists( WPRentivoSimbaAPI::class ) ) {
                 }
             ]);
 
+            register_rest_route( 'simba/v1', '/siteConfig', [
+                'methods' => 'GET',
+                'callback' => static function(\WP_REST_Request $request) {
+                    $data = [
+                        'data' => get_field('site_config', 'options')
+                    ];
+
+                    return new \WP_REST_Response( $data, 200 );
+                }
+            ]);
+
+            register_rest_route( 'simba/v1', '/siteConfig', [
+                'methods' => 'POST',
+                'callback' => static function(\WP_REST_Request $request) {
+                    $data = [];
+                    $status = 200;
+
+                    // Update field.
+                    $siteConfig = $request->get_param( 'siteConfig' );
+                    if($siteConfig) {
+                        update_field('site_config', $siteConfig, 'option');
+                        $data['success'] = true;
+                    } else {
+                        $data['success'] = false;
+                        $data['error'] = "Code not save site config.";
+                    }
+
+                    return new \WP_REST_Response( $data, $status );
+                }
+            ]);
+
             register_rest_route( 'simba/v1', '/clone/cancel', [
                 'methods' => 'GET',
                 'callback' => static function(\WP_REST_Request $request) {

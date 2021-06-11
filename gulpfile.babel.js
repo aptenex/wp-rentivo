@@ -15,6 +15,7 @@ import sourcemaps from 'gulp-sourcemaps';
 import autoprefixer from 'autoprefixer';
 // We use webpack-stream to process our js files
 import webpack from 'webpack-stream';
+import gulpReplace from 'gulp-replace';
 
 // Constant used for production
 const PRODUCTION = yargs.argv.prod;
@@ -79,6 +80,23 @@ export const adminscripts = () => {
 		.pipe( dest( 'src/admin/js' ) );
 };
 
+export const setupWizardScripts = () => {
+
+	// Find and replace `/static/media/` with `/wp-content/plugins/rentivo-simba/apps/webconfig/build/static/media/`
+
+	return src( 'apps/webconfig/build/static/js/main.js' )
+		.pipe(gulpReplace('static/media/', 'wp-content/plugins/rentivo-simba/apps/webconfig/build/static/media/'))
+		.pipe( dest( 'src/admin/js/webconfig' ) );
+};
+
+export const setupWizardStyles = () => {
+	return src( 'apps/webconfig/build/static/css/main.css' )
+		.pipe(gulpReplace('static/media/', 'wp-content/plugins/rentivo-simba/apps/webconfig/build/static/media/'))
+		.pipe( dest( 'src/admin/css/webconfig' ) );
+};
+
+// return src( 'apps/webconfig/build/static/js/main.js' ).pipe( dest( 'src/admin/js' ) );
+
 export const frontendscripts = () => {
 	return src( 'development/frontend/js/script.js' )
 		.pipe( webpack( {
@@ -113,8 +131,10 @@ export const watchForChanges = () => {
 	watch( 'development/frontend/scss/**/*.scss', frontendstyles );
 	watch( 'development/admin/js/**/*.js', adminscripts );
 	watch( 'development/frontend/js/**/*.js', frontendscripts );
+	watch( 'apps/webconfig/build/static/css/**/*.css', setupWizardStyles );
+	watch( 'apps/webconfig/build/static/js/**/*.js', setupWizardScripts );
 };
 
-export const build = series( parallel( adminstyles, frontendstyles, adminscripts ), frontendscripts );
-export const dev = series( parallel( adminstyles, frontendstyles, adminscripts ), frontendscripts, watchForChanges );
+export const build = series( parallel( adminstyles, frontendstyles, adminscripts ), frontendscripts, parallel(setupWizardStyles, setupWizardScripts) );
+export const dev = series( parallel( adminstyles, frontendstyles, adminscripts ), frontendscripts, parallel(setupWizardStyles, setupWizardScripts), watchForChanges );
 export default dev;

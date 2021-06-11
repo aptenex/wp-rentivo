@@ -47,5 +47,12 @@ if ( ! class_exists( Assets::class ) ) {
 
 			wp_enqueue_script( Plugin_Data::plugin_text_domain(), plugin_dir_url( __FILE__ ) . "js/script.$ext", [ 'jquery' ], Plugin_Data::plugin_version(), false );
 		}
+
+		/*
+        public function enqueue_webconfig_scripts() {
+            wp_enqueue_style( Plugin_Data::plugin_text_domain(), plugin_dir_url( __FILE__ ) . "css/webconfig/main.css", [], time(), 'all' );
+            wp_enqueue_script( Plugin_Data::plugin_text_domain(), plugin_dir_url( __FILE__ ) . "js/webconfig/main.js", [], time(), false );
+        }*/
+
 	}
 }

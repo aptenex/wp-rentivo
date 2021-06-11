@@ -1,0 +1,64 @@
+body.toplevel_page_web-config {
+
+  #wpfooter {
+    display: none;
+  }
+
+  #wpcontent {
+    padding-left: 0;
+  }
+
+  #wpbody-content {
+    height: 100vh;
+    padding-bottom: 0;
+    position: relative;
+    #root {
+      position: absolute;
+      inset:0;
+    }
+  }
+
+  &.admin-bar {
+    #wpbody-content {
+      height: calc(100vh - 32px);
+    }
+  }
+
+  ul#adminmenu a.wp-has-current-submenu:after, ul#adminmenu>li.current>a.current:after {
+    display: none;
+  }
+
+  #root {
+    a:active, a:hover {
+      color: inherit;
+    }
+
+    .wp-person a:focus .gravatar, a:focus, a:focus .media-icon img {
+      color: inherit;
+      box-shadow: none;
+      outline: none;
+    }
+
+    input[type=color], input[type=date], input[type=datetime-local], input[type=datetime], input[type=email], input[type=month], input[type=number], input[type=password], input[type=search], input[type=tel], input[type=text], input[type=time], input[type=url], input[type=week], select, textarea {
+      box-shadow: 0 0 0 transparent;
+      border-radius: 6px;
+      border: 1px solid #E2E8F0;
+      background-color: #fff;
+      color: #2c3338;
+    }
+
+    input[type=date], input[type=datetime-local], input[type=datetime], input[type=email], input[type=month], input[type=number], input[type=password], input[type=search], input[type=tel], input[type=text], input[type=time], input[type=url], input[type=week] {
+      padding: 0 12px;
+      line-height: 2;
+      min-height: 30px;
+    }
+
+    input[type=checkbox]:focus, input[type=color]:focus, input[type=date]:focus, input[type=datetime-local]:focus, input[type=datetime]:focus, input[type=email]:focus, input[type=month]:focus, input[type=number]:focus, input[type=password]:focus, input[type=radio]:focus, input[type=search]:focus, input[type=tel]:focus, input[type=text]:focus, input[type=time]:focus, input[type=url]:focus, input[type=week]:focus, select:focus, textarea:focus {
+      border-color: #E2E8F0;
+      box-shadow: none;
+      outline: none;
+    }
+
+  }
+
+}
