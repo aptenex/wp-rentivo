@@ -1,0 +1,89 @@
+{
+    "key": "group_60c8855ee2627",
+    "title": "Category",
+    "fields": [
+        {
+            "key": "field_60c88568ff370",
+            "label": "Make Dedicated Post Section",
+            "name": "dps",
+            "type": "true_false",
+            "instructions": "Do you want this category to form it's own page under a different section from the blog?",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "show_in_graphql": 1,
+            "message": "",
+            "default_value": 0,
+            "ui": 0,
+            "translations": "copy_once",
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
+            "key": "field_60c88865ee926",
+            "label": "Dedicated Title",
+            "name": "dps_title",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "show_in_graphql": 1,
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": "",
+            "translations": "translate"
+        },
+        {
+            "key": "field_60c88808ee925",
+            "label": "Dedicated URL Slug",
+            "name": "dps_slug",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "show_in_graphql": 1,
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": "",
+            "translations": "translate"
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "taxonomy",
+                "operator": "==",
+                "value": "category"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_graphql": 1,
+    "graphql_field_name": "postCategory",
+    "modified": 1623756844
+}
