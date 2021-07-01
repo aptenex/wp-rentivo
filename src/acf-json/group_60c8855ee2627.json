@@ -3,31 +3,10 @@
     "title": "Category",
     "fields": [
         {
-            "key": "field_60c88568ff370",
-            "label": "Make Dedicated Post Section",
+            "key": "field_60c9c612f9fd8",
+            "label": "Dedicated Post Section",
             "name": "dps",
-            "type": "true_false",
-            "instructions": "Do you want this category to form it's own page under a different section from the blog?",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "show_in_graphql": 1,
-            "message": "",
-            "default_value": 0,
-            "ui": 0,
-            "translations": "copy_once",
-            "ui_on_text": "",
-            "ui_off_text": ""
-        },
-        {
-            "key": "field_60c88865ee926",
-            "label": "Dedicated Title",
-            "name": "dps_title",
-            "type": "text",
+            "type": "group",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -37,33 +16,122 @@
                 "id": ""
             },
             "show_in_graphql": 1,
-            "default_value": "",
-            "placeholder": "",
-            "prepend": "",
-            "append": "",
-            "maxlength": "",
-            "translations": "translate"
-        },
-        {
-            "key": "field_60c88808ee925",
-            "label": "Dedicated URL Slug",
-            "name": "dps_slug",
-            "type": "text",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "show_in_graphql": 1,
-            "default_value": "",
-            "placeholder": "",
-            "prepend": "",
-            "append": "",
-            "maxlength": "",
-            "translations": "translate"
+            "layout": "block",
+            "sub_fields": [
+                {
+                    "key": "field_60c88568ff370",
+                    "label": "Make Dedicated Post Section",
+                    "name": "make_dps",
+                    "type": "true_false",
+                    "instructions": "Do you want this category to form it's own page under a different section from the blog?",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "show_in_graphql": 1,
+                    "message": "",
+                    "default_value": 0,
+                    "ui": 0,
+                    "translations": "copy_once",
+                    "ui_on_text": "",
+                    "ui_off_text": ""
+                },
+                {
+                    "key": "field_60c88865ee926",
+                    "label": "Title",
+                    "name": "title",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "show_in_graphql": 1,
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": "",
+                    "translations": "translate"
+                },
+                {
+                    "key": "field_60c9c654f9fd9",
+                    "label": "Above Blocks",
+                    "name": "above_blocks",
+                    "type": "post_object",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "show_in_graphql": 1,
+                    "post_type": [
+                        "wp_block"
+                    ],
+                    "taxonomy": "",
+                    "allow_null": 0,
+                    "multiple": 0,
+                    "return_format": "object",
+                    "translations": "copy_once",
+                    "ui": 1
+                },
+                {
+                    "key": "field_60c9c682f9fda",
+                    "label": "Below Blocks",
+                    "name": "below_blocks",
+                    "type": "post_object",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "show_in_graphql": 1,
+                    "post_type": [
+                        "wp_block"
+                    ],
+                    "taxonomy": "",
+                    "allow_null": 0,
+                    "multiple": 0,
+                    "return_format": "object",
+                    "translations": "copy_once",
+                    "ui": 1
+                },
+                {
+                    "key": "field_60d30e4b46744",
+                    "label": "Posts Per Page",
+                    "name": "per_page",
+                    "type": "number",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "show_in_graphql": 1,
+                    "default_value": 10,
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "min": "",
+                    "max": "",
+                    "step": "",
+                    "translations": "copy_once"
+                }
+            ]
         }
     ],
     "location": [
@@ -85,5 +153,5 @@
     "description": "",
     "show_in_graphql": 1,
     "graphql_field_name": "postCategory",
-    "modified": 1623756844
+    "modified": 1624445132
 }

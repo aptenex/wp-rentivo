@@ -18,13 +18,15 @@
             "show_in_graphql": 1,
             "choices": {
                 "none": "None",
-                "footer": "Footer"
+                "footer": "Footer",
+                "dedicatedPostSection": "Dedicated Post Section"
             },
-            "default_value": [],
+            "default_value": false,
             "allow_null": 0,
             "multiple": 0,
             "ui": 0,
             "return_format": "value",
+            "translations": "copy_once",
             "ajax": 0,
             "placeholder": ""
         }
@@ -44,9 +46,9 @@
     "label_placement": "top",
     "instruction_placement": "label",
     "hide_on_screen": "",
-    "active": 1,
+    "active": true,
     "description": "",
     "show_in_graphql": 1,
     "graphql_field_name": "blockOptions",
-    "modified": 1595940965
+    "modified": 1623836371
 }

@@ -30,6 +30,13 @@
                 "operator": "==",
                 "value": "page"
             }
+        ],
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
         ]
     ],
     "menu_order": 0,
@@ -38,9 +45,9 @@
     "label_placement": "top",
     "instruction_placement": "label",
     "hide_on_screen": "",
-    "active": 1,
+    "active": true,
     "description": "",
     "show_in_graphql": 1,
     "graphql_field_name": "pageOptions",
-    "modified": 1596795633
+    "modified": 1624533990
 }
