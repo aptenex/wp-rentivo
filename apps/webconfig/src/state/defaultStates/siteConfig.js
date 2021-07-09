@@ -1302,8 +1302,6 @@ const siteConfig = {
       "textWriting": {
         "fontFamily": "body"
       },
-
-
       "heading": {
         "h1": {
           "fontFamily": "body",

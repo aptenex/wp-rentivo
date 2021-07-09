@@ -1,9 +1,11 @@
 import * as React from 'react';
+import { ChromePicker } from 'react-color';
+import colorParse from 'color-parse';
 import { get, set } from 'lodash';
 import {
   Field as FormikField,
   FastField as FormikFieldFast,
-  FieldArray as FormikFieldArray
+  FieldArray as FormikFieldArray, useFormikContext
 } from 'formik';
 import {
   FormControl,
@@ -20,7 +22,11 @@ import {
   Select,
   HStack,
   VStack,
-  IconButton
+  IconButton,
+  Box,
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
 } from '@chakra-ui/react';
 import { HiOutlineExternalLink, HiPlus, HiMinus, HiChevronUp, HiChevronDown } from 'react-icons/hi';
 import { FormStateContext, setSanitizer } from '../../containers/FormProvider';
@@ -28,6 +34,7 @@ import { useContext } from 'react';
 import Fields from './index';
 import { useCallback, useState, useMemo } from 'react';
 import { useEffect } from 'react';
+
 
 export function FieldWrapper(props) {
   const { state, slowFields } = useContext(FormStateContext);
@@ -127,28 +134,134 @@ function TextField(props) {
   );
 }
 
+function rgb2hex(rgb){
+  rgb = rgb.match(/^rgba?[\s+]?\([\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?/i);
+  return (rgb && rgb.length === 4) ? "#" +
+    ("0" + parseInt(rgb[1],10).toString(16)).slice(-2) +
+    ("0" + parseInt(rgb[2],10).toString(16)).slice(-2) +
+    ("0" + parseInt(rgb[3],10).toString(16)).slice(-2) : '';
+}
+
+function ColorPicker({value, id, defaultValue, setFieldValue, ...rest}) {
+
+  const convertToColorObject = useCallback((value) => {
+    const pc = colorParse(value);
+    if(pc.space === 'rgb') {
+      return  {
+        a: pc.alpha,
+        r: pc.values[0],
+        g: pc.values[1],
+        b: pc.values[2]
+      }
+    }
+
+    return value;
+  }, []);
+
+  const convertToColorString = useCallback((value) => {
+    const rgbaString = `rgba(${value.r}, ${value.g}, ${value.b}, ${value.a})`;
+    return (value.a === 1) ? rgb2hex(rgbaString) : rgbaString;
+  }, []);
+
+  const [internalValue, setInternalValue] = useState(convertToColorObject(value ? value : defaultValue));
+  const handleOnChange = useCallback((color) => {
+    setInternalValue(color.rgb);
+  }, [setInternalValue]);
+
+  const handleOnChangeComplete = useCallback((color) => {
+    setFieldValue(id, convertToColorString(color.rgb));
+  }, [setFieldValue]);
+
+  return (
+    <Box
+      alignSelf="baseline"
+      justifySelf="flex-start"
+    >
+      <Popover>
+        <PopoverTrigger>
+          <Box
+            width="32px"
+            height="32px"
+            borderRadius="md"
+            border="3px solid"
+            borderColor="gray.200"
+            _hover={{
+              cursor: 'pointer'
+            }}
+            bg={convertToColorString(internalValue)}
+          />
+        </PopoverTrigger>
+        <PopoverContent w="227px">
+          <ChromePicker color={ internalValue } onChange={ handleOnChange } onChangeComplete={handleOnChangeComplete} />
+        </PopoverContent>
+      </Popover>
+    </Box>
+  )
+}
+
+function ColorField(props) {
+  const { validate, id, helperText, label } = props;
+
+  return (
+    <FormikFieldFast name={id} validate={validate}>
+      {({ field, form }) => (
+        <FormControl isInvalid={form.errors[id] && form.touched[id]}>
+          {label && (<FormLabel htmlFor={id}>{label}</FormLabel>)}
+          <ColorPicker {...props} {...form} {...field}/>
+          <FormErrorMessage>{form.errors[id]}</FormErrorMessage>
+          {helperText && (
+            <FormHelperText>
+              {helperText}
+            </FormHelperText>
+          )}
+        </FormControl>
+      )}
+    </FormikFieldFast>
+  );
+}
+
 // TODO: Need to do loading...
 function SelectField(props) {
-  const { id, placeholder, inputProps, options = [], getOptions } = props;
+  const { state } = useContext(FormStateContext);
+  const { values } = useFormikContext();
+  const { id, placeholder, inputProps, options = [], getOptions, listensTo = [] } = props;
   const [hasRunGet, setHasRunGet] = useState(false);
   const [renderedOptions, setRenderedOptions] = useState(options);
+  const getState = useCallback((path, defaultValue) => get(state, path, defaultValue), [state]);
+  const listeningToData = useMemo(() => {
+    const listening = [];
+    for (let [key, value] of Object.entries(values)) {
+      if(listensTo.includes(key)) {
+        listening.push(value);
+      }
+    }
+    return JSON.stringify(listening);
+  }, [listensTo, values]);
+  const [listenToVal, setListenToVal] = useState(listeningToData);
+
 
   useEffect(() => {
     async function fetchData() {
-      const newOptions = await getOptions();
+      if(typeof getOptions !== 'function') return null;
+      const newOptions = await getOptions({state, getState, get, values});
       if(newOptions.length) {
         setRenderedOptions(newOptions);
       }
     }
 
-    if(!hasRunGet) {
+    if(!hasRunGet && typeof getOptions === 'function') {
       setHasRunGet(true);
       fetchData();
     }
-  }, [getOptions, options, hasRunGet, setHasRunGet, setRenderedOptions]);
+    //console.log({listenToVal: listenToVal.length, listeningToData: listeningToData.length, areTheyDiff: (listenToVal !== listeningToData)});
+    if(listenToVal !== listeningToData) {
+      setListenToVal(listeningToData);
+      fetchData();
+    }
+  }, [getOptions, options, hasRunGet, setHasRunGet, setRenderedOptions, listensTo, listenToVal, listeningToData]);
 
   return (
-    <FieldWrapperMemo {...props}>
+    <FieldWrapperMemo {...props} key={`select-${id}-${renderedOptions.length}`}>
       {({ field }) => (
         <Select {...field} id={id} placeholder={placeholder} {...inputProps}>
           {renderedOptions.map((option, i) => <option key={i} value={typeof option === 'string' ? option : option.value}>{typeof option === 'string' ? option : option.label}</option>)}
@@ -268,6 +381,7 @@ function RepeaterField(props) {
 }
 
 function Field(props) {
+
   const { type, render, isConditional } = props;
 
   if(isConditional) {
@@ -276,6 +390,10 @@ function Field(props) {
 
   if(render) {
     return render(props);
+  }
+
+  if(type === 'color') {
+    return <ColorField {...props}/>;
   }
 
   if(type === 'switch') {

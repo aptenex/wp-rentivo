@@ -25,8 +25,6 @@ export const setSanitizer = (val, type) => {
 
 export default function FormProvider({fields, dataStore, children}) {
 
-
-
   // TODO: Need to move to hooks and give setValue access to form.
   const formik = useRef(null);
   const dispatch = useDispatch();
