@@ -66,6 +66,9 @@ if ( ! class_exists( Init::class ) ) {
             $this->loader->add_action( 'init', $customTaxonomies, 'register_experience_tags' );
             */
 
+            if (defined( 'WP_CLI' ) && WP_CLI) {
+                require_once __DIR__ . '../wpcli/simba-command.php';
+            }
 		}
 
 		/**
