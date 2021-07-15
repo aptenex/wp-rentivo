@@ -67,7 +67,7 @@ if ( ! class_exists( Init::class ) ) {
             */
 
             if (defined( 'WP_CLI' ) && WP_CLI) {
-                require_once __DIR__ . '../wpcli/simba-command.php';
+                //require_once __DIR__ . '../wpcli/simba-command.php';
             }
 		}
 
@@ -101,6 +101,20 @@ if ( ! class_exists( Init::class ) ) {
 		private function define_common_hooks(): void {
 			$plugin_common = new Common\Common();
 
+
+            // Acf
+            $acf = new Admin\Acf();
+
+            $this->loader->add_action( 'acf/init', $acf, 'init' );
+            //$this->loader->add_action( 'acf/init', $acf, 'build_core_string_translations' );
+            $this->loader->add_action( 'acf/settings/default_language', $acf, 'settings_default_language' );
+            $this->loader->add_action( 'acf/settings/show_admin', $acf, 'show_admin' );
+            //$this->loader->add_filter( 'acf/settings/save_json', $acf, 'json_save_point' );
+            $this->loader->add_filter( 'acf/settings/load_json', $acf, 'json_load_point' );
+            $this->loader->add_filter( 'acf/location/rule_types', $acf, 'pageOptions_rule_types' );
+            $this->loader->add_filter( 'acf/location/rule_values/page_type', $acf, 'pageOptions_rules_values' );
+            $this->loader->add_filter( 'acf/location/rule_match/page_type', $acf, 'pageOptions_rules_match', 10, 4 );
+
 			// Example: $this->loader->add_filter( 'gform_currencies', $plugin_common, 'gf_currency_usd_whole_dollars', 50 );
 		}
 
@@ -128,7 +142,6 @@ if ( ! class_exists( Init::class ) ) {
             do_shortcode('[web_config param="1"]');
 
 			$assets = new Admin\Assets();
-			$acf = new Admin\Acf();
 			$users = new Admin\Users();
             $scripts = new Admin\Scripts();
             $wpGraphQl = new Frontend\WPGraphQl();
@@ -157,17 +170,6 @@ if ( ! class_exists( Init::class ) ) {
 
 			// Plugin action links
 			$this->loader->add_filter( 'plugin_action_links_' . Plugin_Data::plugin_basename(), $settings, 'add_action_links' );
-
-			// Acf
-			$this->loader->add_action( 'acf/init', $acf, 'init' );
-			//$this->loader->add_action( 'acf/init', $acf, 'build_core_string_translations' );
-			$this->loader->add_action( 'acf/settings/default_language', $acf, 'settings_default_language' );
-			$this->loader->add_action( 'acf/settings/show_admin', $acf, 'show_admin' );
-			//$this->loader->add_filter( 'acf/settings/save_json', $acf, 'json_save_point' );
-			$this->loader->add_filter( 'acf/settings/load_json', $acf, 'json_load_point' );
-			$this->loader->add_filter( 'acf/location/rule_types', $acf, 'pageOptions_rule_types' );
-			$this->loader->add_filter( 'acf/location/rule_values/page_type', $acf, 'pageOptions_rules_values' );
-			$this->loader->add_filter( 'acf/location/rule_match/page_type', $acf, 'pageOptions_rules_match', 10, 4 );
 
             // GraphQl
             $this->loader->add_filter( 'wpgraphql_acf_supported_fields', $wpGraphQl, 'support_custom_acf_fields' );
