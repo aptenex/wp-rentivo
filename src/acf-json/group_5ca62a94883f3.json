@@ -4,7 +4,7 @@
     "fields": [
         {
             "key": "field_5ca62f9d0da2d",
-            "label": "Listing Info",
+            "label": "Listing Information",
             "name": "listing",
             "type": "group",
             "instructions": "",

@@ -163,7 +163,7 @@ if ( ! class_exists( Init::class ) ) {
 			//$this->loader->add_action( 'acf/init', $acf, 'build_core_string_translations' );
 			$this->loader->add_action( 'acf/settings/default_language', $acf, 'settings_default_language' );
 			$this->loader->add_action( 'acf/settings/show_admin', $acf, 'show_admin' );
-			$this->loader->add_filter( 'acf/settings/save_json', $acf, 'json_save_point' );
+			//$this->loader->add_filter( 'acf/settings/save_json', $acf, 'json_save_point' );
 			$this->loader->add_filter( 'acf/settings/load_json', $acf, 'json_load_point' );
 			$this->loader->add_filter( 'acf/location/rule_types', $acf, 'pageOptions_rule_types' );
 			$this->loader->add_filter( 'acf/location/rule_values/page_type', $acf, 'pageOptions_rules_values' );
