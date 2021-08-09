@@ -1,6 +1,6 @@
 {
     "key": "group_60c9c09cadbfe",
-    "title": "Post",
+    "title": "Post Options",
     "fields": [
         {
             "key": "field_60c9c32780cbb",
@@ -338,6 +338,6 @@
     "active": true,
     "description": "",
     "show_in_graphql": 1,
-    "graphql_field_name": "customFields",
-    "modified": 1623835723
+    "graphql_field_name": "postOptions",
+    "modified": 1625120445
 }
