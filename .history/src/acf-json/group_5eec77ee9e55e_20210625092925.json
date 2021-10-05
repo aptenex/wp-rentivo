@@ -19,9 +19,7 @@
             "choices": {
                 "none": "None",
                 "footer": "Footer",
-                "dedicatedPostSection": "Dedicated Post Section",
-                "updateBar": "Update Bar",
-                "topBar": "Top Bar"
+                "dedicatedPostSection": "Dedicated Post Section"
             },
             "default_value": false,
             "allow_null": 0,

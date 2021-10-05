@@ -35,7 +35,7 @@ if ( ! class_exists( WPRentivoSimbaAPI::class ) ) {
 
                     return new \WP_REST_Response( $data, 200 );
                 }
-            ]);
+            ]);  
 
             register_rest_route( 'simba/v1', '/siteConfig', [
                 'methods' => 'POST',
