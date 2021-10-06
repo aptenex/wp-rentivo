@@ -37,7 +37,14 @@
                 "operator": "==",
                 "value": "post"
             }
-        ]
+        ],
+        [
+          {
+              "param": "post_type",
+              "operator": "==",
+              "value": "hubs"
+          }
+      ]
     ],
     "menu_order": 0,
     "position": "acf_after_title",

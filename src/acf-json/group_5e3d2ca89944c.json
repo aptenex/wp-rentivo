@@ -48,6 +48,13 @@
                 "operator": "==",
                 "value": "collections"
             }
+        ],
+        [
+          {
+              "param": "post_type",
+              "operator": "==",
+              "value": "hubs"
+          }
         ]
     ],
     "menu_order": 0,

@@ -76,7 +76,14 @@
                 "operator": "==",
                 "value": "category"
             }
-        ]
+        ],
+        [
+          {
+              "param": "taxonomy",
+              "operator": "==",
+              "value": "hubs"
+          }
+      ]
     ],
     "menu_order": 1,
     "position": "acf_after_title",

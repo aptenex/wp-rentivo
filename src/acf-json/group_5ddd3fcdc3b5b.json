@@ -19,7 +19,8 @@
                 "post",
                 "page",
                 "collections",
-                "experiences"
+                "experiences",
+                "hubs"
             ],
             "taxonomy": "",
             "filters": [
@@ -51,7 +52,8 @@
                 "post",
                 "page",
                 "collections",
-                "experiences"
+                "experiences",
+                "hubs"
             ],
             "taxonomy": "",
             "filters": [
@@ -95,7 +97,14 @@
                 "operator": "==",
                 "value": "experiences"
             }
-        ]
+        ],
+        [
+          {
+              "param": "post_type",
+              "operator": "==",
+              "value": "hubs"
+          }
+      ]
     ],
     "menu_order": 3,
     "position": "acf_after_title",
