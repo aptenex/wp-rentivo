@@ -1,11 +1,12 @@
 {
 	"name": "rentivo-simba",
-	"version": "1.0.6",
+	"version": "1.0.7",
 	"description": "Here is a short description of the plugin.",
 	"main": "index.js",
 	"scripts": {
 		"start": "gulp",
-		"build": "gulp build --prod"
+		"build": "gulp build --prod",
+    "zip": "git archive --format=zip HEAD -o rentivo-simba.zip"
 	},
 	"repository": {
 		"type": "git",

@@ -28,7 +28,7 @@
  * Plugin Name:       Rentivo Simba
  * Plugin URI:        https://www.rentivo.com/rentivo-simba-uri/
  * Description:       This is a short description of what the plugin does. It's displayed in the WordPress admin area.
- * Version:           1.0.5
+ * Version:           1.0.7
  * Author:            Rentivo
  * Author URI:        https://www.rentivo.com/
  * License:           GPL version 3 or any later version
