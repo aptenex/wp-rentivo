@@ -1,6 +1,5 @@
 *.local
 *.test
-*.zip
 .DS_Store
 .idea
 /.phpcs.xml
