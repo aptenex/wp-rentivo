@@ -1,7 +1,7 @@
 [
     {
         "id": 6176,
-        "title": "Featured Posts",
+        "title": "Featured Areas",
         "icon": "<svg xmlns=\"http:\/\/www.w3.org\/2000\/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\"><path d=\"M3 16h5v-2H3v2zm6.5 0h5v-2h-5v2zm6.5 0h5v-2h-5v2zM3 20h2v-2H3v2zm4 0h2v-2H7v2zm4 0h2v-2h-2v2zm4 0h2v-2h-2v2zm4 0h2v-2h-2v2zM3 12h8v-2H3v2zm10 0h8v-2h-8v2zM3 4v4h18V4H3z\" \/><\/svg>",
         "keywords": [],
         "slug": "lazyblock\/featured-posts",
@@ -90,11 +90,11 @@
                 "choices": [
                     {
                         "label": "Collection",
-                        "value": "collection"
+                        "value": "collections"
                     },
                     {
                         "label": "Hub",
-                        "value": "hub"
+                        "value": "hubs"
                     }
                 ],
                 "allow_null": "false",
@@ -165,9 +165,28 @@
             },
             "control_be7a3c459b": {
                 "type": "number",
-                "name": "columns",
-                "default": "4",
-                "label": "Columns",
+                "name": "minItemWidth",
+                "default": "260",
+                "label": "Min Item Width",
+                "help": "",
+                "child_of": "",
+                "placement": "inspector",
+                "width": "100",
+                "hide_if_not_selected": "false",
+                "save_in_meta": "false",
+                "save_in_meta_name": "",
+                "required": "true",
+                "min": "100",
+                "max": "992",
+                "step": "1",
+                "placeholder": "",
+                "characters_limit": ""
+            },
+            "control_0bb89b4ded": {
+                "type": "select",
+                "name": "alignContent",
+                "default": "center",
+                "label": "Align Content",
                 "help": "",
                 "child_of": "",
                 "placement": "inspector",
@@ -176,9 +195,23 @@
                 "save_in_meta": "false",
                 "save_in_meta_name": "",
                 "required": "false",
-                "min": "2",
-                "max": "6",
-                "step": "",
+                "choices": [
+                    {
+                        "label": "Center",
+                        "value": "center"
+                    },
+                    {
+                        "label": "Left",
+                        "value": "left"
+                    },
+                    {
+                        "label": "Right",
+                        "value": "right"
+                    }
+                ],
+                "allow_null": "false",
+                "multiple": "false",
+                "output_format": "",
                 "placeholder": "",
                 "characters_limit": ""
             },
@@ -201,6 +234,24 @@
                 "rows_add_button_label": "Add Post",
                 "rows_collapsible": "true",
                 "rows_collapsed": "true",
+                "placeholder": "",
+                "characters_limit": ""
+            },
+            "control_0e59ae409b": {
+                "type": "toggle",
+                "name": "showPlaceholderImage",
+                "default": "",
+                "label": "Show Placeholder",
+                "help": "",
+                "child_of": "",
+                "placement": "inspector",
+                "width": "100",
+                "hide_if_not_selected": "false",
+                "save_in_meta": "false",
+                "save_in_meta_name": "",
+                "required": "false",
+                "checked": "true",
+                "alongside_text": "",
                 "placeholder": "",
                 "characters_limit": ""
             },
@@ -458,7 +509,9 @@
             "show_preview": "always",
             "single_output": false
         },
-        "condition": []
+        "condition": [
+            "hubs"
+        ]
     },
     {
         "id": 24,
@@ -1002,6 +1055,44 @@
                 "placeholder": "",
                 "characters_limit": ""
             },
+            "control_35f9544644": {
+                "type": "number",
+                "name": "showPosts",
+                "default": "12",
+                "label": "Show Properties",
+                "help": "",
+                "child_of": "",
+                "placement": "inspector",
+                "width": "100",
+                "hide_if_not_selected": "false",
+                "save_in_meta": "false",
+                "save_in_meta_name": "",
+                "required": "true",
+                "min": "2",
+                "max": "64",
+                "step": "1",
+                "placeholder": "",
+                "characters_limit": ""
+            },
+            "control_695b4b436d": {
+                "type": "number",
+                "name": "minItemWidth",
+                "default": "260",
+                "label": "Min Item Width",
+                "help": "",
+                "child_of": "",
+                "placement": "inspector",
+                "width": "100",
+                "hide_if_not_selected": "false",
+                "save_in_meta": "false",
+                "save_in_meta_name": "",
+                "required": "true",
+                "min": "100",
+                "max": "992",
+                "step": "1",
+                "placeholder": "",
+                "characters_limit": ""
+            },
             "control_0a081447ca": {
                 "type": "repeater",
                 "name": "propertyIDs",
@@ -1071,7 +1162,7 @@
                 "full"
             ],
             "html": false,
-            "multiple": false,
+            "multiple": true,
             "inserter": true
         },
         "ghostkit": {
@@ -3095,6 +3186,25 @@
                 "placeholder": "",
                 "characters_limit": ""
             },
+            "control_5398994f9a": {
+                "type": "number",
+                "name": "minItemWidth",
+                "default": "260",
+                "label": "Min Item Width",
+                "help": "",
+                "child_of": "",
+                "placement": "inspector",
+                "width": "100",
+                "hide_if_not_selected": "false",
+                "save_in_meta": "false",
+                "save_in_meta_name": "",
+                "required": "true",
+                "min": "100",
+                "max": "992",
+                "step": "1",
+                "placeholder": "",
+                "characters_limit": ""
+            },
             "control_9a788f43ac": {
                 "type": "repeater",
                 "name": "categories",
@@ -3152,6 +3262,39 @@
                 "min": "1",
                 "max": "36",
                 "step": "1",
+                "placeholder": "",
+                "characters_limit": ""
+            },
+            "control_1f68c44707": {
+                "type": "select",
+                "name": "alignContent",
+                "default": "",
+                "label": "Align Content",
+                "help": "",
+                "child_of": "",
+                "placement": "inspector",
+                "width": "100",
+                "hide_if_not_selected": "false",
+                "save_in_meta": "false",
+                "save_in_meta_name": "",
+                "required": "false",
+                "choices": [
+                    {
+                        "label": "Center",
+                        "value": "center"
+                    },
+                    {
+                        "label": "Left",
+                        "value": "left"
+                    },
+                    {
+                        "label": "Right",
+                        "value": "right"
+                    }
+                ],
+                "allow_null": "false",
+                "multiple": "false",
+                "output_format": "",
                 "placeholder": "",
                 "characters_limit": ""
             },

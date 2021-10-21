@@ -79,7 +79,7 @@
         ],
         [
           {
-              "param": "taxonomy",
+              "param": "post_type",
               "operator": "==",
               "value": "hubs"
           }
