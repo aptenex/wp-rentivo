@@ -811,7 +811,9 @@ const siteConfig = {
     "ROUTE_PATH_HOME": "",
     "ROUTE_BASE_NOT_FOUND": "404",
     "ROUTE_BASE_CUSTOMER_CONTACT": "contact",
-    "ROUTE_BASE_BUSINESS_CONTACT": "contact/business"
+    "ROUTE_BASE_BUSINESS_CONTACT": "contact/business",
+    "ROUTE_BASE_DEDICATED_POST": "post",
+    "ROUTE_BASE_HUB": "area"
   },
   "theme": {
     "id": "barcelona",
