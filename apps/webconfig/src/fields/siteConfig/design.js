@@ -52,14 +52,208 @@ export const chakraThemeFontWeightsBoldPath = `${chakraThemeFontWeightsPath}.bol
 export const chakraThemeFontWeightsExtraboldPath = `${chakraThemeFontWeightsPath}.extrabold`;
 export const chakraThemeFontWeightsBlackPath = `${chakraThemeFontWeightsPath}.black`;
 
+export const chakraThemeTypographyPath = `${chakraThemePath}.typography`;
+export const chakraThemeTypographyTextPath = `${chakraThemeTypographyPath}.text`;
+export const chakraThemeTypographyTextWritingPath = `${chakraThemeTypographyPath}.textWriting`;
+export const chakraThemeTypographyHeadingPath = `${chakraThemeTypographyPath}.heading`;
+export const chakraThemeTypographyHeadingWritingPath = `${chakraThemeTypographyPath}.writingHeading`;
+
 /* eslint-enable no-return-assign, no-param-reassign */
+export const fontWeightOptions = [
+  { label: '100', value: 100 },
+  { label: '200', value: 200 },
+  { label: '300', value: 300 },
+  { label: '400', value: 400 },
+  { label: '500', value: 500 },
+  { label: '600', value: 600 },
+  { label: '700', value: 700 },
+  { label: '800', value: 800 },
+  { label: '900', value: 900 }
+];
+
+export const themeFontWeightOptions = [
+  { label: 'Hairline', value: 'hairline' },
+  { label: 'Thin', value: 'thin' },
+  { label: 'Light', value: 'light' },
+  { label: 'Normal', value: 'normal' },
+  { label: 'Medium', value: 'medium' },
+  { label: 'Semibold', value: 'semibold' },
+  { label: 'Bold', value: 'bold' },
+  { label: 'Extrabold', value: 'extrabold' },
+  { label: 'Black', value: 'black' }
+];
+
+export const themeColorOptions = [
+  { label: 'Primary', value: 'primary.500' },
+  { label: 'Secondary', value: 'secondary.500' },
+  { label: 'Tertiary', value: 'tertiary.500' },
+  { label: 'Lightest Gray', value: 'gray.100' },
+  { label: 'Lighter Gray', value: 'gray.200' },
+  { label: 'Light Gray', value: 'gray.300' },
+  { label: 'Bold', value: 'bold' },
+  { label: 'Text', value: 'text' },
+  { label: 'Light Text', value: 'textLight' },
+  { label: 'Link', value: 'link' },
+  { label: 'Link Hover', value: 'linkHover' }
+];
+
+export const pixelRange = (from = 8, to = 72) => {
+  const pixels = [];
+  for(let i = from; i <= to; ++i) {
+    pixels.push({
+      label: `${i}px`,
+      value: `${i}px`
+    });
+  }
+  return pixels;
+};
+
+export const themeSizeOptions = [
+  { label: 'Extra Small', value: 'xs' },
+  { label: 'Small', value: 'sm' },
+  { label: 'Medium', value: 'md' },
+  { label: 'Large', value: 'lg' },
+  { label: 'XL', value: 'xl' },
+  { label: 'XXL', value: '2xl' },
+  { label: 'XXXL', value: '3xl' },
+  { label: 'XXXXL', value: '4xl' },
+  { label: 'XXXXXL', value: '5xl' },
+  { label: 'XXXXXL', value: '6xl' },
+  ...pixelRange()
+];
+
+const getFontOptions = ({values}) => {
+  if(values.loadFonts && values.loadFonts.length) {
+    return values.loadFonts.map(({family, ...rest}) => ({
+      label: family,
+      value: family,
+      ...rest
+    }));
+  } else {
+    return [];
+  }
+  /*
+  const fonts = getState(siteDesignFontsGooglePath).map(({family, ...rest}) => ({
+    label: family,
+    value: family,
+    ...rest
+  }));
+  return fonts;
+  */
+};
+
+
+function capitalizeStr(txt) {
+  return txt.charAt(0).toUpperCase() + txt.slice(1); //or if you want lowercase the rest txt.slice(1).toLowerCase();
+}
+
+export const generateTypographyFields = (cat, defaultPath, items, includeFontSize = false) => {
+  return items.map((item) => {
+    const itemsArray = [
+      {
+        id: `typography${capitalizeStr(cat)}${capitalizeStr(item.path)}FontFamily`,
+        label: item.labelAffix + ' Font Family',
+        type: 'select',
+        options: [],
+        getOptions: getFontOptions,
+        listensTo: ['loadFonts'],
+        path: `${defaultPath}.${item.path}.fontFamily`
+      },
+      {
+        id: `typography${capitalizeStr(cat)}${capitalizeStr(item.path)}FontWeight`,
+        label: item.labelAffix + ' Font Weight',
+        type: 'select',
+        defaultValue: 'normal',
+        options: themeFontWeightOptions,
+        path: `${defaultPath}.${item.path}.fontWeight`
+      },
+      {
+        id: `typography${capitalizeStr(cat)}${capitalizeStr(item.path)}Color`,
+        label: item.labelAffix + ' Color',
+        type: 'select',
+        defaultValue: 'text',
+        options: themeColorOptions,
+        path: `${defaultPath}.${item.path}.color`
+      }
+    ];
+
+    if(includeFontSize) {
+      itemsArray.push({
+        id: `typography${capitalizeStr(cat)}${capitalizeStr(item.path)}FontSizeBase`,
+        label: item.labelAffix + ' Size (Mobile)',
+        type: 'select',
+        options: themeSizeOptions,
+        defaultValue: 'md',
+        path: `${defaultPath}.${item.path}.fontSize.base`
+      });
+
+      itemsArray.push({
+        id: `typography${capitalizeStr(cat)}${capitalizeStr(item.path)}FontSizeLg`,
+        label: item.labelAffix + ' Size (Desktop)',
+        type: 'select',
+        options: themeSizeOptions,
+        defaultValue: 'lg',
+        path: `${defaultPath}.${item.path}.fontSize.lg`
+      });
+    }
+
+    return itemsArray;
+  });
+}
+
+export const typographyTextFieldItems = [
+  {
+    path: 'text',
+    labelAffix: 'Text'
+  }
+];
+
+export const typographyHeadingFieldItems = [
+  {
+    path: 'h1',
+    labelAffix: 'H1'
+  },
+  {
+    path: 'h2',
+    labelAffix: 'H2'
+  },
+  {
+    path: 'h3',
+    labelAffix: 'H3'
+  },
+  {
+    path: 'h4',
+    labelAffix: 'H4'
+  },
+  {
+    path: 'h5',
+    labelAffix: 'H5'
+  },
+  {
+    path: 'h6',
+    labelAffix: 'H6'
+  }
+];
+
+export const typographyTextFields = generateTypographyFields('text', chakraThemeTypographyTextPath, typographyTextFieldItems);
+export const typographyTextWritingFields = generateTypographyFields('textWriting', chakraThemeTypographyTextPath, typographyTextFieldItems);
+export const typographyHeadingFields = generateTypographyFields('heading', chakraThemeTypographyHeadingPath, typographyHeadingFieldItems, true);
+export const typographyHeadingWritingFields = generateTypographyFields('writingHeading', chakraThemeTypographyHeadingWritingPath, typographyHeadingFieldItems, true);
 
 export const loadFontsField = {
   id: 'loadFonts',
   label: 'Google Fonts',
   helperText: 'These are the fonts which will be loaded through-out your website',
   type: 'repeater',
-  modifies: ['bodyFont', 'headingFont'],
+  modifies: [
+    'bodyFont', 
+    'headingFont', 
+    'accentFont', 
+    ...typographyTextFields.map(item => item[0].id),
+    ...typographyTextWritingFields.map(item => item[0].id),
+    ...typographyHeadingFields.map(item => item[0].id),
+    ...typographyHeadingWritingFields.map(item => item[0].id),
+  ],
   //validate: RequiredString,
   fields: [
     {
@@ -109,17 +303,6 @@ export const loadFontsField = {
   path: siteDesignFontsGooglePath
 };
 
-export const fontWeightOptions = [
-  { label: '100', value: 100 },
-  { label: '200', value: 200 },
-  { label: '300', value: 300 },
-  { label: '400', value: 400 },
-  { label: '500', value: 500 },
-  { label: '600', value: 600 },
-  { label: '700', value: 700 },
-  { label: '800', value: 800 },
-  { label: '900', value: 900 }
-];
 /* eslint-disable no-unused-vars */
 const getFontWeightOptions = ({values}) => {
   if(values.loadFonts && values.loadFonts.length) {
@@ -334,26 +517,6 @@ export const gray300ColorField = {
   defaultValue: '#CBD5E0'
 };
 
-const getFontOptions = ({values}) => {
-  if(values.loadFonts && values.loadFonts.length) {
-    return values.loadFonts.map(({family, ...rest}) => ({
-      label: family,
-      value: family,
-      ...rest
-    }));
-  } else {
-    return [];
-  }
-  /*
-  const fonts = getState(siteDesignFontsGooglePath).map(({family, ...rest}) => ({
-    label: family,
-    value: family,
-    ...rest
-  }));
-  return fonts;
-  */
-};
-
 export const headingFontField = {
   id: 'headingFont',
   label: 'General Heading Font',
@@ -384,6 +547,14 @@ export const accentFontField = {
   path: chakraThemeFontsAccentPath
 };
 
+/*
+"fontFamily": "body",
+          "fontWeight": "bold",
+          "lineHeight": "shorter",
+          "fontSize": { "base": "2xl", "lg": "3xl" },
+          "color": "text"*/
+
+
 export const fonts = [loadFontsField];
 export const coreColors = [
   [primaryColorField, secondaryColorField, tertiaryColorField],
@@ -398,11 +569,29 @@ export const generalFonts = [
 ];
 export const fontWeights = [
   [fontWeightHairlineField, fontWeightThinField, fontWeightLightField],
-  [fontWeightMediumField, fontWeightNormalField, fontWeightSemiboldField],
+  [fontWeightNormalField, fontWeightMediumField, fontWeightSemiboldField],
   [fontWeightBoldField, fontWeightExtraboldField, fontWeightBlackField]
 ];
 
-export const allFields = flattenArray([fonts, coreColors, textColors, generalFonts, fontWeights]);
+export const typographyDefaultText = [
+  ...typographyTextFields
+];
+
+export const typographyWritingText = [
+  ...typographyTextWritingFields
+];
+
+export const typographyDefaultHeading = [
+  ...typographyHeadingFields
+];
+
+export const typographyWritingHeading = [
+  ...typographyHeadingWritingFields
+];
+
+export const allFields = flattenArray([
+  fonts, coreColors, textColors, generalFonts, fontWeights, typographyDefaultText, typographyWritingText, typographyDefaultHeading, typographyWritingHeading
+]);
 
 export const fieldGroups = [
   {
@@ -424,5 +613,21 @@ export const fieldGroups = [
   {
     title: 'Font Weights',
     fields: fontWeights
+  },
+  {
+    title: 'Default Text',
+    fields: typographyDefaultText
+  },
+  {
+    title: 'Page / Blog Text',
+    fields: typographyWritingText
+  },
+  {
+    title: 'Default Headings',
+    fields: typographyDefaultHeading
+  },
+  {
+    title: 'Page / Blog Headings',
+    fields: typographyWritingHeading
   }
 ];

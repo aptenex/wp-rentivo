@@ -1,5 +1,6 @@
 import {
-  RequiredString
+  RequiredString,
+  RequiredNumber
 } from '../../utils/rules';
 import { flattenArray } from '../../utils/arrays';
 
@@ -11,54 +12,26 @@ export const siteApiLycanChannelIdPath = `${siteApiLycanPath}.channelId`;
 export const siteApiLycanHostPath = `${siteApiLycanPath}.host`;
 export const siteApiLycanSendCurrencyOnPriceRequestsPath = `${siteApiLycanPath}.sendCurrencyOnPriceRequests`;
 
-/*
-"lycan": {
-        "channelId": "120a0ed1-c841-4531-968f-d1d65209ccc0",
-        "host": "https://search.es.rentivo.com:9243",
-        "sendCurrencyOnPriceRequests": false
-      },
+export const searchPath = `search`;
+export const searchElasticSearchPath = `${searchPath}.elasticSearch`;
+export const searchElasticSearchAppPath = `${searchElasticSearchPath}.app`;
+export const searchElasticSearchCredentialsPath = `${searchElasticSearchPath}.credentials`;
+export const searchResultsTotalHits = `${searchPath}.results.totalHits`;
 
-      "googleApiKey": "AIzaSyBpUyxFM1ORsk7scdoW54MtLiq1pfFYFMw",
-      "tracking": {
-        "debug": false,
-        "environments": ["production", "development"],
-        "googleTagManager": {
-          "active": true,
-          "autoStart": true,
-          "defaultDataLayer": {
-            "platform": "rentivo"
-          },
-          "trackingId": "GTM-M4WLHWN",
-          "cookieFlags": "secure;samesite=none"
-        },
-        "googleAnalytics": {
-          "active": true,
-          "head": true,
-          "trackingId": "UA-34358122-1",
-          "autoStart": true,
-          "anonymize": true,
-          "cookieFlags": "secure;samesite=none"
-        },
-        "googleAds": {
-          "active": false,
-          "head": true,
-          "trackingId": "YOUR_GOOGLE_ADS_TRACKING_ID",
-          "anonymize": true,
-          "cookieFlags": "secure;samesite=none"
-        },
-        "hotjar": {
-          "active": false,
-          "head": true,
-          "trackingId": "YOUR_HOTJAR_ID",
-          "snippetVersion": "6"
-        },
-        "facebookPixel": {
-          "active": false,
-          "head": true,
-          "autoStart": true,
-          "trackingId": ""
-        }
- */
+export const searchFiltersPath = `${searchPath}.filters`;
+export const searchFiltersLosPath = `${searchFiltersPath}.los`;
+export const searchFiltersLosActivePath = `${searchFiltersLosPath}.active`;
+export const searchFiltersLosShowFilterPath = `${searchFiltersLosPath}.showFilter`;
+export const searchFiltersLosDefaultValuePath = `${searchFiltersLosPath}.defaultValue`;
+
+export const checkoutPath = `checkout`;
+
+export const checkoutPaymentPath = `${checkoutPath}.payment`;
+export const checkoutPaymentDefaultAcceptedPaymentBrandsPath = `${checkoutPaymentPath}.defaultAcceptedPaymentBrands`;
+
+export const checkoutSuccessPath = `${checkoutPath}.success`;
+export const checkoutSuccessReservationIdPath = `${checkoutSuccessPath}.reservationIdPath`;
+
 
 /* eslint-enable no-return-assign, no-param-reassign */
 
@@ -88,12 +61,121 @@ export const lycanSendCurrencyOnPriceRequestsField = {
   defaultValue: false
 };
 
+
+export const searchElasticSearchAppField = {
+  id: 'searchElasticSearchApp',
+  label: 'Elastic Search App',
+  type: 'text',
+  path: searchElasticSearchAppPath,
+  validate: RequiredString
+};
+
+export const searchElasticSearchCredientialsField = {
+  id: 'searchElasticSearchCredientials',
+  label: 'Elastic Search Credientials',
+  type: 'text',
+  path: searchElasticSearchCredentialsPath,
+  validate: RequiredString
+};
+
+export const searchResultsTotalHitsField = {
+  id: 'searchResultsTotalHits',
+  label: 'Total properties to index/search',
+  type: 'number',
+  path: searchResultsTotalHits,
+  validate: RequiredNumber
+};
+
+export const searchFiltersLosActiveField = {
+  id: 'searchFiltersLosActive',
+  label: 'Enable LOS',
+  type: 'switch',
+  path: searchFiltersLosActivePath,
+  defaultValue: false
+};
+
+export const searchFiltersLosShowFilterField = {
+  id: 'searchFiltersLosShowFilter',
+  label: 'Show LOS',
+  type: 'switch',
+  path: searchFiltersLosShowFilterPath,
+  defaultValue: false
+};
+
+export const searchFiltersLosDefaultValueField = {
+  id: 'searchFiltersLosDefaultValue',
+  label: 'Default Value',
+  type: 'select',
+  options: [
+    {label: 'Yes', value: 'yes'},
+    {label: 'No', value: 'no'}
+  ],
+  path: searchFiltersLosDefaultValuePath,
+  defaultValue: 'no'
+};
+
+
+// Adv
+export const checkoutPaymentDefaultAcceptedPaymentBrandsField = {
+  id: 'checkoutPaymentDefaultAcceptedPaymentBrands',
+  label: 'Supported Payment Brands',
+  type: 'repeater',
+  fields: {
+    type: 'select',
+    options: [
+      {label: 'Visa', value: 'visa'},
+      {label: 'Mastercard', value: 'mastercard'},
+      {label: 'Amex', value: 'amex'},
+      {label: 'JCB', value: 'jcb'},
+      {label: 'Master', value: 'master'},
+      {label: 'Diners Club', value: 'diners_club'},
+      {label: 'Stripe', value: 'stripe'},
+      {label: 'Paypal', value: 'paypal'},
+      {label: 'Amazon', value: 'amazon'}
+    ]
+  },
+  addNewLabel: 'Add Payment Brand',
+  path: checkoutPaymentDefaultAcceptedPaymentBrandsPath
+};
+
+// Adv
+export const checkoutSuccessReservationIdField = {
+  id: 'checkoutSuccessReservationId',
+  label: 'Success Reservation ID Field',
+  type: 'text',
+  path: checkoutSuccessReservationIdPath,
+  defaultValue: 'reservationExternalConnections[0].externalReservationId'
+};
+
+
 export const lycanAPI = [lycanChannelIdField, lycanHostPathField, lycanSendCurrencyOnPriceRequestsField];
-export const allFields = flattenArray([lycanAPI]);
+export const elasticSearch = [
+  searchElasticSearchAppField, 
+  searchElasticSearchCredientialsField, 
+  searchResultsTotalHitsField,
+  [
+    searchFiltersLosActiveField,
+    searchFiltersLosShowFilterField,
+    searchFiltersLosDefaultValueField
+  ]
+];
+export const checkout = [
+  checkoutPaymentDefaultAcceptedPaymentBrandsField,
+  checkoutSuccessReservationIdField
+];
+export const allFields = flattenArray([lycanAPI, elasticSearch, checkout]);
 
 export const fieldGroups = [
   {
     title: 'Lycan API',
     fields: lycanAPI
+  },
+  {
+    title: 'Search',
+    fields: elasticSearch
+  },
+  {
+    title: 'Checkout',
+    fields: checkout
   }
 ];

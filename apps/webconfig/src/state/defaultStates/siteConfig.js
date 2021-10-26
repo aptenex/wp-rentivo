@@ -115,14 +115,16 @@ const siteConfig = {
           "email": "hello@leavetown.com"
         },
         "sameAs": [
-
+        
         ]
       },
       "brand": {
         "name": "Leavetown",
         "url": "https://leavetown.com",
         "logo": "https://leavetown.rentivo.net/wp-content/uploads/sites/11/2020/12/logo-3-ungrouped.svg",
-        "sameAs": []
+        "sameAs": [
+          
+        ]
       }
     },
     "content": {
@@ -1337,14 +1339,14 @@ const siteConfig = {
           "fontFamily": "body",
           "fontWeight": "semibold",
           "lineHeight": "shorter",
-          "fontSize": "md",
+          "fontSize": { "base": "md", "lg": "md" },
           "color": "text"
         },
         "h6": {
           "fontFamily": "body",
           "fontWeight": "semibold",
           "lineHeight": "shorter",
-          "fontSize": "md",
+          "fontSize": { "base": "md", "lg": "md" },
           "color": "text"
         }
       },
@@ -1388,7 +1390,7 @@ const siteConfig = {
           "fontFamily": "body",
           "fontWeight": "semibold",
           "lineHeight": "shorter",
-          "fontSize": "16px",
+          "fontSize": { "base": "16px", "lg": "16px" },
           "color": "text"
         }
       }

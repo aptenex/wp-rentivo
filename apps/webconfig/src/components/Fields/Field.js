@@ -258,6 +258,7 @@ function SelectField(props) {
       setListenToVal(listeningToData);
       fetchData();
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [getOptions, options, hasRunGet, setHasRunGet, setRenderedOptions, listensTo, listenToVal, listeningToData]);
 
   return (

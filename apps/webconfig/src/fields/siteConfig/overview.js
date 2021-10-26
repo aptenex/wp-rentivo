@@ -15,6 +15,7 @@ import { flattenArray } from '../../utils/arrays';
 export const siteNamePath = 'name';
 export const siteIdPath = 'id';
 export const siteShortNamePath = 'shortName';
+export const siteNoIndex = 'noIndex';
 
 export const sitePath = 'site';
 export const siteLogoPath = `${sitePath}.logo`;
@@ -284,6 +285,14 @@ export const cookiesPositionField = {
   defaultValue: 'center'
 };
 
+export const noIndexField = {
+  id: 'noIndex',
+  label: 'Do not index this site',
+  type: 'switch',
+  path: siteNoIndex,
+  defaultValue: false
+};
+
 export const sharingOgImageField = {
   id: 'sharingOgImage',
   label: 'Sharing Image (min. 1200px)',
@@ -423,7 +432,7 @@ export const structuredDataSameAsFieldObj = {
 export const siteDetails = [siteNameField];
 export const logo = [logoUseImageField, logoTextField, logoImageField, logoImageDarkField, logoImageHeightField, logoImageWidthField, iconLargeImageField, iconSmallImageField];
 export const cookies = [cookiesActiveField, cookiesPolicyUrlField, cookiesPositionField];
-export const sharingSeo = [sharingOgImageField, structuredDataLegalNameField, structuredDataFoundingDateField, structuredDataContactTypeField, structuredDataContactEmailField, structuredDataSameAsField];
+export const sharingSeo = [noIndexField, sharingOgImageField, structuredDataLegalNameField, structuredDataFoundingDateField, structuredDataContactTypeField, structuredDataContactEmailField, structuredDataSameAsField];
 export const allFields = flattenArray([siteDetails, logo, cookies, sharingSeo]);
 
 export const fieldGroups = [
