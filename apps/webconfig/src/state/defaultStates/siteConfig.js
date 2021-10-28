@@ -1169,6 +1169,7 @@ const siteConfig = {
           }
         ],
         "layout": {
+          "searchAreaType": "GRID_DESKTOP",
           "searchArea": {
             "mapOpen": {
               "base": {
@@ -1411,6 +1412,7 @@ const siteConfig = {
         "parts": ["header"],
         "baseStyle": {
           "type": "light",
+          "layout": "CENTRAL_LOGO",
           "header": {
             "height": "80px",
             "boxShadow": "0 0 5px 1px rgba(0, 0, 0, 0.05)",

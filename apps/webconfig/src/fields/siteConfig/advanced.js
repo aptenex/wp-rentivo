@@ -163,6 +163,8 @@ export const checkout = [
   checkoutPaymentDefaultAcceptedPaymentBrandsField,
   checkoutSuccessReservationIdField
 ];
+
+
 export const allFields = flattenArray([lycanAPI, elasticSearch, checkout]);
 
 export const fieldGroups = [

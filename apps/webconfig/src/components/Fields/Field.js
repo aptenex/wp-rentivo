@@ -2,6 +2,11 @@ import * as React from 'react';
 import { ChromePicker } from 'react-color';
 import colorParse from 'color-parse';
 import { get, set } from 'lodash';
+import brace from 'brace';
+import AceEditor from 'react-ace';
+import 'brace/mode/json';
+import 'brace/theme/github';
+import 'brace/theme/monokai';
 import {
   Field as FormikField,
   FastField as FormikFieldFast,
@@ -170,7 +175,7 @@ function ColorPicker({value, id, defaultValue, setFieldValue, ...rest}) {
 
   const handleOnChangeComplete = useCallback((color) => {
     setFieldValue(id, convertToColorString(color.rgb));
-  }, [setFieldValue]);
+  }, [setFieldValue, id, convertToColorString]);
 
   return (
     <Box
@@ -297,6 +302,69 @@ function MediaUrlField(props) {
   );
 }
 
+const nativeInputValueSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, "value").set
+
+function JSONEditorField(props) {
+  const { state } = useContext(FormStateContext);
+  const inputRef = React.useRef();
+  const [hiddenInputState, setHiddenInputState] = useState(undefined);
+  const { id } = props;
+
+  useEffect(() => {
+    if(hiddenInputState) {
+      nativeInputValueSetter.call(inputRef.current, hiddenInputState);
+      const fakeEvent = new Event('input', { bubbles: true});
+      inputRef.current.dispatchEvent(fakeEvent);
+    }
+  }, [inputRef, hiddenInputState, id]);
+
+  return (
+
+    <FieldWrapperMemo {...props}>
+      {({ field }) => (
+        <div>
+          <Input 
+            ref={inputRef}
+            id={id}
+            onChange={field.onChange}
+            display="none"
+          />
+          <div id={id + '_editor'}>
+            {state && (
+              <AceEditor
+                placeholder="Placeholder Text"
+                mode="json"
+                theme="monokai"
+                name={id + '_editor'}
+                width="100%"
+                height="800px"
+                //onLoad={this.onLoad}
+                onChange={(value) => {
+                  setHiddenInputState(value);
+                }}
+                fontSize={14}
+                showPrintMargin={true}
+                showGutter={true}
+                highlightActiveLine={true}
+                defaultValue={JSON.stringify(state, null, 2)}
+                //value={JSON.stringify(state, null, 2)}
+                setOptions={{
+                  enableBasicAutocompletion: false,
+                  enableLiveAutocompletion: false,
+                  enableSnippets: false,
+                  showLineNumbers: true,
+                  tabSize: 2
+                }}
+              />
+            )}
+          </div>
+        </div>
+      )}
+    </FieldWrapperMemo>
+    
+  );
+}
+
 function SwitchField(props) {
   const { id, inputProps } = props;
 
@@ -415,6 +483,10 @@ function Field(props) {
 
   if(type === 'repeater') {
     return <RepeaterField {...props}/>;
+  }
+
+  if(type === 'json') {
+    return <JSONEditorField {...props} />;
   }
 
   return <TextField {...props}/>;

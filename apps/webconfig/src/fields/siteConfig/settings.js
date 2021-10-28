@@ -3,7 +3,6 @@ import { flattenArray } from '../../utils/arrays';
 import {
   RequiredNumber,
   RequiredString,
-  RequiredStringUrl
 } from '../../utils/rules';
 import { capitalize } from 'lodash';
 
@@ -26,6 +25,7 @@ export const searchMapPath = `${searchPath}.map`;
 export const searchMapDefaultCenterPath = `${searchMapPath}.defaultCenter`;
 export const searchMapDefaultCenterLatPath = `${searchMapDefaultCenterPath}.lat`;
 export const searchMapDefaultCenterLngPath = `${searchMapDefaultCenterPath}.lng`;
+export const searchMapIsOpenOnLoadPath = `${searchMapPath}.isOpenOnLoad`;
 
 export const searchFiltersPath = `${searchPath}.filters`;
 
@@ -228,18 +228,35 @@ export const searchResultsOpenInNewTabField = {
   path: searchResultsOpenInNewTabPath,
 };
 
+export const searchMapIsOpenOnLoadField = {
+  id: 'searchMapIsOpenOnLoad',
+  label: 'Show map on load',
+  helperText: 'Best performance is hidding the map on load. This means on first visit, the map will be closed, however, if the user opens the map once, next time they visit it will be open be default.',
+  type: 'switch',
+  defaultValue: true,
+  path: searchMapIsOpenOnLoadPath
+};
+
 export const searchMapDefaultCenterLatField = {
   id: 'searchMapDefaultCenterLat',
   label: 'Default Map Lat',
-  type: 'number',
+  type: 'text',
   defaultValue: 38.941631,
+  setValue: async ({value, setVal}) => {
+    setVal(parseFloat(value));
+  },
+  validate: RequiredNumber,
   path: searchMapDefaultCenterLatPath,
 };
 
 export const searchMapDefaultCenterLngField = {
   id: 'searchMapDefaultCenterLng',
   label: 'Default Map Lat',
-  type: 'number',
+  type: 'text',
+  setValue: async ({value, setVal}) => {
+    setVal(parseFloat(value));
+  },
+  validate: RequiredNumber,
   defaultValue: -119.977219,
   path: searchMapDefaultCenterLngPath,
 };
@@ -434,7 +451,7 @@ export const checkoutCheckboxesDefaultTermsAndConditionsField = {
 export const generalSettings = [dynamicPropertyPagesField, supportedCurrenciesField, defaultCurrencyField];
 export const searchSettings = [
   [searchResultsPerPageField, searchResultsOpenInNewTabField],
-  [searchMapDefaultCenterLatField, searchMapDefaultCenterLngField]
+  [searchMapIsOpenOnLoadField, searchMapDefaultCenterLatField, searchMapDefaultCenterLngField]
 ];
 export const propertySettings = [
   propertyHeadlineShowSubtitleField,

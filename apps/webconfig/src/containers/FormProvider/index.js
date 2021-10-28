@@ -24,7 +24,6 @@ export const setSanitizer = (val, type) => {
 };
 
 export default function FormProvider({fields, dataStore, children}) {
-
   // TODO: Need to move to hooks and give setValue access to form.
   const formik = useRef(null);
   const dispatch = useDispatch();
@@ -53,7 +52,7 @@ export default function FormProvider({fields, dataStore, children}) {
     for(const field of fields) {
 
       const getState = (path, defaultValue) => get(state, path, defaultValue);
-      let val = typeof field.getValue === 'function' ? field.getValue({state, getState, get}) : get(state, field.path);
+      let val = typeof field.getValue === 'function' ? field.getValue({state, getState, dataStore, get}) : get(state, field.path);
       if(val === undefined && field.defaultValue !== undefined) {
         val = field.defaultValue;
       }
@@ -61,7 +60,7 @@ export default function FormProvider({fields, dataStore, children}) {
       result[field.id] = val;
     }
     return  result;
-  }, [fields, state]);
+  }, [fields, state, dataStore]);
 
   const validationSchema = useMemo(() => {
     const result = {};
@@ -75,35 +74,44 @@ export default function FormProvider({fields, dataStore, children}) {
   }, [fields]);
 
   const handleSubmit = useCallback(async (values, actions) => {
-
     try {
       let newState = state;
       for(const field of fields) {
-        if(values[field.id]) {
 
-          const setState = (path, val) => set(newState, path, setSanitizer(val, field.type));
-          const getState = (path, defaultValue) => get(newState, path, defaultValue);
-          const prevVal = field.getValue && typeof field.getValue === 'function' ? field.getValue({state, get, getState}) : get(state, field.path);
-          const setVal = field.path ? (val) => set(newState, field.path, setSanitizer(val, field.type)) : undefined;
-
-          if(field.setValue) {
-            await field.setValue({
-              value: values[field.id],
-              setVal,
-              prevVal,
-              state: newState,
-              setState,
-              getState,
-              set,
-              get,
-              id: field.id,
-              form: formik.current
-            });
+        // eslint-disable-next-line no-loop-func
+        const setState = (path, val) => {
+          if(path) {
+            return set(newState, path, setSanitizer(val, field.type));
           } else {
-            set(newState, field.path, values[field.id]);
+            newState = val;
+            return val;
           }
-
         }
+        // eslint-disable-next-line no-loop-func
+        const getState = (path, defaultValue) => get(newState, path, defaultValue);
+        const prevVal = field.getValue && typeof field.getValue === 'function' ? field.getValue({state, get, getState}) : get(state, field.path);
+        // eslint-disable-next-line no-loop-func
+        const setVal = field.path ? (val) => set(newState, field.path, setSanitizer(val, field.type)) : undefined;
+
+        if(field.setValue) {
+          await field.setValue({
+            value: values[field.id],
+            setVal,
+            dataStore,
+            prevVal,
+            state: newState,
+            setState,
+            getState,
+            set,
+            get,
+            id: field.id,
+            form: formik.current
+          });
+        } else {
+          // console.log(field.path, values[field.id]);
+          set(newState, field.path, values[field.id]);
+        }
+        
       }
       console.log(newState);
       if(dataStore === 'siteConfig') {
@@ -118,7 +126,7 @@ export default function FormProvider({fields, dataStore, children}) {
   }, [state, fields, dataStore, dispatch, formik]);
 
   return (
-    <FormStateContext.Provider value={{state, error, isSaving, fields, slowFields}}>
+    <FormStateContext.Provider value={{state, error, dataStore, isSaving, fields, slowFields}}>
       {typeof initValues === 'object' ? (
         <Formik
           innerRef={formik}

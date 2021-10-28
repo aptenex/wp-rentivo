@@ -58,6 +58,145 @@ export const chakraThemeTypographyTextWritingPath = `${chakraThemeTypographyPath
 export const chakraThemeTypographyHeadingPath = `${chakraThemeTypographyPath}.heading`;
 export const chakraThemeTypographyHeadingWritingPath = `${chakraThemeTypographyPath}.writingHeading`;
 
+export const chakraThemeComponentsPath = `${chakraThemePath}.components`;
+export const chakraThemeComponentsHeaderNavbarPath = `${chakraThemeComponentsPath}.HeaderNavbar`;
+
+export const chakraThemeComponentsHeaderNavbarBaseStylePath = `${chakraThemeComponentsHeaderNavbarPath}.baseStyle`;
+
+export const chakraThemeComponentsHeaderNavbarBaseStyleTypePath = `${chakraThemeComponentsHeaderNavbarBaseStylePath}.type`;
+export const chakraThemeComponentsHeaderNavbarBaseStyleLayoutPath = `${chakraThemeComponentsHeaderNavbarBaseStylePath}.layout`;
+
+export const chakraThemeComponentsHeaderNavbarBaseStyleHeaderPath = `${chakraThemeComponentsHeaderNavbarBaseStylePath}.header`;
+export const chakraThemeComponentsHeaderNavbarBaseStyleHeaderHeightPath = `${chakraThemeComponentsHeaderNavbarBaseStyleHeaderPath}.height`;
+export const chakraThemeComponentsHeaderNavbarBaseStyleHeaderBgPath = `${chakraThemeComponentsHeaderNavbarBaseStyleHeaderPath}.bg`;
+
+export const chakraThemeComponentsHeaderNavbarBaseStyleContainerPath = `${chakraThemeComponentsHeaderNavbarBaseStylePath}.container`;
+export const chakraThemeComponentsHeaderNavbarBaseStyleContainerMaxWPath = `${chakraThemeComponentsHeaderNavbarBaseStyleContainerPath}.maxW`;
+
+export const chakraThemeBarcelonaPath = `${chakraThemePath}.barcelona`;
+export const chakraThemeBarcelonaSearchPath = `${chakraThemeBarcelonaPath}.search`;
+
+export const chakraThemeBarcelonaSearchDefaultTypePath = `${chakraThemeBarcelonaSearchPath}.defaultType`;
+export const chakraThemeBarcelonaSearchShowViewButtonPath = `${chakraThemeBarcelonaSearchPath}.showViewButton`;
+
+export const chakraThemeBarcelonaSearchLayoutPath = `${chakraThemeBarcelonaSearchPath}.layout`;
+export const chakraThemeBarcelonaSearchLayoutSearchAreaTypePath = `${chakraThemeBarcelonaSearchLayoutPath}.searchAreaType`;
+export const chakraThemeBarcelonaSearchLayoutSearchAreaPath = `${chakraThemeBarcelonaSearchLayoutPath}.searchArea`;
+export const chakraThemeBarcelonaSearchLayoutSearchAreaMapOpenPath = `${chakraThemeBarcelonaSearchLayoutSearchAreaPath}.mapOpen`;
+
+
+export const searchShowViewButtonField = {
+  id: 'searchShowViewButton',
+  label: 'Show view button',
+  helperText: 'Display a view property button on each listing.',
+  type: 'switch',
+  defaultValue: true,
+  path: chakraThemeBarcelonaSearchShowViewButtonPath,
+};
+
+export const searchDefaultTypeField = {
+  id: 'searchDefaultType',
+  label: 'Default Listing Type',
+  type: 'select',
+  options: [
+    {
+      label: 'List',
+      value: 'list'
+    },
+    {
+      label: 'Grid',
+      value: 'grid'
+    }
+  ],
+  defaultValue: 'list',
+  path: chakraThemeBarcelonaSearchDefaultTypePath,
+};
+
+export const searchLayoutSearchAreaTypeField = {
+  id: 'searchLayoutSearchAreaType',
+  label: 'Default Listing Type',
+  helperText: 'This only applies when the map is open, and users are on desktop',
+  type: 'select',
+  options: [
+    {
+      label: 'List view (Desktop + Map Open)',
+      value: 'LIST_DESKTOP'
+    },
+    {
+      label: 'Grid view (Desktop + Map Open)',
+      value: 'GRID_DESKTOP'
+    },
+    {
+      label: 'Custom',
+      value: 'CUSTOM'
+    }
+  ],
+  defaultValue: 'GRID_DESKTOP',
+  setValue: ({value, setVal, setState}) => {
+    setVal(value);
+    if(value === 'GRID_DESKTOP') {
+      setState(chakraThemeBarcelonaSearchLayoutSearchAreaMapOpenPath, {
+        "base": {
+          "colSpan": 24,
+          "perRow": 1,
+          "type": "grid"
+        },
+        "md": {
+          "colSpan": 14,
+          "perRow": 1,
+          "type": "grid"
+        },
+        "lg": {
+          "colSpan": 16,
+          "perRow": 2,
+          "type": "grid"
+        },
+        "xl": {
+          "colSpan": 14,
+          "perRow": 2,
+          "type": "grid"
+        },
+        "xxl": {
+          "colSpan": 12,
+          "perRow": 2,
+          "type": "grid"
+        }
+      });
+    }
+
+    if(value === 'LIST_DESKTOP') {
+      setState(chakraThemeBarcelonaSearchLayoutSearchAreaMapOpenPath, {
+        "base": {
+          "colSpan": 24,
+          "perRow": 1,
+          "type": "grid"
+        },
+        "md": {
+          "colSpan": 14,
+          "perRow": 1,
+          "type": "grid"
+        },
+        "lg": {
+          "colSpan": 16,
+          "perRow": 2,
+          "type": "grid"
+        },
+        "xl": {
+          "colSpan": 14,
+          "perRow": 1,
+          "type": "list"
+        },
+        "xxl": {
+          "colSpan": 12,
+          "perRow": 1,
+          "type": "list"
+        }
+      });
+    }
+  },
+  path: chakraThemeBarcelonaSearchLayoutSearchAreaTypePath,
+};
+
 /* eslint-enable no-return-assign, no-param-reassign */
 export const fontWeightOptions = [
   { label: '100', value: 100 },
@@ -547,12 +686,85 @@ export const accentFontField = {
   path: chakraThemeFontsAccentPath
 };
 
-/*
-"fontFamily": "body",
-          "fontWeight": "bold",
-          "lineHeight": "shorter",
-          "fontSize": { "base": "2xl", "lg": "3xl" },
-          "color": "text"*/
+export const headerNavbarBaseStyleHeaderBgField = {
+  id: 'headerNavbarBaseStyleHeaderBg',
+  label: 'Background Color',
+  type: 'color',
+  path: chakraThemeComponentsHeaderNavbarBaseStyleHeaderBgPath,
+  validate: RequiredString,
+  defaultValue: '#FFFFFF'
+};
+
+export const headerNavbarBaseStyleTypeField = {
+  id: 'headerNavbarBaseStyleType',
+  label: 'Color Type',
+  helperText: 'If your header has a light background, use "Light". If your header has a dark background, use "Dark"',
+  type: 'select',
+  options: [
+    {
+      label: 'Light',
+      value: 'light' 
+    },
+    {
+      label: 'Dark',
+      value: 'dark' 
+    }
+  ],
+  defaultValue: 'light',
+  path: chakraThemeComponentsHeaderNavbarBaseStyleTypePath
+};
+
+export const headerNavbarBaseStyleLayoutField = {
+  id: 'headerNavbarBaseStyleLayout',
+  label: 'Header Layout',
+  type: 'select',
+  options: [
+    {
+      label: 'Central Logo',
+      value: 'CENTRAL_LOGO'
+    },
+    {
+      label: 'Left Logo',
+      value: 'LEFT_LOGO' 
+    }
+  ],
+  defaultValue: 'LEFT_LOGO',
+  path: chakraThemeComponentsHeaderNavbarBaseStyleLayoutPath
+};
+
+export const headerNavbarBaseStyleHeaderHeightField = {
+  id: 'headerNavbarBaseStyleHeaderHeight',
+  label: 'Header Height',
+  helperText: 'Do not make your header height less than the height of your logo.',
+  type: 'select',
+  options: pixelRange(24, 200),
+  defaultValue: '60px',
+  path: chakraThemeComponentsHeaderNavbarBaseStyleHeaderHeightPath
+};
+
+export const headerNavbarBaseStyleContainerMaxWField = {
+  id: 'headerNavbarBaseStyleContainerMaxW',
+  label: 'Container Width',
+  type: 'select',
+  options: [
+    {
+      label: 'Full Width (Fluid)',
+      value: 'container.full' 
+    },
+    {
+      label: 'Large Container',
+      value: 'container.xl'
+    },
+    {
+      label: 'Small Container',
+      value: 'container.lg' 
+    }
+  ],
+  defaultValue: 'container.full',
+  path: chakraThemeComponentsHeaderNavbarBaseStyleContainerMaxWPath
+};
+
+
 
 
 export const fonts = [loadFontsField];
@@ -572,7 +784,14 @@ export const fontWeights = [
   [fontWeightNormalField, fontWeightMediumField, fontWeightSemiboldField],
   [fontWeightBoldField, fontWeightExtraboldField, fontWeightBlackField]
 ];
-
+export const header = [
+  [headerNavbarBaseStyleHeaderBgField, headerNavbarBaseStyleTypeField],
+  [headerNavbarBaseStyleLayoutField, headerNavbarBaseStyleHeaderHeightField],
+  headerNavbarBaseStyleContainerMaxWField
+];
+export const search = [
+  [searchLayoutSearchAreaTypeField, searchShowViewButtonField]
+];
 export const typographyDefaultText = [
   ...typographyTextFields
 ];
@@ -590,7 +809,7 @@ export const typographyWritingHeading = [
 ];
 
 export const allFields = flattenArray([
-  fonts, coreColors, textColors, generalFonts, fontWeights, typographyDefaultText, typographyWritingText, typographyDefaultHeading, typographyWritingHeading
+  fonts, coreColors, textColors, generalFonts, fontWeights, header, search, typographyDefaultText, typographyWritingText, typographyDefaultHeading, typographyWritingHeading
 ]);
 
 export const fieldGroups = [
@@ -613,6 +832,14 @@ export const fieldGroups = [
   {
     title: 'Font Weights',
     fields: fontWeights
+  },
+  {
+    title: 'Header',
+    fields: header
+  },
+  {
+    title: 'Search',
+    fields: search
   },
   {
     title: 'Default Text',
