@@ -11,6 +11,7 @@ import {
   Redirect
 } from 'react-router-dom';
 import SiteConfig from '../SiteConfig';
+import Translations from '../Translations';
 import { HiMenuAlt2, HiCode, HiTemplate, HiRefresh } from 'react-icons/hi';
 
 const navLinks = [
@@ -23,7 +24,7 @@ const navLinks = [
   {
     slug: `translations`,
     label: `Translations`,
-    component: () => <div>Translations</div>,
+    component: Translations,
     icon: HiMenuAlt2,
   },
   {

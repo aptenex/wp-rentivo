@@ -340,7 +340,8 @@ export const propertyPricingAlwaysShowAfterArrivalFees = {
 
 export const propertyPricingMinNightsField = {
   id: 'propertyPricingMinNights',
-  label: 'Show request to book button',
+  label: 'Default global min nights',
+  helperText: 'If a property does not have a min night(s) specified, it will default to this value.',
   type: 'select',
   options: numberRange(1, 365),
   path: propertyPricingMinNightsPath,
@@ -349,7 +350,8 @@ export const propertyPricingMinNightsField = {
 
 export const propertyPricingMaxNightsField = {
   id: 'propertyPricingMaxNights',
-  label: 'Show request to book button',
+  label: 'Default global max nights',
+  helperText: 'If a property does not have a max night(s) specified, it will default to this value.',
   type: 'select',
   options: numberRange(1, 365),
   path: propertyPricingMaxNightsPath,
