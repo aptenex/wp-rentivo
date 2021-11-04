@@ -1179,4 +1179,4 @@ const translations = {
   
 }
 
-export default translations;
+export default Object.freeze(translations);

@@ -51,19 +51,8 @@ export default function App() {
         <Flex align="center" bg="blue.600" color="white" px="6" minH="16">
           <Flex justify="space-between" align="center" w="full">
             <MobileHamburgerMenu onClick={toggle} isOpen={isMenuOpen} />
-            <NavMenu.Mobile navLinks={navLinks}/>
+            
             <NavMenu.Desktop navLinks={navLinks} />
-            <Logo
-              flex={{
-                base: '1',
-                lg: '0',
-              }}
-              display={{
-                lg: 'none',
-              }}
-              flexShrink={0}
-              h="5"
-            />
           </Flex>
         </Flex>
 
@@ -79,3 +68,4 @@ export default function App() {
     </Router>
   );
 }
+// <NavMenu.Mobile navLinks={navLinks}/>

@@ -38,10 +38,7 @@ const DesktopNavMenu = (props) => {
     <HStack
       spacing="3"
       flex="1"
-      display={{
-        base: 'none',
-        lg: 'flex',
-      }}
+      
     >
       {navLinks.map(({icon: Icon, ...navLink}, i) => (
         <NavItem.Desktop key={i} active={pathname.includes(`/${navLink.slug}`)} to={`/${navLink.slug}`} label={navLink.label} icon={<Icon />}>
@@ -51,6 +48,12 @@ const DesktopNavMenu = (props) => {
     </HStack>
   );
 };
+
+/*
+display={{
+        base: 'none',
+        lg: 'flex',
+      }}*/
 
 export const NavMenu = {
   Mobile: MobileNavMenu,

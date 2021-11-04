@@ -2,8 +2,9 @@ import * as React from 'react';
 import PageHeader from '../../components/PageHeader';
 import { Redirect, Route, Switch, useRouteMatch } from 'react-router-dom';
 import SubPageTemplate from './SubPageTemplate';
+import { isEqual } from 'lodash';
 
-export default function SubPage({title, navLinks, children}) {
+function SubPage({title, navLinks, children}) {
   let match = useRouteMatch();
   return (
     <div>
@@ -22,3 +23,5 @@ export default function SubPage({title, navLinks, children}) {
     </div>
   )
 };
+
+export default React.memo(SubPage, isEqual);

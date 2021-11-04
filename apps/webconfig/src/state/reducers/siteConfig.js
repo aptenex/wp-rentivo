@@ -12,11 +12,13 @@ export default function siteConfigReducer(state = initialState, action) {
   switch (action.type) {
     case SAVING_SITE_CONFIG:
       return {
+        ...state,
         isSaving: true,
         error: null
       };
     case SAVING_SITE_CONFIG_ERROR:
       return {
+        ...state,
         isSaving: false,
         error: action.payload
       };
