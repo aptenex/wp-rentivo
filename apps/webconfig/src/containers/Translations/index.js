@@ -78,8 +78,6 @@ export const Translation = ({ lang, translation, dTranslations, translationKey }
     }
   }, [translationKey, lang, dispatch, dTranslations]);
 
-  //console.log({defaults: dTranslations[lang], translationKey, exists: (dTranslations[lang][translationKey] !== undefined), oldValue: dTranslations[lang][translationKey], newValue: newTranslation});
-
   return (
     <Flex
       h="100%"
@@ -129,7 +127,10 @@ export const Translation = ({ lang, translation, dTranslations, translationKey }
             w={`calc(100% - 30px)`}
             defaultValue={translation} 
             value={newTranslation} 
-            placeholder={dTranslations && dTranslations[lang] && dTranslations[lang][translationKey] ? dTranslations[lang][translationKey] : ''}
+            placeholder={
+              dTranslations && dTranslations[lang] && dTranslations[lang][translationKey] ? dTranslations[lang][translationKey] : 
+              dTranslations['en'] && dTranslations['en'][translationKey] ? dTranslations['en'][translationKey] : ''
+            }
           >
             <EditablePreview px={1} py={1} _hover={{color: 'blue.500'}} minH="21px" w="100%"/>
             <EditableInput 
