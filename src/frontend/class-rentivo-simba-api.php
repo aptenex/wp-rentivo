@@ -57,6 +57,99 @@ if ( ! class_exists( WPRentivoSimbaAPI::class ) ) {
                 }
             ]);
 
+            register_rest_route( 'simba/v1', '/translations', [
+                'methods' => 'GET',
+                'callback' => static function(\WP_REST_Request $request) {
+                    $data = [
+                        'data' => get_field('translations', 'options')
+                    ];
+
+                    return new \WP_REST_Response( $data, 200 );
+                }
+            ]);  
+
+            register_rest_route( 'simba/v1', '/translations', [
+                'methods' => 'POST',
+                'callback' => static function(\WP_REST_Request $request) {
+                    $data = [];
+                    $status = 200;
+
+                    // Update field.
+                    $translations = $request->get_param( 'translations' );
+                    if($translations) {
+                        update_field('translations', $translations, 'option');
+                        $data['success'] = true;
+                    } else {
+                        $data['success'] = false;
+                        $data['error'] = "Code not save translations.";
+                    }
+
+                    return new \WP_REST_Response( $data, $status );
+                }
+            ]);
+
+            register_rest_route( 'simba/v1', '/headCustomHTML', [
+                'methods' => 'GET',
+                'callback' => static function(\WP_REST_Request $request) {
+                    $data = [
+                        'data' => get_field('headCustomHTML', 'options')
+                    ];
+
+                    return new \WP_REST_Response( $data, 200 );
+                }
+            ]);  
+
+            register_rest_route( 'simba/v1', '/headCustomHTML', [
+                'methods' => 'POST',
+                'callback' => static function(\WP_REST_Request $request) {
+                    $data = [];
+                    $status = 200;
+
+                    // Update field.
+                    $code = $request->get_param( 'headCustomHTML' );
+                    if($code) {
+                        update_field('headCustomHTML', $code, 'option');
+                        $data['success'] = true;
+                    } else {
+                        $data['success'] = false;
+                        $data['error'] = "Code not save header custom HTML.";
+                    }
+
+                    return new \WP_REST_Response( $data, $status );
+                }
+            ]);
+
+            register_rest_route( 'simba/v1', '/closingBodyCustomHTML', [
+                'methods' => 'GET',
+                'callback' => static function(\WP_REST_Request $request) {
+                    $data = [
+                        'data' => get_field('closingBodyCustomHTML', 'options')
+                    ];
+
+                    return new \WP_REST_Response( $data, 200 );
+                }
+            ]);  
+
+            register_rest_route( 'simba/v1', '/closingBodyCustomHTML', [
+                'methods' => 'POST',
+                'callback' => static function(\WP_REST_Request $request) {
+                    $data = [];
+                    $status = 200;
+
+                    // Update field.
+                    $code = $request->get_param( 'closingBodyCustomHTML' );
+                    if($code) {
+                        update_field('closingBodyCustomHTML', $code, 'option');
+                        $data['success'] = true;
+                    } else {
+                        $data['success'] = false;
+                        $data['error'] = "Code not save closing body custom HTML.";
+                    }
+
+                    return new \WP_REST_Response( $data, $status );
+                }
+            ]);
+
             register_rest_route( 'simba/v1', '/clone/cancel', [
                 'methods' => 'GET',
                 'callback' => static function(\WP_REST_Request $request) {
