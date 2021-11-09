@@ -28,18 +28,11 @@ import { useHistory } from "react-router-dom";
 import { isEqual } from "lodash";
 import { RepeatClockIcon, CloseIcon } from "@chakra-ui/icons";
 
-/*
-const ast = parse(`this is {count, plural, 
-  one{# dog} 
-  other{# dogs}
-}`)
-*/
-
 const dataStore = "translations";
 
 const langOptions = ['fr', 'es', 'nl', 'it', 'de'];
 
-export const Translation = ({ lang, translation, translationKey }) => {
+export const Translation = ({ lang, translation, dTranslations, translationKey }) => {
   const dispatch = useDispatch();
   const prevTranslation = useRef(translation);
   const [newTranslation, setNewTranslation] = useState(translation);
@@ -69,23 +62,23 @@ export const Translation = ({ lang, translation, translationKey }) => {
   }, [dispatch, translation, translationKey, lang, newTranslation]);
 
   const handleReset = useCallback(() => {
-    if(defaultTranslations[lang] !== undefined && defaultTranslations[lang][translationKey] !== undefined && defaultTranslations[lang][translationKey] !== translation) {
-      setNewTranslation(defaultTranslations[lang][translationKey]);
-      dispatch(startSetTranslation(lang, translationKey, defaultTranslations[lang][translationKey]));
+    if(dTranslations[lang] !== undefined && dTranslations[lang][translationKey] !== undefined && dTranslations[lang][translationKey] !== translation) {
+      setNewTranslation(dTranslations[lang][translationKey]);
+      dispatch(startSetTranslation(lang, translationKey, dTranslations[lang][translationKey]));
     }
-  }, [translationKey, translation, lang, dispatch]);
+  }, [translationKey, dTranslations, translation, lang, dispatch]);
 
   const handleDelete = useCallback(() => {
     let r = window.confirm("Are you sure you want to remove this translation?");
     if (r === true) {
-      if(defaultTranslations[lang] !== undefined && defaultTranslations[lang][translationKey] === undefined) {
-        setNewTranslation(defaultTranslations[lang][translationKey] === '');
+      if(dTranslations[lang] !== undefined && dTranslations[lang][translationKey] === undefined) {
+        setNewTranslation(dTranslations[lang][translationKey] === '');
         dispatch(startSetTranslation(lang, translationKey, '', true));
       }
     }
-  }, [translationKey, lang, dispatch]);
+  }, [translationKey, lang, dispatch, dTranslations]);
 
-  console.log({defaults: defaultTranslations[lang], translationKey, exists: (defaultTranslations[lang][translationKey] !== undefined)});
+  //console.log({defaults: dTranslations[lang], translationKey, exists: (dTranslations[lang][translationKey] !== undefined), oldValue: dTranslations[lang][translationKey], newValue: newTranslation});
 
   return (
     <Flex
@@ -109,7 +102,7 @@ export const Translation = ({ lang, translation, translationKey }) => {
       </Box>
       <Box w="50%" overflow="hidden" position="relative">
         <Box px={1} py={1}>
-          {(defaultTranslations[lang] !== undefined && defaultTranslations[lang][translationKey] !== undefined && defaultTranslations[lang][translationKey] !== newTranslation) && (
+          {(dTranslations[lang] !== undefined && dTranslations[lang][translationKey] !== undefined && dTranslations[lang][translationKey] !== newTranslation) && (
             <IconButton
               position="absolute"
               top="4px"
@@ -121,7 +114,7 @@ export const Translation = ({ lang, translation, translationKey }) => {
               onClick={handleReset}
             />
           )}
-          {(defaultTranslations[lang] !== undefined && defaultTranslations[lang][translationKey] === undefined) && (
+          {(dTranslations[lang] !== undefined && dTranslations[lang][translationKey] === undefined) && (
             <IconButton
               position="absolute"
               top="4px"
@@ -136,7 +129,7 @@ export const Translation = ({ lang, translation, translationKey }) => {
             w={`calc(100% - 30px)`}
             defaultValue={translation} 
             value={newTranslation} 
-            placeholder={defaultTranslations && defaultTranslations[lang] && defaultTranslations[lang][translationKey] ? defaultTranslations[lang][translationKey] : ''}
+            placeholder={dTranslations && dTranslations[lang] && dTranslations[lang][translationKey] ? dTranslations[lang][translationKey] : ''}
           >
             <EditablePreview px={1} py={1} _hover={{color: 'blue.500'}} minH="21px" w="100%"/>
             <EditableInput 
@@ -157,10 +150,11 @@ export const Translation = ({ lang, translation, translationKey }) => {
   );
 };
 
-export const Translations = ({ langs, lang }) => {
+export const Translations = ({ langs, lang, dTranslations }) => {
+
   const dispatch = useDispatch();
-  const state = useSelector((state) => state[dataStore].data);
-  const translations = Object.entries(state[lang]).map(([key, translation]) => ({key, translation}));
+  const translationsState = useSelector((state) => state[dataStore].data?.[lang]);
+  const translations = Object.entries({...((dTranslations[lang]) ? dTranslations[lang] : dTranslations['en']), ...translationsState}).map(([key, translation]) => ({key, translation}));
   const [translationInputKeyValue, setTranslationInputKeyValue] = useState('');
   const [translationInputValue, setTranslationInputValue] = useState('');
   const [inputValue, setInputValue] = useState('');
@@ -215,13 +209,16 @@ export const Translations = ({ langs, lang }) => {
     return (
       <div style={style}>
        <Translation 
-        lang={lang}
-        translationKey={filteredTranslations[index].key}
-        translation={filteredTranslations[index].translation}
-      />
+          lang={lang}
+          translationsState={translationsState}
+          //translation={translationsState[filteredTranslations[index].key] ? translationsState[filteredTranslations[index].key] : filteredTranslations[index].translation}
+          dTranslations={dTranslations}
+          translationKey={filteredTranslations[index].key}
+          translation={filteredTranslations[index].translation}
+        />
       </div>
     )
-  }, [lang, filteredTranslations]);
+  }, [lang, filteredTranslations, dTranslations, translationsState]);
   
   return (
     <Box position="relative">
@@ -297,7 +294,7 @@ export default function AllTranslations() {
         slug: lang,
         label: lang.toUpperCase(),
         component: () => (
-          <Translations langs={langs} lang={lang} />
+          <Translations langs={langs} lang={lang} dTranslations={{...defaultTranslations}} />
         ),
       };
     });
@@ -317,9 +314,6 @@ export default function AllTranslations() {
     }
 
   }, [langs, dispatch, getNavLinks]);
-
-
-  console.log({ state, error, isSaving });
 
   if(navLinks.length === 0) {
     return null;

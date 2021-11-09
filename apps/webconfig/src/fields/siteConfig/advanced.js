@@ -104,7 +104,7 @@ export const searchFiltersLosShowFilterField = {
 
 export const searchFiltersLosDefaultValueField = {
   id: 'searchFiltersLosDefaultValue',
-  label: 'Default Value',
+  label: 'Default LOS Value',
   type: 'select',
   options: [
     {label: 'Yes', value: 'yes'},

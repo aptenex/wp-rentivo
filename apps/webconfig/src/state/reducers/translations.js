@@ -1,11 +1,14 @@
 import { SET_TRANSLATIONS, SET_TRANSLATIONS_ERROR, SAVING_TRANSLATIONS, SET_TRANSLATION, SAVING_TRANSLATIONS_ERROR, ADD_NEW_LANG, REMOVE_LANG } from '../actionTypes';
-import defaultTranslations from '../defaultStates/translations';
 
 
 export const initialState = {
   isSaving: false,
   lastSaved: null,
-  data: Object.assign({}, defaultTranslations),
+  data: {
+    en: {
+
+    }
+  },
   error: null
 };
 
@@ -33,9 +36,7 @@ export default function translationsReducer(state = initialState, action) {
         data: action.payload
       };
     case SET_TRANSLATION:
-      return state;
-      // translationData[lang] = removeKey(key, translationData[lang]);
-      // TODO: ---- SOME HOW MUTATING ------
+      
       if(action.remove) {
         return {
           ...state,
