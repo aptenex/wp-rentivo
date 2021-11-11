@@ -23,7 +23,13 @@ export const setSanitizer = (val, type) => {
   }
 };
 
-export default function FormProvider({fields, dataStore, children}) {
+const defaultActions = {
+  startSetReduxState: startSetSiteConfig,
+  setReduxStateError: setSiteConfigError
+}
+
+export default function FormProvider({fields, dataStore, children, reduxActions = defaultActions}) {
+
   // TODO: Need to move to hooks and give setValue access to form.
   const formik = useRef(null);
   const dispatch = useDispatch();
@@ -114,16 +120,16 @@ export default function FormProvider({fields, dataStore, children}) {
         
       }
       console.log(newState);
-      if(dataStore === 'siteConfig') {
-        await dispatch(startSetSiteConfig(newState));
+      if(dataStore) {
+        await dispatch(reduxActions.startSetReduxState(newState));
       }
     } catch (e) {
-      await dispatch(setSiteConfigError(e));
+      await dispatch(reduxActions.setReduxStateError(e));
       console.log(e);
     }
 
     actions.setSubmitting(false);
-  }, [state, fields, dataStore, dispatch, formik]);
+  }, [state, fields, dataStore, dispatch, formik, reduxActions]);
 
   return (
     <FormStateContext.Provider value={{state, error, dataStore, isSaving, fields, slowFields}}>

@@ -24,9 +24,9 @@ const SubmitButton = () => {
   );
 };
 
-export default function Form({title, children, dataStore, fields, fieldGroups}) {
+export default function Form({title, children, dataStore, fields, fieldGroups, reduxActions}) {
   return (
-    <FormProvider fields={fields} dataStore={dataStore}>
+    <FormProvider fields={fields} dataStore={dataStore} reduxActions={reduxActions}>
       <Stack spacing="4" divider={<StackDivider />}>
         <Heading size="lg" as="h1" paddingBottom="4">
           {title}

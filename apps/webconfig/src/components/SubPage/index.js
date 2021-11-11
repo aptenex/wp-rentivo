@@ -9,17 +9,23 @@ function SubPage({title, navLinks, children}) {
   return (
     <div>
       <PageHeader title={title} navLinks={navLinks}/>
-      {children}
-      <Switch>
+      {children && (
+        <SubPageTemplate showPageHeader={false} title={title} navLinks={navLinks}>
+          {children}
+        </SubPageTemplate>
+      )}
+      {(navLinks && navLinks.length) && (
+        <Switch>
         {navLinks.map(({slug, component: Component}, i) => (
-          <Route key={i} path={`${match.path}/${slug}`}>
-            <SubPageTemplate showPageHeader={false} title={title} navLinks={navLinks}>
-              <Component/>
-            </SubPageTemplate>
-          </Route>
-        ))}
-        <Redirect exact from={`${match.path}`} to={`${match.path}/${navLinks[0].slug}`} />
-      </Switch>
+            <Route key={i} path={`${match.path}/${slug}`}>
+              <SubPageTemplate showPageHeader={false} title={title} navLinks={navLinks}>
+                <Component/>
+              </SubPageTemplate>
+            </Route>
+          ))}
+          <Redirect exact from={`${match.path}`} to={`${match.path}/${navLinks[0].slug}`} />
+        </Switch>
+      )}
     </div>
   )
 };

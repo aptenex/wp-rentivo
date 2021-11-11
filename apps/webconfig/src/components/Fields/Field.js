@@ -5,6 +5,7 @@ import { get, set } from 'lodash';
 import brace from 'brace';
 import AceEditor from 'react-ace';
 import 'brace/mode/json';
+import 'brace/mode/html';
 import 'brace/theme/github';
 import 'brace/theme/monokai';
 import {
@@ -13,6 +14,7 @@ import {
   FieldArray as FormikFieldArray, useFormikContext
 } from 'formik';
 import {
+  Textarea,
   FormControl,
   FormLabel,
   FormErrorMessage,
@@ -304,8 +306,13 @@ function MediaUrlField(props) {
 
 const nativeInputValueSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, "value").set
 
+const nativeTextAreaValueSetter = Object.getOwnPropertyDescriptor(window.HTMLTextAreaElement.prototype, "value").set
+
 function JSONEditorField(props) {
-  const { state } = useContext(FormStateContext);
+  let { state } = useContext(FormStateContext);
+  if(props.path) {
+    state = get(state, props.path);
+  }
   const inputRef = React.useRef();
   const [hiddenInputState, setHiddenInputState] = useState(undefined);
   const { id } = props;
@@ -317,7 +324,7 @@ function JSONEditorField(props) {
       inputRef.current.dispatchEvent(fakeEvent);
     }
   }, [inputRef, hiddenInputState, id]);
-
+  
   return (
 
     <FieldWrapperMemo {...props}>
@@ -332,7 +339,7 @@ function JSONEditorField(props) {
           <div id={id + '_editor'}>
             {state && (
               <AceEditor
-                placeholder="Placeholder Text"
+                placeholder={props.placeholder ? props.placeholder : ''}
                 mode="json"
                 theme="monokai"
                 name={id + '_editor'}
@@ -351,6 +358,67 @@ function JSONEditorField(props) {
                 setOptions={{
                   enableBasicAutocompletion: false,
                   enableLiveAutocompletion: false,
+                  enableSnippets: false,
+                  showLineNumbers: true,
+                  tabSize: 2
+                }}
+              />
+            )}
+          </div>
+        </div>
+      )}
+    </FieldWrapperMemo>
+    
+  );
+}
+
+function HTMLEditorField(props) {
+  const { state } = useContext(FormStateContext);
+  const inputRef = React.useRef();
+  const [hiddenInputState, setHiddenInputState] = useState(undefined);
+  const { id, placeholder, inputProps } = props;
+
+  useEffect(() => {
+    if(hiddenInputState) {
+      nativeTextAreaValueSetter.call(inputRef.current, hiddenInputState);
+      const fakeEvent = new Event('input', { bubbles: true});
+      inputRef.current.dispatchEvent(fakeEvent);
+    }
+  }, [inputRef, hiddenInputState, id]);
+
+  return (
+
+    <FieldWrapperMemo {...props}>
+      {({ field }) => (
+        <div>
+          <Textarea 
+            ref={inputRef}
+            onChange={field.onChange}
+            id={id} 
+            display="none"
+            {...inputProps}
+          />
+          <div id={id + '_editor'}>
+            {state && (
+              <AceEditor
+                mode="html"
+                theme="monokai"
+                name={id + '_editor'}
+                width="100%"
+                height="450px"
+                //onLoad={this.onLoad}
+                placeholder={placeholder}
+                onChange={(value) => {
+                  setHiddenInputState(value);
+                }}
+                fontSize={14}
+                showPrintMargin={true}
+                showGutter={true}
+                highlightActiveLine={true}
+                defaultValue={field.value}
+                setOptions={{
+                  enableBasicAutocompletion: true,
+                  enableLiveAutocompletion: true,
                   enableSnippets: false,
                   showLineNumbers: true,
                   tabSize: 2
@@ -487,6 +555,10 @@ function Field(props) {
 
   if(type === 'json') {
     return <JSONEditorField {...props} />;
+  }
+
+  if(type === 'html') {
+    return <HTMLEditorField {...props} />;
   }
 
   return <TextField {...props}/>;

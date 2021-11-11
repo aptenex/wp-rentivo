@@ -9,16 +9,18 @@ export default function PageHeader({title, navLinks}) {
   return (
     <Box bg={mode('white', 'gray.900')} pt="8" shadow="sm">
       <Container maxW="7xl">
-        <Heading size="lg" mb="3">
+        <Heading size="lg" mb="3" pb={(navLinks && navLinks.length) ? 0 : 3}>
           {title}
         </Heading>
-        <Stack direction="row" spacing="4">
-          {navLinks.map((navLink, i) => (
-            <TabLink key={i} aria-current={`${match.url}/${navLink.slug}` === pathname ? 'page' : undefined} to={`${match.url}/${navLink.slug}`}>
-              {navLink.label}
-            </TabLink>
-          ))}
-        </Stack>
+        {(navLinks && navLinks.length) && (
+          <Stack direction="row" spacing="4">
+            {navLinks.map((navLink, i) => (
+              <TabLink key={i} aria-current={`${match.url}/${navLink.slug}` === pathname ? 'page' : undefined} to={`${match.url}/${navLink.slug}`}>
+                {navLink.label}
+              </TabLink>
+            ))}
+          </Stack>
+        )}
       </Container>
     </Box>
   )

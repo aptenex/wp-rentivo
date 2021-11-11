@@ -33,6 +33,7 @@
     "react-window": "^1.8.6",
     "reactcss": "^1.2.3",
     "redux": "^4.1.0",
+    "redux-devtools-extension": "^2.13.9",
     "redux-thunk": "^2.3.0",
     "rewire": "^5.0.0",
     "use-debounce": "^7.0.0",

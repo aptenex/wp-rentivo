@@ -12,6 +12,8 @@ import {
 } from 'react-router-dom';
 import SiteConfig from '../SiteConfig';
 import Translations from '../Translations';
+import CustomCode from '../CustomCode';
+import Redirects from '../Redirects';
 import { HiMenuAlt2, HiCode, HiTemplate, HiRefresh } from 'react-icons/hi';
 
 const navLinks = [
@@ -30,13 +32,13 @@ const navLinks = [
   {
     slug: `redirects`,
     label: `Redirects`,
-    component: () => <div>Redirects</div>,
+    component: Redirects,
     icon: HiRefresh,
   },
   {
     slug: `custom`,
     label: `Custom Code`,
-    component: () => <div>Custom Code</div>,
+    component: CustomCode,
     icon: HiCode,
   }
 ];
