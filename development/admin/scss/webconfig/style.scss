@@ -18,6 +18,10 @@ body.toplevel_page_web-config {
     }
   }
 
+  .wp-core-ui select {
+    background: none!important;
+  }
+
   &.admin-bar {
     #wpbody-content {
       height: calc(100vh - 32px);

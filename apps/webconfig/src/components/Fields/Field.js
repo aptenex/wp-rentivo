@@ -271,8 +271,23 @@ function SelectField(props) {
   return (
     <FieldWrapperMemo {...props} key={`select-${id}-${renderedOptions.length}`}>
       {({ field }) => (
-        <Select {...field} id={id} placeholder={placeholder} {...inputProps}>
-          {renderedOptions.map((option, i) => <option key={i} value={typeof option === 'string' ? option : option.value}>{typeof option === 'string' ? option : option.label}</option>)}
+        <Select 
+          {...field} 
+          id={id} 
+          placeholder={placeholder} 
+          {...inputProps}
+          style={{
+            // fontFamily: (id.toLowerCase().includes('font')) ? (field.value) ? field.value : field.defaultValue : undefined
+          }}
+        >
+          {renderedOptions.map((option, i) => (
+            <option 
+              key={i} 
+              value={typeof option === 'string' ? option : option.value}
+            >
+              {typeof option === 'string' ? option : option.label}
+            </option>
+          ))}
         </Select>
       )}
     </FieldWrapperMemo>

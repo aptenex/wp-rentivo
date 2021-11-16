@@ -1427,4 +1427,1403 @@ const siteConfig = {
   }
 };
 
-export default siteConfig;
+
+const staysConfig = {
+  "id": "stays",
+  "name": "Stays",
+  "shortName": "Stays",
+  "websiteUrl": "https://stays.co.uk",
+  "baseUrl": "https://stays-wp.k8.rentivo.com/graphql",
+  "dynamicPropertyPages": false,
+  "noIndex": false,
+  "currency": {
+    "defaultCurrency": "GBP",
+    "supportedCurrencies": ["GBP", "EUR", "USD", "CHF"]
+  },
+  "site": {
+    "logo": {
+      "useImage": true,
+      "text": "Stays",
+      "image": {
+        "width": 227,
+        "height": 38,
+        "types": {
+          "default": "https://stays-wp.k8.rentivo.com/wp-content/uploads/2021/09/stays-logo.svg",
+          "defaultMobile": "https://stays-wp.k8.rentivo.com/wp-content/uploads/2021/09/stays-logo.svg",
+          "light": "https://stays-wp.k8.rentivo.com/wp-content/uploads/2021/09/stays-logo.svg",
+          "lightMobile": "https://stays-wp.k8.rentivo.com/wp-content/uploads/2021/09/stays-logo.svg",
+          "dark": "https://stays-wp.k8.rentivo.com/wp-content/uploads/2021/09/stays-logo.svg",
+          "darkMobile": "https://stays-wp.k8.rentivo.com/wp-content/uploads/2021/09/stays-logo.svg"
+        }
+      }
+    },
+    "icons": {
+      "16": "https://stays-wp.k8.rentivo.com/wp-content/uploads/2021/07/fav.png",
+      "32": "https://stays-wp.k8.rentivo.com/wp-content/uploads/2021/07/fav.png",
+      "48": "https://stays-wp.k8.rentivo.com/wp-content/uploads/2021/09/stays-logo.svg",
+      "128": "https://stays-wp.k8.rentivo.com/wp-content/uploads/2021/09/stays-logo.svg"
+    },
+    "cookies": {
+      "active": false,
+      "policyUrl": "https://stays-wp.k8.rentivo.com/wp-content/uploads/2021/09/TermsConditions.pdf",
+      "position": "center"
+    },
+    "api": {
+      "lycan": {
+        "channelId": "c3baf30d-090e-4243-932f-931c273264a1",
+        "host": "https://lycan.rentivo.com",
+        "sendCurrencyOnPriceRequests": false
+      },
+      "googleApiKey": "AIzaSyAHKtVjv9tNEOkVfe_p9hgyPdJfaGgEAy8",
+      "tracking": {
+        "debug": false,
+        "environments": ["production", "development"],
+        "googleTagManager": {
+          "active": false,
+          "autoStart": true,
+          "defaultDataLayer": {
+            "platform": "rentivo"
+          },
+          "trackingId": "GTM-M4WLHWN",
+          "cookieFlags": "secure;samesite=none"
+        },
+        "googleAnalytics": {
+          "active": false,
+          "head": true,
+          "trackingId": "UA-34358122-1",
+          "autoStart": true,
+          "anonymize": true,
+          "cookieFlags": "secure;samesite=none"
+        },
+        "googleAds": {
+          "active": false,
+          "head": true,
+          "trackingId": "YOUR_GOOGLE_ADS_TRACKING_ID",
+          "anonymize": true,
+          "cookieFlags": "secure;samesite=none"
+        },
+        "hotjar": {
+          "active": false,
+          "head": true,
+          "trackingId": "YOUR_HOTJAR_ID",
+          "snippetVersion": "6"
+        },
+        "facebookPixel": {
+          "active": false,
+          "head": true,
+          "autoStart": true,
+          "trackingId": ""
+        }
+      },
+      "cdn": {
+        "provider": "IMAGEKIT",
+        "options": {
+          "publicKey": "xGRvTtVgg0R+rXlLusIq8Vr/Xmk=",
+          "urlEndpoint": "https://ik.imagekit.io/rentivo/core"
+        }
+      },
+      "map": {
+        "provider": "MAPBOX",
+        "mapKey": "pk.eyJ1IjoiamV0c3RyZWFtdGVjaCIsImEiOiJja21lcGsxZTkwb3llMnJwNTNuN3kyMjMyIn0.oYCIs5zfjXos1xhUgZm-Ng",
+        "mapStyle": "mapbox://styles/mapbox/streets-v11"
+      }
+    },
+    "sharing": {
+      "ogImage": "https://stays-wp.k8.rentivo.com/wp-content/uploads/2021/07/shutterstock_271743734-1-scaled-e1626945134167.jpeg",
+      "twitterImage": "https://stays-wp.k8.rentivo.com/wp-content/uploads/2021/07/shutterstock_271743734-1-scaled-e1626945134167.jpeg"
+    },
+    "structuredData": {
+      "organization": {
+        "name": "Stays",
+        "legalName": "Stays",
+        "url": "https://www.stays.co.uk",
+        "logo": "https://stays-wp.k8.rentivo.com/wp-content/uploads/2021/09/stays-logo.svg",
+        "foundingDate": "2008",
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "contactType": "Customer Support",
+          "email": "hello@stays.co.uk"
+        },
+        "sameAs": []
+      },
+      "brand": {
+        "name": "Stays",
+        "url": "https://www.stays.co.uk",
+        "logo": "https://stays-wp.k8.rentivo.com/wp-content/uploads/2021/09/stays-logo.svg",
+        "sameAs": []
+      }
+    },
+    "content": {
+      "variables": {
+        "sep": "—",
+        "siteTitle": "Stays"
+      }
+    },
+    "design": {
+      "fonts": {
+
+      }
+    },
+    "formatting": {
+      "fullDate": "Do MMM YY"
+    },
+    "countries": {
+      "important": ["GB", "US", "CA", "AU", "MX", "NZ", "BR", "JP", "CN"],
+      "include": [],
+      "exclude": []
+    },
+    "cancellationPolicies": {
+      "RELAXED": [{
+        "daysBeforeArrival": 1,
+        "percentageRetained": 0.0
+      }],
+      "MODERATE": [{
+        "daysBeforeArrival": 5,
+        "percentageRetained": 0.0
+      },
+        {
+          "daysBeforeArrival": 1,
+          "percentageRetained": 50.0
+        }
+      ],
+      "FIRM": [{
+        "daysBeforeArrival": 14,
+        "percentageRetained": 0.0,
+        "graceHours": 48
+      },
+        {
+          "daysBeforeArrival": 7,
+          "percentageRetained": 50.0,
+          "graceHours": 48
+        }
+      ],
+      "STRICT": [{
+        "daysBeforeArrival": 30,
+        "percentageRetained": 50.0,
+        "graceHours": 48
+      }],
+      "NO_REFUND": [{
+        "daysBeforeArrival": 60,
+        "percentageRetained": 50.0,
+        "graceHours": 48
+      }]
+
+    }
+  },
+  "search": {
+    "collections": {
+      "rootCollectionDatabaseId": 296860
+    },
+    "results": {
+      "perPage": 12,
+      "totalHits": 25000,
+      "openInNewTab": true,
+      "includeDiscounts": false
+    },
+    "map": {
+      "experiences": {
+        "include": true,
+        "showByDefault": true
+      },
+      "placeNames": {
+        "usePlaceNames": false
+      },
+      "isOpenOnLoad": true,
+      "defaultZoom": 3,
+      "maxZoom": 19,
+      "minZoom": 1,
+      "useFuzzyRadius": false,
+      "fuzzyRadius": 200,
+      "searchMapOnMoveDefault": true,
+      "defaultCenter": {
+        "lat": 55.378052,
+        "lng": -3.435973
+      }
+    },
+    "filters": {
+      "los": {
+        "active": true,
+        "showFilter": false,
+        "urlParam": "los",
+        "defaultValue": "yes"
+      },
+      "availability": {
+        "active": true,
+        "urlParam": "availability",
+        "defaultValue": null,
+        "showFilter": true,
+        "minNights": 1,
+        "listensTo": ["los", "guests", "price"]
+      },
+      "availabilityIn": {
+        "active": true,
+        "urlParam": "availability_in",
+        "defaultValue": null,
+        "showFilter": true,
+        "listensTo": ["availability"]
+      },
+      "location": {
+        "active": true,
+        "urlParam": "location",
+        "defaultValue": null,
+        "showFilter": true,
+        "type": "COLLECTION_CASCADE",
+        "bias": {
+          "countries": ["GB", "US"],
+          "types": null,
+          "radius": 0
+        }
+      },
+      "bedrooms": {
+        "active": true,
+        "urlParam": "bedrooms",
+        "defaultValue": 0,
+        "showFilter": true,
+        "min": 0,
+        "max": 12,
+        "queryFormat": "~"
+      },
+      "beds": {
+        "active": true,
+        "urlParam": "beds",
+        "defaultValue": 0,
+        "showFilter": true,
+        "min": 0,
+        "max": 24,
+        "queryFormat": "~"
+      },
+      "bathrooms": {
+        "active": true,
+        "urlParam": "bathrooms",
+        "defaultValue": 0,
+        "showFilter": true,
+        "min": 0,
+        "max": 12,
+        "queryFormat": "~"
+      },
+      "guests": {
+        "active": true,
+        "urlParam": "guests",
+        "defaultValue": 0,
+        "showFilter": true,
+        "min": 0,
+        "max": 24,
+        "queryFormat": "gte",
+        "guestsPicker": true
+      },
+      "adults": {
+        "active": true,
+        "urlParam": "adults",
+        "defaultValue": 0,
+        "showFilter": false,
+        "countsToTotal": true,
+        "dependsOn": "guests"
+      },
+      "children": {
+        "active": true,
+        "urlParam": "children",
+        "defaultValue": 0,
+        "countsToTotal": true,
+        "showFilter": false,
+        "dependsOn": "guests"
+      },
+      "infants": {
+        "active": true,
+        "urlParam": "infants",
+        "defaultValue": 0,
+        "countsToTotal": false,
+        "showFilter": false,
+        "dependsOn": "guests"
+      },
+      "pets": {
+        "active": true,
+        "urlParam": "pets",
+        "defaultValue": 0,
+        "countsToTotal": false,
+        "showFilter": true,
+        "queryFormat": "gte",
+        "useQuery": true
+      },
+      "price": {
+        "active": true,
+        "urlParam": "price",
+        "defaultValue": [0, 500],
+        "showFilter": true,
+        "sliderStep": 5,
+        "histogramInterval": 50,
+        "showHistogram": true,
+        "listensTo": ["los"]
+      },
+      "flags": {
+        "active": true,
+        "showFilter": true,
+        "urlParam": "flags",
+        "options": [
+          {
+            "urlValue": "featured",
+            "value": "isFeatured"
+          }
+        ],
+        "defaultValue": []
+      },
+      "features": {
+        "active": true,
+        "urlParam": "features",
+        "defaultValue": [],
+        "showFilter": true,
+        "nestedField": "features",
+        "field": "features.type.keyword",
+        "optionsToShow": 6,
+        "options": [
+          {
+            "urlValue": "hot_tub",
+            "value": "SPA_POOL_JACUZZI_HOT_TUB"
+          },
+          {
+            "urlValue": "fireplace",
+            "value": "GENERAL_FIREPLACE"
+          },
+          {
+            "urlValue": "wifi",
+            "value": "COMMUNICATION_INTERNET|COMMUNICATION_INTERNET_CABLED|COMMUNICATION_INTERNET_DONGLE|COMMUNICATION_INTERNET_HIGHSPEED|COMMUNICATION_INTERNET_WIFI"
+          },
+          {
+            "urlValue": "aircon",
+            "value": "GENERAL_AIR_CONDITIONING"
+          },
+          {
+            "urlValue": "pool",
+            "value": "SPA_POOL_INDOOR_POOL|SPA_POOL_POOL_COMMUNAL|SPA_POOL_SWIMMING_POOL|SPA_POOL_POOL_HEATED|SPA_POOL_POOL_INDOOR|SPA_POOL_POOL_PRIVATE|SPA_POOL_POOL_UNHEATED"
+          },
+          {
+            "urlValue": "pets",
+            "value": "GENERAL_PET_FRIENDLY"
+          },
+          {
+            "urlValue": "kitchen",
+            "value": "KITCHEN_KITCHENETTE|KITCHEN_STOVE"
+          },
+          {
+            "urlValue": "fitness",
+            "value": "LOCAL_GYM"
+          },
+          {
+            "urlValue": "stove",
+            "value": "KITCHEN_STOVE"
+          },
+          {
+            "urlValue": "oven",
+            "value": "KITCHEN_OVEN"
+          },
+          {
+            "urlValue": "dryer",
+            "value": "GENERAL_TUMBLE_DRYER"
+          },
+          {
+            "urlValue": "washer",
+            "value": "GENERAL_WASHING_MACHINE"
+          },
+          {
+            "urlValue": "ironing",
+            "value": "GENERAL_IRON_IRONING_BOARD"
+          },
+          {
+            "urlValue": "hair_dryer",
+            "value": "GENERAL_HAIRDRYER"
+          },
+          {
+            "urlValue": "parking",
+            "value": "GENERAL_PARKING"
+          },
+          {
+            "urlValue": "tv",
+            "value": "ENTERTAINMENT_TV|ENTERTAINMENT_CABLE_TV|ENTERTAINMENT_HIGH_DEFINITION_TV|ENTERTAINMENT_SATELLITE_TV|ENTERTAINMENT_STANDARD_DEFINITION_TV"
+          },
+          {
+            "urlValue": "balcony",
+            "value": "OUTDOOR_BALCONY"
+          },
+          {
+            "urlValue": "patio_deck",
+            "value": "OUTDOOR_DECK_PATIO"
+          },
+          {
+            "urlValue": "dishwasher",
+            "value": "KITCHEN_DISHWASHER"
+          },
+          {
+            "urlValue": "microwave",
+            "value": "KITCHEN_MICROWAVE"
+          },
+          {
+            "urlValue": "fridge",
+            "value": "KITCHEN_FRIDGE_FREEZER|KITCHEN_AMERICAN_FRIDGE|KITCHEN_FRIDGE_STANDALONE"
+          },
+          {
+            "urlValue": "toaster",
+            "value": "KITCHEN_TOASTER"
+          },
+          {
+            "urlValue": "coffee_machine",
+            "value": "KITCHEN_COFFEE_MACHINE"
+          },
+          {
+            "urlValue": "dishes_utensils",
+            "value": "KITCHEN_FULL_CUTLERY_UTENSIL_KIT"
+          },
+          {
+            "urlValue": "bbq",
+            "value": "OUTDOOR_BARBECUE"
+          },
+          {
+            "urlValue": "garden",
+            "value": "GENERAL_GARDEN"
+          },
+          {
+            "urlValue": "cot",
+            "value": "CHILDREN_BABY_COT"
+          },
+          {
+            "urlValue": "games_room",
+            "value": "ENTERTAINMENT_GAMES_ROOM"
+          },
+          {
+            "urlValue": "tennis",
+            "value": "LOCAL_TENNIS_COURT"
+          },
+          {
+            "urlValue": "water_parks",
+            "value": "ATTRACTIONS_WATER_THEME_PARK"
+          },
+          {
+            "urlValue": "private_beach",
+            "value": "LOCALITY_BEACH|LOCALITY_BEACH_FRONT|LOCAL_BEACH|LOCAL_BEACH_FRONT"
+          },
+          {
+            "urlValue": "boat_mooring",
+            "value": "LOCAL_BOATING"
+          },
+          {
+            "urlValue": "housekeeping",
+            "value": "ACCOMMODATIONS_HOUSE_CLEANING_INCLUDED"
+          },
+          {
+            "urlValue": "breakfast",
+            "value": "ACCOMMODATIONS_BREAKFAST_INCLUDED_IN_PRICE"
+          }
+        ]
+      },
+      "type": {
+        "active": true,
+        "urlParam": "type",
+        "defaultValue": [],
+        "showFilter": true,
+        "nestedField": null,
+        "field": "listing.type.keyword",
+        "optionsToShow": 12,
+        "options": [
+          {
+            "urlValue": "cabin_chalet_cottage",
+            "value": "LISTING_TYPE_CABIN|LISTING_TYPE_CHALET|LISTING_TYPE_COTTAGE"
+          },
+          {
+            "urlValue": "condo_apartment",
+            "value": "LISTING_TYPE_APARTMENT|LISTING_TYPE_CONDO|LISTING_TYPE_STUDIO"
+          },
+          {
+            "urlValue": "hotel",
+            "value": "LISTING_TYPE_HOTEL"
+          },
+          {
+            "urlValue": "house",
+            "value": "LISTING_TYPE_HOUSE|LISTING_TYPE_VILLA"
+          },
+          {
+            "urlValue": "townhome",
+            "value": "LISTING_TYPE_TOWNHOUSE"
+          },
+          {
+            "urlValue": "glamping",
+            "value": "LISTING_TYPE_CAMPER_VAN"
+          },
+          {
+            "urlValue": "on_water",
+            "value": "LISTING_TYPE_HOUSE_BOAT|LISTING_TYPE_BOAT"
+          }
+        ]
+      },
+      "locationFeatures": {
+        "active": true,
+        "urlParam": "location_features",
+        "defaultValue": [],
+        "showFilter": true,
+        "nestedField": "features",
+        "field": "features.type.keyword",
+        "optionsToShow": 6,
+        "options": [
+          {
+            "urlValue": "waterfront",
+            "value": "LOCALITY_BEACH|LOCALITY_BEACH_FRONT|LOCAL_BEACH|LOCAL_BEACH_FRONT"
+          },
+          {
+            "urlValue": "water_view",
+            "value": "LOCALITY_WATER_VIEWS"
+          },
+          {
+            "urlValue": "central",
+            "value": "LOCALITY_TOWN_CENTRE"
+          },
+          {
+            "urlValue": "slopeside",
+            "value": "LOCALITY_SKI_IN_SKI_OUT|LOCAL_SKIING"
+          },
+          {
+            "urlValue": "golf",
+            "value": "LOCAL_GOLF|LOCALITY_GOLF_COURSE"
+          },
+          {
+            "urlValue": "250m_ski",
+            "value": "LOCAL_SKIING|LOCAL_SNOW_BOARDING"
+          }
+        ]
+      },
+      "suitability": {
+        "active": true,
+        "urlParam": "suitability",
+        "defaultValue": [],
+        "nestedField": "features",
+        "field": "features.type.keyword",
+        "showFilter": true,
+        "optionsToShow": 6,
+        "options": [
+          {
+            "urlValue": "disabled_access",
+            "value": "SUITABILITY_ACCESSIBILITY_WHEELCHAIR_GREAT"
+          },
+          {
+            "urlValue": "elevator",
+            "value": "GENERAL_LIFT_ELEVATOR"
+          },
+          {
+            "urlValue": "smoking",
+            "value": "SUITABILITY_SMOKING_ALLOWED"
+          }
+        ]
+      },
+      "relax": {
+        "active": true,
+        "urlParam": "relax_features",
+        "defaultValue": [],
+        "showFilter": true,
+        "nestedField": "features",
+        "field": "features.type.keyword",
+        "optionsToShow": 6,
+        "options": [
+          {
+            "urlValue": "sauna",
+            "value": "SPA_POOL_SAUNA"
+          },
+          {
+            "urlValue": "spa",
+            "value": "SPA_POOL_HEALTH_FACILITIES"
+          },
+          {
+            "urlValue": "bathtub",
+            "value": "GENERAL_BATHTUB"
+          }
+        ]
+      },
+      "safety": {
+        "active": true,
+        "urlParam": "safety_features",
+        "defaultValue": [],
+        "showFilter": true,
+        "nestedField": "safety",
+        "field": "safety.type.keyword",
+        "optionsToShow": 6,
+        "options": [
+          {
+            "urlValue": "smoke_detector",
+            "value": "SAFETY_SMOKE_DETECTOR"
+          },
+          {
+            "urlValue": "carbon_monoxide_detector",
+            "value": "SAFETY_CARBON_MONOXIDE_DETECTOR"
+          }
+        ]
+      },
+      "keyword": {
+        "active": true,
+        "urlParam": "keyword",
+        "defaultValue": null,
+        "showFilter": true
+      },
+      "sort": {
+        "active": true,
+        "urlParam": "sort_by",
+        "showFilter": true,
+        "defaultValue": "RELEVANCE_ASC",
+        "options": [
+          {
+            "urlValue": "relevance",
+            "value": "RELEVANCE_ASC"
+          },
+          {
+            "urlValue": "nightly_price_asc",
+            "value": "NIGHTLY_PRICE_ASC"
+          },
+          {
+            "urlValue": "nightly_price_desc",
+            "value": "NIGHTLY_PRICE_DESC"
+          },
+          {
+            "urlValue": "sleeps_asc",
+            "value": "SLEEPS_ASC"
+          },
+          {
+            "urlValue": "sleeps_desc",
+            "value": "SLEEPS_DESC"
+          },
+          {
+            "urlValue": "latest",
+            "value": "CREATED_AT_DESC"
+          }
+        ]
+      },
+      "page": {
+        "active": true,
+        "showFilter": true,
+        "urlParam": "page",
+        "defaultValue": 1,
+        "marginPagesDisplayed": 1,
+        "pageRangeDisplayed": 5
+      }
+    },
+    "elasticSearch": {
+      "app": "lycan_main.stays_uk_ltd_website.properties_lkvqt4",
+      "credentials": "stays:password",
+      "url": "https://search.es.rentivo.com:9243",
+      "size": 12
+    }
+  },
+  "property": {
+    "headline": {
+      "showSubtitle": true
+    },
+    "price": {
+      "type": "PRICE_RANGE",
+      "period": "WEEKLY"
+    },
+    "pricing": {
+      "actions": {
+        "enquiryDisplayMode": "ON_ANY_RESPONSE",
+        "requestToBookDisplayMode": "ON_SUCCESSFUL_PRICE_INCLUDING_ENQUIRY"
+      },
+      "alwaysShowBeforeArrivalFees": true,
+      "alwaysShowAfterArrivalFees": true,
+      "minNights": 1,
+      "maxNights": 31,
+      "data": {
+        "guests": {
+          "urlParam": "guests",
+          "defaultValue": 0,
+          "min": 0,
+          "max": 48
+        },
+        "adults": {
+          "active": true,
+          "urlParam": "adults",
+          "countsToTotal": true,
+          "defaultValue": 0,
+          "min": 0,
+          "max": 24
+        },
+        "children": {
+          "active": true,
+          "urlParam": "children",
+          "countsToTotal": true,
+          "defaultValue": 0,
+          "min": 0,
+          "max": 24
+        },
+        "infants": {
+          "active": true,
+          "urlParam": "infants",
+          "countsToTotal": false,
+          "defaultValue": 0,
+          "min": 0,
+          "max": 24
+        },
+        "pets": {
+          "active": true,
+          "urlParam": "pets",
+          "countsToTotal": false,
+          "defaultValue": 0,
+          "min": 0,
+          "max": 10
+        },
+        "startDate": {
+          "urlParam": "check_in"
+        },
+        "endDate": {
+          "urlParam": "check_out"
+        },
+        "nights": {
+          "urlParam": "nights"
+        }
+      }
+    },
+    "map": {
+      "experiences": {
+        "include": true,
+        "showByDefault": true
+      },
+      "defaultZoom": 14,
+      "maxZoom": 20,
+      "minZoom": 1,
+      "useFuzzyRadius": false,
+      "fuzzyRadius": 200,
+      "useCustomMarker": false,
+      "customMarker": {
+        "offsetLeft": -12,
+        "offsetTop": -24,
+        "imageURL": "http://www.pngall.com/wp-content/uploads/2017/05/Map-Marker-PNG-Picture.png",
+        "imageWidth": 24,
+        "imageHeight": 24
+      }
+    }
+  },
+  "checkout": {
+    "payment": {
+      "defaultAcceptedPaymentBrands": ["visa", "mastercard", "amex"]
+    },
+    "info": {
+      "phoneRequired": false
+    },
+    "success": {
+      "reservationIdPath": "reservationExternalConnections[0].externalReservationId"
+    },
+    "messageToAgent": {
+      "active": true,
+      "required": false
+    },
+    "enquiryModal": {
+      "active": true
+    },
+    "checkboxes": {
+      "showMarketingOptIn": false,
+      "showTermsAndConditions": true,
+      "showPrivacyPolicy": true,
+      "defaultPrivacyPolicy": "/privacy/",
+      "defaultTermsAndConditions": "https://stays-wp.k8.rentivo.com/wp-content/uploads/2021/09/TermsConditions.pdf"
+    }
+  },
+  "blog": {
+    "perPage": 20
+  },
+  "routePaths": {
+    "ROUTE_BASE_SEARCH": "homes",
+    "ROUTE_BASE_PROPERTY": "home",
+    "ROUTE_BASE_CHECKOUT": "checkout",
+    "ROUTE_BASE_CHECKOUT_REVIEW": "review",
+    "ROUTE_BASE_CHECKOUT_GUEST_INFO": "info",
+    "ROUTE_BASE_CHECKOUT_CONFIRM": "confirm",
+    "ROUTE_BASE_CHECKOUT_SUCCESS": "success",
+    "ROUTE_BASE_POSTS": "blog",
+    "ROUTE_BASE_POSTS_CATEGORIES": "categories",
+    "ROUTE_BASE_POSTS_TAGS": "tags",
+    "ROUTE_BASE_POSTS_AUTHOR": "author",
+    "ROUTE_PATH_HOME": "",
+    "ROUTE_BASE_NOT_FOUND": "404",
+    "ROUTE_BASE_CUSTOMER_CONTACT": "contact",
+    "ROUTE_BASE_BUSINESS_CONTACT": "contact/business",
+    "ROUTE_BASE_DEDICATED_POST": "post",
+    "ROUTE_BASE_HUB": "area"
+  },
+  "theme": {
+    "id": "barcelona",
+    "variables": {
+      "base": {
+        "body-background": "#fff",
+        "component-background": "#fff",
+        "primary-color": "#108294",
+        "error-color": "#ff8469",
+        "info-color": "#fbd46d",
+        "success-color": "#52c41a",
+        "text-color": "#030f17",
+        "text-color-secondary": "#38343f",
+        "heading-color": "#030f17",
+        "link-color": "#108294",
+        "normal-color": "#d9d9d9",
+        "item-hover-bg": "#f5f5f5",
+        "background-color-light": "#f5f5f5",
+        "background-color-base": "#fafafa",
+        "link-decoration": "none",
+        "link-hover-decoration": "none",
+
+        "shadow-color": "rgba(0, 0, 0, 0.15)",
+        "box-shadow-base": "0 0.23rem 1.09rem rgba(8,10,37,.03), 0 0.465rem 0.70rem rgba(8,10,37,.03), 0 0.125rem 0.265rem rgba(8,10,37,.05), 0 0.0625rem 0.0935rem rgba(8,10,37,.03)",
+
+        "font-family": "ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'",
+        "code-family": "'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace",
+        "font-size-base": "16px",
+        "font-size-lg": "19px",
+        "font-size-sm": "14px",
+        "line-height-base": "1.5715",
+        "heading-1-size": "34px",
+        "heading-2-size": "28px",
+        "heading-3-size": "24px",
+        "heading-4-size": "20px",
+
+        "typography-title-margin-top": "1.2em",
+        "typography-title-margin-bottom": "0.5em",
+
+        "border-radius-base": "6px",
+        "border-width-base": "1px",
+        "border-color-base": "#d9d9d9",
+        "border-color-split": "#d9d9d9",
+        "border-color-inverse": "#ffffff",
+
+        "padding-lg": "24px",
+        "padding-md": "16px",
+        "padding-sm": "12px",
+        "padding-xs": "8px",
+
+        "screen-xs": "480px",
+        "screen-sm": "576px",
+        "screen-md": "768px",
+        "screen-lg": "992px",
+        "screen-xl": "1200px",
+        "screen-xxl": "1600px",
+
+        "layout-header-height": "60px",
+
+        "btn-border-radius-base": "0",
+        "btn-border-radius-sm": "0",
+        "btn-font-weight": "600",
+        "btn-shadow": "none",
+        "btn-primary-shadow": "none",
+        "btn-text-shadow": "none",
+
+        "btn-padding-horizontal-base": "16px",
+        "btn-padding-horizontal-lg": "16px",
+        "btn-padding-horizontal-sm": "8px",
+        "btn-height-base": "40px",
+        "btn-height-lg": "48px",
+        "btn-height-sm": "30px",
+        "btn-font-size-sm": "15px",
+
+        "popover-bg": "#ffffff",
+        "popover-min-width": "200px",
+        "popover-arrow-width": "14px",
+        "popover-arrow-color": "#ffffff",
+        "popover-arrow-outer-color": "#ffffff",
+        "popover-distance": "16px",
+
+
+        "dropdown-vertical-padding": "5px",
+        "dropdown-edge-child-vertical-padding": "4px",
+        "dropdown-line-height": "22px",
+        "dropdown-selected-color": "#f5f5f5",
+
+        "select-item-selected-font-weight": "600",
+        "select-dropdown-bg": "#ffffff",
+        "select-item-selected-bg": "#f5f5f5",
+        "select-background": "#ffffff",
+        "select-clear-background": "#ffffff",
+        "select-selection-item-bg": "#f5f5f5",
+        "select-selection-item-border-color": "#f0f0f0",
+
+        "checkbox-size": "20px",
+        "checkbox-color": "#108294",
+        "checkbox-check-color": "#ffffff",
+        "checkbox-border-width": "2px",
+
+        "input-height-base": "40px",
+        "input-height-lg": "48px",
+        "input-height-sm": "30px",
+        "input-padding-horizontal": "16px",
+        "input-padding-horizontal-base": "16px",
+        "input-padding-horizontal-sm": "8px",
+        "input-padding-horizontal-lg": "16px",
+        "input-placeholder-color": "#aaaaaa",
+        "input-bg": "#ffffff",
+
+        "animation-duration-slow": "0.2s",
+        "animation-duration-base": "0.3s",
+        "animation-duration-fast": "0.1s",
+        "ease-base-out": "cubic-bezier(0.7, 0.3, 0.1, 1)",
+        "ease-base-in": "cubic-bezier(0.9, 0, 0.3, 0.7)",
+        "ease-out": "cubic-bezier(0.215, 0.61, 0.355, 1)",
+        "ease-in": "cubic-bezier(0.55, 0.055, 0.675, 0.19)",
+        "ease-in-out": "cubic-bezier(0.645, 0.045, 0.355, 1)",
+        "ease-out-back": "cubic-bezier(0.12, 0.4, 0.29, 1.46)",
+        "ease-in-back": "cubic-bezier(0.71, -0.46, 0.88, 0.6)",
+        "ease-in-out-back": "cubic-bezier(0.71, -0.46, 0.29, 1.46)",
+        "ease-out-circ": "cubic-bezier(0.08, 0.82, 0.17, 1)",
+        "ease-in-circ": "cubic-bezier(0.6, 0.04, 0.98, 0.34)",
+        "ease-in-out-circ": "cubic-bezier(0.78, 0.14, 0.15, 0.86)",
+        "ease-out-quint": "cubic-bezier(0.23, 1, 0.32, 1)",
+        "ease-in-quint": "cubic-bezier(0.755, 0.05, 0.855, 0.06)",
+        "ease-in-out-quint": "cubic-bezier(0.86, 0, 0.07, 1)",
+
+        "menu-inline-toplevel-item-height": "36px",
+        "menu-item-height": "36px",
+        "menu-collapsed-width": "80px",
+        "menu-bg": "#ffffff",
+        "menu-popup-bg": "#ffffff",
+        "menu-item-color": "#030f17",
+        "menu-highlight-color": "#108294",
+        "menu-item-active-bg": "#ebf9f9",
+        "menu-item-active-border-width": "0",
+        "menu-item-group-title-color": "#38343f",
+        "menu-item-vertical-margin": "2px",
+        "menu-item-font-size": "17px",
+        "menu-item-boundary-margin": "0",
+        "menu-dark-color": "rgba(0,0,0,0.65)",
+        "menu-dark-bg": "#001529",
+        "menu-dark-arrow-color": "#fff",
+        "menu-dark-submenu-bg": "#000c17",
+        "menu-dark-highlight-color": "#fff",
+        "menu-dark-item-active-bg": "#ebf9f9",
+        "menu-dark-selected-item-icon-color": "#ffffff",
+        "menu-dark-selected-item-text-color": "#ffffff",
+        "menu-dark-item-hover-bg": "transparent",
+
+
+
+
+        "primary-hover-color": "#17a2b8",
+        "text-gray-color": "#38343f",
+
+        "secondary-color": "#fbd46d",
+        "secondary-hover-color": "#030f17",
+
+        "btn-primary-text-color": "#ffffff",
+        "btn-primary-hover-text-color": "#ffffff",
+        "btn-secondary-text-color": "#030f17",
+        "btn-secondary-hover-text-color": "#fbd46d",
+
+        "btn-secondary-shadow": "none",
+
+        "box-shadow-lg": "0 0.46875rem 2.1875rem rgba(8,10,37,.03), 0 0.9375rem 1.40625rem rgba(8,10,37,.03), 0 0.25rem 0.53125rem rgba(8,10,37,.05), 0 0.125rem 0.1875rem rgba(8,10,37,.03)",
+
+        "gray-1": "#fff",
+        "gray-2": "#fafafa",
+        "gray-3": "#f5f5f5",
+        "gray-4": "#f0f0f0",
+        "gray-5": "#d9d9d9",
+        "gray-6": "#bfbfbf",
+        "gray-7": "#8c8c8c",
+        "gray-8": "#595959",
+        "gray-9": "#434343",
+        "gray-10": "#262626",
+        "gray-11": "#1f1f1f",
+        "gray-12": "#141414",
+        "gray-13": "#000",
+
+        "padding-xl": "32px",
+        "padding-xxl": "64px",
+        "padding-xxxl": "128px",
+        "padding-xxs": "4px",
+
+        "typography-letter-spacing": "0",
+        "typography-font-weight": "400",
+        "typography-font-weight-thick": "600",
+
+        "heading-line-height-base": "1.2",
+        "content-heading-line-height-base": "1.35",
+
+        "heading-5-size": "17px",
+
+        "heading-1-font-weight": "400",
+        "heading-2-font-weight": "400",
+        "heading-3-font-weight": "600",
+        "heading-4-font-weight": "600",
+        "heading-5-font-weight": "600",
+        "heading-1-font-family": "ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif",
+        "heading-2-font-family": "ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif",
+        "heading-3-font-family": "ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'",
+        "heading-4-font-family": "ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'",
+        "heading-5-font-family": "ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'",
+        "heading-1-letter-spacing": "0",
+        "heading-2-letter-spacing": "0",
+        "heading-3-letter-spacing": "0",
+        "heading-4-letter-spacing": "0",
+        "heading-5-letter-spacing": "0",
+
+        "content-width": "992px",
+        "content-width-wide": "1200px",
+        "content-line-height-base": "1.75",
+        "content-font-size-base": "17px",
+        "content-font-family": "ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'",
+        "content-letter-spacing": "0",
+        "content-heading-1-size": "48px",
+        "content-heading-2-size": "36px",
+        "content-heading-3-size": "28px",
+        "content-heading-4-size": "24px",
+        "content-heading-1-font-weight": "400",
+        "content-heading-2-font-weight": "400",
+        "content-heading-3-font-weight": "600",
+        "content-heading-4-font-weight": "600",
+        "content-heading-5-font-weight": "600",
+        "content-heading-1-font-family": "ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif",
+        "content-heading-2-font-family": "ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif",
+        "content-heading-3-font-family": "ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'",
+        "content-heading-4-font-family": "ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'",
+        "content-heading-5-font-family": "ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'",
+        "content-heading-1-letter-spacing": "0",
+        "content-heading-2-letter-spacing": "0",
+        "content-heading-3-letter-spacing": "0",
+        "content-heading-4-letter-spacing": "0",
+        "content-heading-5-letter-spacing": "0",
+
+        "popover-arrow-top-distance": "6px",
+        "popover-arrow-bottom-distance": "10px",
+        "popover-padding": "16px 24px",
+        "popover-shadow": "0 0 16px rgba(0, 0, 0, 0.15)",
+
+        "dropdown-border-radius": "7px",
+
+        "input-border-radius": "0",
+        "input-border": "1px solid #d9d9d9",
+        "input-box-shadow": "none",
+
+        "btn-primary-shadow-lg": "none",
+
+        "calendar-default-bg-color": "#ffffff",
+        "calendar-default-hover-bg-color": "#eeeeee",
+        "calendar-default-color": "#030f17",
+        "calendar-hovered-offset-bg-color": "#ffe3a8",
+        "calendar-hovered-offset-color": "#030f17",
+        "calendar-selected-span-bg-color": "#fbd46d",
+        "calendar-selected-span-color": "#030f17",
+        "calendar-selected-bg-color": "#fbd46d",
+        "calendar-selected-color": "#030f17",
+        "calendar-blocked-bg-color": "repeating-linear-gradient(-45deg, rgb(255, 255, 255), rgb(255, 255, 255) 3px, #e0e0e0 3px, #d2d2d2 4px)",
+        "calendar-blocked-color": "#cccccc",
+
+        "menu-horizontal-border-bottom": "1px solid transparent",
+        "menu-horizontal-border-bottom-active": "1px solid transparent",
+        "menu-horizontal-side-padding": "10px",
+        "menu-item-font-weight": "600",
+
+        "fa-icon-primary": "#108294",
+        "fa-icon-secondary": "#108294"
+      },
+      "theme": {
+        "site-header-fluid": true,
+        "site-header-theme": "light",
+        "search-primary-filters-theme": "light",
+        "search-primary-filters-height": "64px",
+        "search-primary-filters-bg": "#ffffff",
+        "search-primary-filters-border-bottom": "1px solid #f1f1f1",
+        "search-primary-filters-box-shadow": "none",
+        "search-content-bg": "#ffffff"
+      }
+    }
+  },
+  "chakraTheme": {
+    "barcelona": {
+      "search": {
+        "defaultType": "list",
+        "showViewButton": true,
+        "layout": {
+          "searchArea": {
+            "mapOpen": {
+              "base": {
+                "colSpan": 24,
+                "perRow": 1,
+                "type": "grid"
+              },
+              "md": {
+                "colSpan": 14,
+                "perRow": 1,
+                "type": "grid"
+              },
+              "lg": {
+                "colSpan": 16,
+                "perRow": 2,
+                "type": "grid"
+              },
+              "xl": {
+                "colSpan": 14,
+                "perRow": 2,
+                "type": "grid"
+              },
+              "xxl": {
+                "colSpan": 12,
+                "perRow": 2,
+                "type": "grid"
+              }
+            },
+            "mapClosed": {
+              "base": {
+                "perRow": 1,
+                "type": "grid"
+              },
+              "md": {
+                "perRow": 2,
+                "type": "grid"
+              },
+              "lg": {
+                "perRow": 3,
+                "type": "grid"
+              },
+              "xl": {
+                "perRow": 4,
+                "type": "grid"
+              },
+              "xxl": {
+                "perRow": 4,
+                "type": "grid"
+              }
+            }
+          }
+        }
+      }
+    },
+    "colors": {
+      "text": "#030f17",
+      "textLight": "#667488",
+      "link": "#188FBF",
+      "linkHover": "#126D92",
+      "primary": {
+        "50": "#F2FAFD",
+        "100": "#DBF2FB",
+        "200": "#AEE0F5",
+        "300": "#81CFEF",
+        "400": "#53BEEA",
+        "500": "#26ADE4",
+        "600": "#188FBF",
+        "700": "#126D92",
+        "800": "#0D4B64",
+        "900": "#072937"
+      },
+      "secondary": {
+        "50": "#FFFDF8",
+        "100": "#FFFBF0",
+        "200": "#FEF4DB",
+        "300": "#FDEEC5",
+        "400": "#FCE199",
+        "500": "#FBD46D",
+        "600": "#E2BF62",
+        "700": "#977F41",
+        "800": "#715F31",
+        "900": "#4B4021"
+      },
+      "tertiary": {
+        "50": "#FFFFFF",
+        "100": "#FFFFFF",
+        "200": "#FFF3F3",
+        "300": "#FFC0C2",
+        "400": "#FF8D90",
+        "500": "#FF5A5F",
+        "600": "#FF272E",
+        "700": "#F30007",
+        "800": "#C00006",
+        "900": "#8D0004"
+      }
+    },
+    "fontWeights": {
+      "hairline": 100,
+      "thin": 200,
+      "light": 300,
+      "normal": 400,
+      "medium": 500,
+      "semibold": 600,
+      "bold": 700,
+      "extrabold": 800,
+      "black": 900
+    },
+    "fonts": {
+      "heading": "ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif",
+      "body": "ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'",
+      "button": "ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'",
+      "mono": "SFMono-Regular,Menlo,Monaco,Consolas,'Liberation Mono','Courier New',monospace"
+    },
+    "fontSizes": {
+      "xs": "0.75rem",
+      "sm": "0.875rem",
+      "md": "1rem",
+      "lg": "1.125rem",
+      "xl": "1.25rem",
+      "2xl": "1.5rem",
+      "3xl": "1.875rem",
+      "4xl": "2.25rem",
+      "5xl": "3rem",
+      "6xl": "3.75rem",
+      "7xl": "4.5rem",
+      "8xl": "6rem",
+      "9xl": "8rem"
+    },
+    "typography": {
+      "text": {
+        "fontFamily": "body"
+      },
+      "textWriting": {
+        "fontFamily": "body"
+      },
+      "heading": {
+        "h1": {
+          "fontFamily": "body"
+        },
+        "h2": {
+          "fontFamily": "body"
+        },
+        "h3": {
+          "fontFamily": "body"
+        },
+        "h4": {
+          "fontFamily": "body"
+        },
+        "h5": {
+          "fontFamily": "body"
+        },
+        "h6": {
+          "fontFamily": "body"
+        }
+      },
+      "writingHeading": {
+        "h1": {
+          "fontFamily": "heading",
+          "fontWeight": "medium"
+        },
+        "h2": {
+          "fontFamily": "heading",
+          "fontWeight": "medium"
+        },
+        "h3": {
+          "fontFamily": "body"
+        },
+        "h4": {
+          "fontFamily": "body"
+        },
+        "h5": {
+          "fontFamily": "body"
+        },
+        "h6": {
+          "fontFamily": "body"
+        }
+      }
+    },
+    "layerStyles": {
+      "highlight": {
+        "borderBottom": "2px solid",
+        "bg": "secondary.200",
+        "borderColor": "secondary.300",
+        "color": "text",
+        "fontSize": "sm",
+        "display": "inline-block",
+        "padding": "0 5px",
+        "margin-top": "4px",
+        "margin-bottom": "3px"
+      }
+    },
+    "components": {
+      "Link": {
+        "baseStyle": {
+          "color": "primary.400",
+          "_hover": {
+            "textDecoration": "none",
+            "color": "primary.500"
+          },
+          "_focus": {
+            "boxShadow": "none"
+          }
+        }
+      },
+      "Button": {
+        "sizes": {
+          "lg": {
+            "fontSize": "xl",
+            "px": "32px"
+          }
+        },
+        "variants": {
+          "default": {
+            "bg": "#ffffff",
+            "color": "text",
+            "borderColor": "gray.200",
+            "_hover": {
+              "borderColor": "text"
+            },
+            "_focus": {
+              "borderColor": "text",
+              "boxShadow": "none"
+            },
+            "_active": {
+              "borderColor": "text",
+              "boxShadow": "none"
+            }
+          },
+          "primary": {
+            "borderColor": "primary.500",
+            "bg": "primary.500",
+            "_hover": {
+              "borderColor": "primary.400",
+              "bg": "primary.400"
+            },
+            "_focus": {
+              "borderColor": "primary.400",
+              "bg": "primary.400"
+            },
+            "_active": {
+              "borderColor": "primary.400",
+              "bg": "primary.400"
+            }
+          },
+          "secondary": {
+            "border": "1px solid #FBD46D",
+            "bg": "secondary.500",
+            "color": "text",
+            "_hover": {
+              "bg": "text",
+              "border": "1px solid #030f17"
+            },
+            "_focus": {
+              "bg": "text",
+              "border": "1px solid #030f17"
+            },
+            "_active": {
+              "bg": "text",
+              "border": "1px solid #030f17"
+            }
+          },
+          "menuLight": {
+            "bg:": "transparent",
+            "color": "text",
+            "_focus": {
+              "bg:": "primary.100",
+              "color": "text"
+            },
+            "_active": {
+              "bg:": "primary.100",
+              "color": "text"
+            },
+            "_hover": {
+              "bg:": "primary.100",
+              "color": "text"
+            }
+          }
+        }
+      },
+      "HeaderNavbar": {
+        "parts": ["header"],
+        "baseStyle": {
+          "type": "light",
+          "header": {
+            "height": "60px",
+            "boxShadow": "lg",
+            "bg": "white"
+          },
+          "container": {
+            "maxW": "container.full"
+          }
+        }
+      }
+    }
+  }
+};
+
+export default staysConfig;

@@ -261,15 +261,38 @@ export const themeSizeOptions = [
   ...pixelRange()
 ];
 
+/*
+"heading": "ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif",
+      "body": "ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'",
+      "button": "ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'",
+      "mono": "SFMono-Regular,Menlo,Monaco,Consolas,'Liberation Mono','Courier New',monospace"
+      */
+
 const getFontOptions = ({values}) => {
+
+  const standardFonts = [
+    {
+      label: 'Native Serif Font',
+      value: "ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif"
+    },
+    {
+      label: 'Native Sans-Serif Font',
+      value: "ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'"
+    },
+    {
+      label: 'Native Mono Font',
+      value: "SFMono-Regular,Menlo,Monaco,Consolas,'Liberation Mono','Courier New',monospace"
+    }
+  ]
+
   if(values.loadFonts && values.loadFonts.length) {
-    return values.loadFonts.map(({family, ...rest}) => ({
+    return [...standardFonts, ...values.loadFonts.map(({family, ...rest}) => ({
       label: family,
       value: family,
       ...rest
-    }));
+    }))];
   } else {
-    return [];
+    return [...standardFonts];
   }
   /*
   const fonts = getState(siteDesignFontsGooglePath).map(({family, ...rest}) => ({
