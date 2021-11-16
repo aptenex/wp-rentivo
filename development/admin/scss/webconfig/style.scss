@@ -35,7 +35,7 @@ body.toplevel_page_web-config {
   #root {
 
     .chakra-select__icon-wrapper {
-      display: none!important;
+      // display: none!important;
     }
 
     a:active, a:hover {
@@ -52,7 +52,9 @@ body.toplevel_page_web-config {
       box-shadow: 0 0 0 transparent;
       border-radius: 6px;
       border: 1px solid #E2E8F0;
-      background-color: #fff;
+      // background-color: #fff;
+      background: #fff!important;
+      max-width: 100%!important;
       color: #2c3338;
     }
 

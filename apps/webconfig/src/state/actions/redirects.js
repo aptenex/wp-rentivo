@@ -15,8 +15,12 @@ export const startSetRedirects = (payload) => {
           method: 'post',
           url: WP_API_REDIRECTS,
           data: {
-            siteConfig: JSON.stringify(payload),
+            redirects: JSON.stringify(payload),
           }
+        });
+
+        console.log({
+          redirects: JSON.stringify(payload),
         });
 
         console.log(result);

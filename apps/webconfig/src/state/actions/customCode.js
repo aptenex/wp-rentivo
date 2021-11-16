@@ -15,7 +15,8 @@ export const startSetCustomCode = (payload) => {
           method: 'post',
           url: WP_API_CUSTOM_CODE,
           data: {
-            siteConfig: JSON.stringify(payload),
+            headCustomHTML: JSON.stringify(payload.headCustomHTML),
+            closingBodyCustomHTML: JSON.stringify(payload.closingBodyCustomHTML),
           }
         });
 
