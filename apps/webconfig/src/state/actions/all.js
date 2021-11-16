@@ -10,7 +10,7 @@ import { setCustomCodeState } from './customCode';
 const sleep = t => new Promise(s => setTimeout(s, t));
 
 export const startFetchingAll = () => {
-  return async (dispatch, getState) => {
+  return async (dispatch) => {
    
     await dispatch(fetchingAll());
 
@@ -21,6 +21,50 @@ export const startFetchingAll = () => {
           method: 'get',
           url: WP_API_ALL
         });
+
+        const data = result.data.data;
+
+        if(data) {
+          
+          let defaultLang = data.defaultLang ? data.defaultLang : 'en';
+
+          if(data.siteConfig) {
+            const config = JSON.parse(data.siteConfig);
+            await dispatch(setSiteConfigState(config));
+          } else {
+            await dispatch(setSiteConfigState(defaultSiteConfig));
+          }
+
+          if(data.redirects) {
+            const redirects = JSON.parse(data.redirects);
+            await dispatch(setRedirectsState(redirects));
+          } else {
+            await dispatch(setRedirectsState({redirects: []}));
+          }
+
+          if(data.translations) {
+            let translations = JSON.parse(data.translations);
+            const translationValues = Object.values(translations);
+
+            if(translationValues.length > 0 && typeof translationValues[0] === 'string') {
+              translations = {
+                [defaultLang]: translations
+              }
+            }
+            await dispatch(setTranslationState(translations));
+          } else {
+            await dispatch(setTranslationState({en: {}}));
+          }
+
+          if(data.customCode && data.customCode.closingBodyCustomHTML && data.customCode.headCustomHTML) {
+            await dispatch(setCustomCodeState(data.customCode));
+          } else {
+            await dispatch(setCustomCodeState({headCustomHTML: '', closingBodyCustomHTML: ''}));
+          }
+
+        } else {
+          throw new Error('Could not get data');
+        }
 
         console.log(result);
 

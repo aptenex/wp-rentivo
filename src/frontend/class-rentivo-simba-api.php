@@ -33,6 +33,7 @@ if (!class_exists(WPRentivoSimbaAPI::class)) {
         'callback' => static function (\WP_REST_Request $request) {
           $data = [
             'data' => [
+              'defaultLang' => pll_default_language(),
               'siteConfig' => get_field('site_config', 'options'),
               'translations' => get_field('translations', 'options'),
               'redirects' => get_field('redirects', 'options'),
