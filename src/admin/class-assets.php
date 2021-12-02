@@ -29,7 +29,9 @@ if ( ! class_exists( Assets::class ) ) {
 				$ext = 'css';
 			}
 
-			wp_enqueue_style( Plugin_Data::plugin_text_domain(), plugin_dir_url( __FILE__ ) . "css/style.$ext", [], Plugin_Data::plugin_version(), 'all' );
+      // Plugin_Data::plugin_version()
+
+			wp_enqueue_style( Plugin_Data::plugin_text_domain(), plugin_dir_url( __FILE__ ) . "css/style.$ext", [], time(), 'all' );
 		}
 
 		/**
