@@ -1,6 +1,6 @@
 {
 	"name": "rentivo-simba",
-	"version": "1.0.15",
+	"version": "1.0.16",
 	"description": "Here is a short description of the plugin.",
 	"main": "index.js",
 	"scripts": {
