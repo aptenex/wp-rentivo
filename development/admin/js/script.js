@@ -31,10 +31,47 @@ import $ from 'jquery';
 // // @TODO This is an example import. Remove for production
 // import './components/test';
 
+
+/*
+height: 20px;
+min-height: 20px;
+line-height: 20px;
+margin-top: 5px;
+padding: 0 6px;
+margin-right: 7px;
+*/
+
 $( document ).ready( function () {
 	// jQuery methods go here...
 
 
+  const $adminBarMenuSecondary = document.getElementById('wp-admin-bar-top-secondary');
+
+  function createNewButton(id) {
+    const $button = document.createElement("button");
+    $button.classList.add('button button-primary button-small');
+    $button.style.height = '20px';
+    $button.style.minHeight = '20px';
+    $button.style.lineHeight = '20px';
+    $button.style.marginTop = '5px';
+    $button.style.padding = '0 6px';
+    $button.style.marginRight = '7px';
+    $button.id = `${id}`;
+  }
+
+  function createNewMenuButton(id, $button) {
+    const $li = document.createElement("li");
+    $li.classList.add('menupop')
+    $li.id = `${id}`;
+    $li.appendChild($button);
+
+    return $li;
+  }
+
+  const $publishButton = createNewButton('publish-site');
+  const $menuItemButton = createNewMenuButton('menu-publish-site', $publishButton);
+
+  $adminBarMenuSecondary.appendChild($menuItemButton);
 
 } );
 
