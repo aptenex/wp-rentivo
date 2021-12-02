@@ -162,13 +162,15 @@ jQuery( document ).ready( function ($) {
     });
 
     function runBuild(type = 'preview', $buttonEl) {
+
+      $buttonEl.innerText = 'Verifying...';
+      $buttonEl.setAttribute('disabled');
+
       postBuild(type, (resp) => {
         $buttonEl.innerText = 'Building...';
-        $buttonEl.setAttribute('disabled');
         console.log(resp);
         // TODO: Update build_ids for checker...
         // postUpdateBuildStatus(type, )
-
       }, (e) => {
         console.error(e);
         $buttonEl.innerText = 'Oops, error';
