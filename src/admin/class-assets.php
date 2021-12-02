@@ -36,7 +36,7 @@ if ( ! class_exists( Assets::class ) ) {
 		 * Register the JavaScript for the admin area.
 		 */
 		public function enqueue_scripts(): void {
-			$ext = 'min.js';
+			$ext = 'js';
 
 			if (
 				defined( 'SCRIPT_DEBUG' )
