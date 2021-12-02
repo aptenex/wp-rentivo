@@ -32,11 +32,28 @@ if ( ! class_exists( WebConfigPage::class ) ) {
 
         public function add_admin_head_code() {
             $graphql = function_exists('get_graphql_setting') ? get_graphql_setting( 'graphql_endpoint', 'graphql' ) : 'graphql';
+
+            if( is_user_logged_in() ) { // check if there is a logged in user 
+              $user = wp_get_current_user(); // getting & setting the current user 
+              $roles = ( array ) $user->roles; // obtaining the role 
+              $rolesReadyForJs = [];
+              foreach ($roles as $role_name) {
+                  array_push($rolesReadyForJs, "'$role_name'");
+              }
+
+              $rolesReadyForJs = join(', ', $rolesReadyForJs);
+            } else {
+              $rolesReadyForJs = '';
+            }
+
+            $access_token = get_option('wpcmd_site_access_token');
+
             ?>
             <script>
                 window.apps = window.apps === undefined ? {} : window.apps;
                 window.apps.base_url = "<?php echo site_url(); ?>/<?php echo $graphql; ?>";
-                console.log(window.apps);
+                window.apps.user_roles = [<?php echo $rolesReadyForJs; ?>];
+                window.apps.access_token = "<?php if($access_token) { echo $access_token; } else { echo ''; } ?>";
             </script>
             <?php
         }
