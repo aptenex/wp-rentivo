@@ -43,13 +43,21 @@ margin-right: 7px;
 
 $( document ).ready( function () {
 	// jQuery methods go here...
-
+  const accessToken = window.app ? window.app.access_token : undefined;
+  console.log({accessToken});
+  
+  if(!accessToken) {
+    console.log('No access token');
+    return;
+  }
 
   const $adminBarMenuSecondary = document.getElementById('wp-admin-bar-top-secondary');
 
-  function createNewButton(id) {
+  function createNewButton(id, label) {
     const $button = document.createElement("button");
-    $button.classList.add('button button-primary button-small');
+    $button.classList.add('button');
+    $button.classList.add('button-primary');
+    $button.classList.add('button-small');
     $button.style.height = '20px';
     $button.style.minHeight = '20px';
     $button.style.lineHeight = '20px';
@@ -57,21 +65,37 @@ $( document ).ready( function () {
     $button.style.padding = '0 6px';
     $button.style.marginRight = '7px';
     $button.id = `${id}`;
+    $button.innerText = label;
+
+    return $button;
   }
 
-  function createNewMenuButton(id, $button) {
+  function createNewMenuButton(id, $buttonEl) {
     const $li = document.createElement("li");
     $li.classList.add('menupop')
     $li.id = `${id}`;
-    $li.appendChild($button);
+    $li.appendChild($buttonEl);
 
     return $li;
   }
 
-  const $publishButton = createNewButton('publish-site');
-  const $menuItemButton = createNewMenuButton('menu-publish-site', $publishButton);
+  const $buildButton = createNewButton('build-site', 'Build & Publish');
+  const $menuItemBuildButton = createNewMenuButton('menu-build-site', $buildButton);
 
-  $adminBarMenuSecondary.appendChild($menuItemButton);
+  const $buildPreviewButton = createNewButton('build-preview-site', 'Build Preview');
+  const $menuItemBuildPreviewButton = createNewMenuButton('menu-build-preview-site', $buildPreviewButton);
+
+  $adminBarMenuSecondary.appendChild($menuItemBuildButton);
+  $adminBarMenuSecondary.appendChild($menuItemBuildPreviewButton);
+
+
+  function checkStatus(accessToken, $button) {
+
+  }
+
+  setInterval(() => {
+    checkStatus()
+  }, 10000);
 
 } );
 

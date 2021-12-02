@@ -158,10 +158,6 @@ if (!class_exists(Init::class)) {
       // Set up user stuff (including new roles)
       $this->loader->add_action('admin_init', $users, 'set_user_roles');
 
-      // Enqueue plugin's admin assets
-      $this->loader->add_action('admin_enqueue_scripts', $assets, 'enqueue_styles');
-      $this->loader->add_action('admin_enqueue_scripts', $assets, 'enqueue_scripts');
-
       // Settings
       $settings = new Admin\Settings();
       //$this->loader->add_action( 'admin_menu', $settings, 'add_plugin_admin_menu' );
@@ -183,6 +179,10 @@ if (!class_exists(Init::class)) {
 
       // Custom page/apps
       new Admin\WebConfigPage();
+
+      // Enqueue plugin's admin assets
+      $this->loader->add_action('admin_enqueue_scripts', $assets, 'enqueue_styles');
+      $this->loader->add_action('admin_enqueue_scripts', $assets, 'enqueue_scripts');
     }
 
     /**
