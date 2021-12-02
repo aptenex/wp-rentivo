@@ -47,6 +47,8 @@ if ( ! class_exists( WebConfigPage::class ) ) {
             }
 
             $access_token = get_option('wpcmd_site_access_token');
+            $last_build_job_id = get_option('last_build_job_id', '');
+            $last_build_preview_job_id = get_option('last_build_preview_job_id', '');
 
             ?>
             <script>
@@ -54,6 +56,8 @@ if ( ! class_exists( WebConfigPage::class ) ) {
                 window.apps.base_url = "<?php echo site_url(); ?>/<?php echo $graphql; ?>";
                 window.apps.user_roles = [<?php echo $rolesReadyForJs; ?>];
                 window.apps.access_token = "<?php if($access_token) { echo $access_token; } else { echo ''; } ?>";
+                window.apps.last_build_job_id = "<?php if($last_build_job_id) { echo $last_build_job_id; } else { echo ''; } ?>";
+                window.apps.last_build_preview_job_id = "<?php if($last_build_preview_job_id) { echo $last_build_preview_job_id; } else { echo ''; } ?>";
             </script>
             <?php
         }

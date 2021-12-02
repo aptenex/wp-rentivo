@@ -15,6 +15,35 @@ if (!class_exists(WPRentivoSimbaAPI::class)) {
     public function register_endpoints()
     {
 
+
+      register_rest_route('simba/v1', '/last_build_job_id', [
+        'methods' => 'POST',
+        'callback' => static function (\WP_REST_Request $request) {
+          $data = [];
+          $status = 200;
+          if($request->get_param('job_id')) {
+            update_option('last_build_job_id', $request->get_param('job_id'));
+            $data['job_id'] = $request->get_param('job_id');
+          }
+
+          return new \WP_REST_Response($data, $status);
+        }
+      ]);
+
+      register_rest_route('simba/v1', '/last_build_preview_job_id', [
+        'methods' => 'POST',
+        'callback' => static function (\WP_REST_Request $request) {
+          $data = [];
+          $status = 200;
+          if($request->get_param('job_id')) {
+            update_option('last_build_preview_job_id', $request->get_param('job_id'));
+            $data['job_id'] = $request->get_param('job_id');
+          }
+
+          return new \WP_REST_Response($data, $status);
+        }
+      ]);
+
       register_rest_route('simba/v1', '/overview', [
         'methods' => 'GET',
         'callback' => static function (\WP_REST_Request $request) {
