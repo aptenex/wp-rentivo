@@ -49,7 +49,6 @@ jQuery( document ).ready( function ($) {
     }
   }
 
-
   function manageBuildButtons() {
     console.log({accessToken});
 
@@ -62,6 +61,7 @@ jQuery( document ).ready( function ($) {
       $.ajax({
         url: `https://wpcmd.k8.rentivo.com/public/site/build-${type}`,
         dataType: 'json',
+        method: 'POST',
         success: successCallback,
         error: errorCallback,
         headers: { 'X-Site-Token': accessToken }
@@ -72,6 +72,21 @@ jQuery( document ).ready( function ($) {
       $.ajax({
         url: `https://wpcmd.k8.rentivo.com/public/site/build-preview/${jobId}`,
         dataType: 'json',
+        method: 'GET',
+        success: successCallback,
+        error: errorCallback,
+        headers: { 'X-Site-Token': accessToken }
+      });
+    }
+
+    function postUpdateBuildStatus(type = 'preview', jobId, successCallback, errorCallback) {
+      $.ajax({
+        url: `/wp-json/simba/v1/${type === 'preview' ? 'last_build_preview_job_id' : 'last_build_job_id'}`,
+        dataType: 'json',
+        data: {
+          job_id: jobId
+        },
+        method: 'POST',
         success: successCallback,
         error: errorCallback,
         headers: { 'X-Site-Token': accessToken }
@@ -146,13 +161,13 @@ jQuery( document ).ready( function ($) {
       runBuild('release', $buildButton);
     });
 
-    function runBuild(type = 'prevew', $buttonEl) {
+    function runBuild(type = 'preview', $buttonEl) {
       postBuild(type, (resp) => {
         $buttonEl.innerText = 'Building...';
         $buttonEl.setAttribute('disabled');
-
+        console.log(resp);
         // TODO: Update build_ids for checker...
-
+        // postUpdateBuildStatus(type, )
 
       }, (e) => {
         console.error(e);
