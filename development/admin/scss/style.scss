@@ -3,11 +3,12 @@ $color: #f03;
 @import "style-editor";
 @import "./webconfig/style";
 
-body {
-
+#toplevel_page_web-config {
+  display: none;
 }
 
 // Remove Customizer button
 a.button.customize {
 	display: none;
 }
+
