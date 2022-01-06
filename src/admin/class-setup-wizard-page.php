@@ -30,7 +30,7 @@ if (!class_exists(WebConfigPage::class)) {
 
       if ($this->users->is_editor()) {
 
-        
+        add_action('admin_menu', array($this, 'add_menu_item'));
         add_action('admin_enqueue_scripts', array($this, 'register_page_scripts'));
         add_action('admin_enqueue_scripts', array($this, 'load_page_scripts'));
       }
