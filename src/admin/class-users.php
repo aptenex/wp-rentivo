@@ -18,7 +18,7 @@ if (!class_exists(Users::class)) {
 
     public function is_user()
     {
-      $user = wp_get_current_user();
+      $user = \wp_get_current_user();
       if (!is_super_admin() and !is_admin()) {
         return true;
       } else {
@@ -28,7 +28,7 @@ if (!class_exists(Users::class)) {
 
     public function is_owner()
     {
-      $user = wp_get_current_user();
+      $user = \wp_get_current_user();
       if (is_super_admin() or is_admin() or in_array('owner', (array) $user->roles)) {
         return true;
       } else {
@@ -38,7 +38,7 @@ if (!class_exists(Users::class)) {
 
     public function is_manager()
     {
-      $user = wp_get_current_user();
+      $user = \wp_get_current_user();
       if (is_super_admin() or is_admin() or in_array('manager', (array) $user->roles)) {
         return true;
       } else {
@@ -48,7 +48,7 @@ if (!class_exists(Users::class)) {
 
     public function is_editor()
     {
-      $user = wp_get_current_user();
+      $user = \wp_get_current_user();
       if (is_super_admin() or is_admin() or in_array('manager', (array) $user->roles) or in_array('editor', (array) $user->roles)) {
         return true;
       } else {
