@@ -63,7 +63,19 @@ if ( ! class_exists( Settings::class ) ) {
                 ['id' => 'feedback', 'removePage' => false, 'type' => 'admin_bar'],
                 ['id' => 'my-sites', 'removePage' => false, 'type' => 'admin_bar'],
                 ['id' => 'my-sites-list', 'removePage' => false, 'type' => 'admin_bar'],
-                ['id' => 'site-name', 'removePage' => false, 'type' => 'admin_bar']
+                ['id' => 'site-name', 'removePage' => false, 'type' => 'admin_bar'],
+                ['id' => 'graphql', 'removePage' => true, 'type' => 'menu'],
+                ['id' => 'graphiql-ide', 'removePage' => true, 'type' => 'admin_bar'],
+                ['id' => 'edit.php?post_type=action_monitor', 'removePage' => true, 'type' => 'menu'],
+                ['id' => 'mlang', 'removePage' => true, 'type' => 'menu'],
+                ['id' => 'themes.php', 'removePage' => true, 'type' => 'menu'],
+     
+                ['id' => 'index.php', 'removePage' => true, 'type' => 'submenu', 'submenuId' => 'update-core.php'],      
+                ['id' => 'options-general.php', 'removePage' => true, 'type' => 'menu'],
+            ];
+
+            $this->blockedEditorItems = [
+              ['id' => 'users.php', 'removePage' => true, 'type' => 'menu']
             ];
         }
 
@@ -86,18 +98,28 @@ if ( ! class_exists( Settings::class ) ) {
          * Add the Settings page to the wp-admin menu.
          */
         public function add_plugin_admin_menu(): void {
-            add_options_page(
-                Plugin_Data::get_plugin_display_name(),
-                Plugin_Data::get_plugin_display_name(),
-                $this->settings->common->required_capability(),
-                $this->settings->get_settings_page_slug(),
-                [ $this, 'settings_page' ]
-            );
+            // add_options_page(
+            //     Plugin_Data::get_plugin_display_name(),
+            //     Plugin_Data::get_plugin_display_name(),
+            //     $this->settings->common->required_capability(),
+            //     $this->settings->get_settings_page_slug(),
+            //     [ $this, 'settings_page' ]
+            // );
+
+            add_menu_page(
+              'Menus',
+              'Menus',
+              'edit_theme_options',
+              'nav-menus.php',
+              '',
+              'dashicons-list-view',
+              68
+           );
         }
 
         public function dashboard_setup() {
             global $wp_meta_boxes;
-
+            unset($wp_meta_boxes['dashboard']['normal']['core']['dashboard_site_health']);
             unset($wp_meta_boxes['dashboard']['side']['core']['dashboard_quick_press']);
             unset($wp_meta_boxes['dashboard']['normal']['core']['dashboard_incoming_links']);
             unset($wp_meta_boxes['dashboard']['normal']['core']['dashboard_right_now']);
@@ -128,20 +150,25 @@ if ( ! class_exists( Settings::class ) ) {
             echo '<pre>'; print_r( $submenu ); echo '</pre>'; // SUBMENUS
             die();
             */
+            // echo "<pre>";
+            // print_r($menu);
+            // print_r($submenu);
+            // echo "</pre>";
+            // die();
 
             if($this->users->is_user()) {
 
                 foreach ($this->blockedItems as $item) {
                     //print_r($item);
                     if($item['removePage']) {
-                        if($item['type'] === 'menu') {
+                        if($item['type'] === 'menu' and isset($_GET['page'])) {
                             if($pagenow === $item['id'] or $pagenow . '?page=' . $_GET['page'] === 'admin.php?page=' . $item['id']) {
                                 header("Location: $siteUrl/wp-admin/index.php", true, 301);
                                 exit();
                             }
                         }
 
-                        if($item['type'] === 'submenu' and !empty($item['submenuId'])) {
+                        if($item['type'] === 'submenu' and !empty($item['submenuId']) and isset($_GET['page'])) {
                             if($pagenow === $item['submenuId'] or $pagenow . '?page=' . $_GET['page'] === 'admin.php?page=' . $item['submenuId']) {
                                 header("Location: $siteUrl/wp-admin/index.php", true, 301);
                                 exit();
@@ -158,15 +185,46 @@ if ( ! class_exists( Settings::class ) ) {
                     }
                 }
             }
+
+
+            if($this->users->is_editor_or_below()) {
+
+              foreach ($this->blockedEditorItems as $item) {
+                  //print_r($item);
+                  if($item['removePage']) {
+                      if($item['type'] === 'menu' and isset($_GET['page'])) {
+                          if($pagenow === $item['id'] or $pagenow . '?page=' . $_GET['page'] === 'admin.php?page=' . $item['id']) {
+                              header("Location: $siteUrl/wp-admin/index.php", true, 301);
+                              exit();
+                          }
+                      }
+
+                      if($item['type'] === 'submenu' and !empty($item['submenuId']) and isset($_GET['page'])) {
+                          if($pagenow === $item['submenuId'] or $pagenow . '?page=' . $_GET['page'] === 'admin.php?page=' . $item['submenuId']) {
+                              header("Location: $siteUrl/wp-admin/index.php", true, 301);
+                              exit();
+                          }
+                      }
+                  }
+
+                  if($item['type'] === 'menu') {
+                      remove_menu_page($item['id']);
+                  }
+
+                  if($item['type'] === 'submenu' and !empty($item['submenuId'])) {
+                      remove_submenu_page($item['id'], $item['submenuId']);
+                  }
+              }
+          }
         }
 
         public function admin_bar($admin_bar) {
-            /*
-            echo "<pre>";
-            print_r($admin_bar);
-            echo "</pre>";
-            die();
-            */
+            
+            // echo "<pre>";
+            // print_r($admin_bar);
+            // echo "</pre>";
+            // die();
+            
 
             if($this->users->is_user()) {
                 foreach ($this->blockedItems as $item) {

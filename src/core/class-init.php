@@ -160,7 +160,7 @@ if (!class_exists(Init::class)) {
 
       // Settings
       $settings = new Admin\Settings();
-      //$this->loader->add_action( 'admin_menu', $settings, 'add_plugin_admin_menu' );
+      $this->loader->add_action( 'admin_menu', $settings, 'add_plugin_admin_menu' );
       //$this->loader->add_action( 'admin_menu', $settings, 'hide_admin_sub_menu_items' );
       $this->loader->add_action('admin_menu', $settings, 'admin_menu', 100);
       $this->loader->add_action('in_admin_header', $settings, 'admin_notices', 100);

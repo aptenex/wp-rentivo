@@ -29,7 +29,8 @@ if (!class_exists(WebConfigPage::class)) {
       }
 
       if ($this->users->is_editor()) {
-        add_action('admin_menu', array($this, 'add_menu_item'));
+
+        
         add_action('admin_enqueue_scripts', array($this, 'register_page_scripts'));
         add_action('admin_enqueue_scripts', array($this, 'load_page_scripts'));
       }
@@ -78,10 +79,26 @@ if (!class_exists(WebConfigPage::class)) {
         $web_url = $siteConfig->websiteUrl;
       }
 
+      global $post;
+      
+      $post_slug = "";
+      $post_type = "";
+
+      if($post) {
+
+        //rint_r($post);
+        //die();
+
+        $post_slug = $post->post_name;
+        $post_type = $post->post_type;
+      }
+      
+
 
 
 ?>
       <script>
+
         window.apps = window.apps === undefined ? {} : window.apps;
         window.apps.base_url = "<?php echo site_url(); ?>/<?php echo $graphql; ?>";
         window.apps.web_url = "<?php echo $web_url; ?>";
@@ -102,6 +119,8 @@ if (!class_exists(WebConfigPage::class)) {
                                                   } else {
                                                     echo '';
                                                   } ?>";
+        window.apps.current_slug = "<?php echo $post_slug; ?>";    
+        window.apps.current_post_type = "<?php echo $post_type; ?>";                                  
       </script>
     <?php
     }

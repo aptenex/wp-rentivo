@@ -34,20 +34,25 @@ import jQuery from 'jquery';
 jQuery( document ).ready( function ($) {
 
   let accessToken = '';
+  let siteConfig = {};
   let lastBuildJobId = '';
   let lastBuildPreviewJobId = '';
   let globalVarChecker = setInterval(checkForGlobalVars, 500);
-
+  let post_slug = '';
+  let post_type = '';
   let latestBuildViewLink = null;
   let latestPreviewViewLink = null;
 
   function checkForGlobalVars() {
     if(window && window.apps) {
       accessToken = window.apps.access_token;
+      siteConfig = window.apps.site_config;
       lastBuildJobId = window.apps.last_build_job_id;
       lastBuildPreviewJobId = window.apps.last_build_preview_job_id;
       latestBuildViewLink = window.apps.web_url;
-      console.log(window.apps);
+      post_slug = window.apps.current_slug;
+      post_type = window.apps.current_post_type;
+      
       clearInterval(globalVarChecker);
       manageBuildButtons();
     }
@@ -63,6 +68,34 @@ jQuery( document ).ready( function ($) {
     if(!accessToken) {
       console.log('No access token');
       return;
+    }
+
+    function trimSlash(url) {     
+      return url.replace(/\/$/, "");
+    } 
+
+    function getUrlPath(url) {
+      if(!siteConfig || !siteConfig.routePaths || !post_slug || !post_type) {
+        return url;
+      }
+
+      if(post_type === 'collections') {
+        return `${trimSlash(url)}/${siteConfig.routePaths.ROUTE_BASE_SEARCH}/${post_slug}/`;
+      }
+
+      if(post_type === 'hubs') {
+        return `${trimSlash(url)}/${siteConfig.routePaths.ROUTE_BASE_HUB}/${post_slug}/`;
+      }
+
+      if(post_type === 'post') {
+        return `${trimSlash(url)}/${siteConfig.routePaths.ROUTE_BASE_POSTS}/${post_slug}/`;
+      }
+
+      if(post_type === 'page') {
+        return `${trimSlash(url)}/${post_slug}/`;
+      }
+
+      return url;
     }
 
     function postBuild(type = 'preview', successCallback, errorCallback) {
@@ -225,7 +258,7 @@ jQuery( document ).ready( function ($) {
       e.preventDefault();
 
       if(latestPreviewViewLink) {
-        window.open(latestPreviewViewLink, "_blank") || window.location.replace(latestPreviewViewLink);
+        window.open(getUrlPath(latestPreviewViewLink), "_blank") || window.location.replace(getUrlPath(latestPreviewViewLink));
       }
     });
 
@@ -239,7 +272,7 @@ jQuery( document ).ready( function ($) {
       e.preventDefault();
       
       if(latestBuildViewLink) {
-        window.open(latestBuildViewLink, "_blank") || window.location.replace(latestBuildViewLink);
+        window.open(getUrlPath(latestBuildViewLink), "_blank") || window.location.replace(getUrlPath(latestBuildViewLink));
       }
     });
 

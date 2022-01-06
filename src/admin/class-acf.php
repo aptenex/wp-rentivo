@@ -2,6 +2,8 @@
 
 namespace Rentivo_Simba\Admin;
 
+use Rentivo_Simba\Admin as Admin;
+
 // Abort if this file is called directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -12,6 +14,8 @@ if ( ! class_exists( Acf::class ) ) {
 
         public function init() {
 
+            $this->users = new Admin\Users();
+
             $optionsSiteConfig = get_field('site_config', 'options');
             if($optionsSiteConfig) {
                 $siteConfig = json_decode($optionsSiteConfig);
@@ -21,7 +25,7 @@ if ( ! class_exists( Acf::class ) ) {
                 }
             }
 
-            if( function_exists('acf_add_options_page') ) {
+            if( function_exists('acf_add_options_page') and $this->users->is_admin()) {
 
                 // Add parent.
                 $parent = acf_add_options_page(array(
