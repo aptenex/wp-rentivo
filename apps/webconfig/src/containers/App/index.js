@@ -16,6 +16,7 @@ import Translations from '../Translations';
 import CustomCode from '../CustomCode';
 import Redirects from '../Redirects';
 import { HiMenuAlt2, HiCode, HiTemplate, HiRefresh } from 'react-icons/hi';
+import { isAdmin, isManager } from '../../utils/role';
 
 const navLinks = [
   {
@@ -29,20 +30,27 @@ const navLinks = [
     label: `Translations`,
     component: Translations,
     icon: HiMenuAlt2,
-  },
-  {
+  }
+];
+
+if(isAdmin()) {
+  navLinks.push({
     slug: `redirects`,
     label: `Redirects`,
     component: Redirects,
     icon: HiRefresh,
-  },
-  {
+  });
+}
+
+if(isManager()) {
+  navLinks.push({
     slug: `custom`,
     label: `Custom Code`,
     component: CustomCode,
     icon: HiCode,
-  }
-];
+  });
+}
+
 
 export default function App() {
   const { isMenuOpen, toggle } = useMobileMenuState();

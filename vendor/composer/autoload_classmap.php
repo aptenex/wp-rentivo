@@ -47,4 +47,5 @@ return array(
     'Rentivo_Simba\\Shortcodes\\Setup_Wizard' => $baseDir . '/src/shortcodes/class-setup_wizard.php',
     'Rentivo_Simba\\Shortcodes\\Shortcode' => $baseDir . '/src/shortcodes/class-shortcode.php',
     'Rentivo_Simba\\Shortcodes\\TK_Request' => $baseDir . '/src/shortcodes/class-tk_request.php',
+    'Rentivo_Simba\\Wpcli\\Simba_Command' => $baseDir . '/src/wpcli/simba-command.php',
 );

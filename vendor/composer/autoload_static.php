@@ -66,6 +66,7 @@ class ComposerStaticInitdf9a36fdba2576c177cac6e4c0762fa7
         'Rentivo_Simba\\Shortcodes\\Setup_Wizard' => __DIR__ . '/../..' . '/src/shortcodes/class-setup_wizard.php',
         'Rentivo_Simba\\Shortcodes\\Shortcode' => __DIR__ . '/../..' . '/src/shortcodes/class-shortcode.php',
         'Rentivo_Simba\\Shortcodes\\TK_Request' => __DIR__ . '/../..' . '/src/shortcodes/class-tk_request.php',
+        'Rentivo_Simba\\Wpcli\\Simba_Command' => __DIR__ . '/../..' . '/src/wpcli/simba-command.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

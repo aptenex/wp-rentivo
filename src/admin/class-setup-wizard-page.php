@@ -2,6 +2,7 @@
 
 namespace Rentivo_Simba\Admin;
 use Rentivo_Simba\Plugin_Data as Plugin_Data;
+use Rentivo_Simba\Admin as Admin;
 
 // Abort if this file is called directly.
 if ( ! defined( 'ABSPATH' ) ) {
@@ -12,10 +13,18 @@ if ( ! class_exists( WebConfigPage::class ) ) {
 	class WebConfigPage {
 
         public function __construct() {
-            add_action( 'admin_menu', array($this, 'add_menu_item') );
-            add_action( 'admin_head', array($this, 'add_admin_head_code') );
-            add_action( 'admin_enqueue_scripts', array($this, 'register_page_scripts') );
-            add_action( 'admin_enqueue_scripts', array($this, 'load_page_scripts') );
+            $this->users = new Admin\Users();
+
+            // Allow old Site Owner role see build buttons
+            if($this->users->is_editor() or $this->users->is_owner()) {
+              add_action( 'admin_head', array($this, 'add_admin_head_code') );
+            }
+
+            if($this->users->is_editor()) {
+              add_action( 'admin_menu', array($this, 'add_menu_item') );
+              add_action( 'admin_enqueue_scripts', array($this, 'register_page_scripts') );
+              add_action( 'admin_enqueue_scripts', array($this, 'load_page_scripts') );
+            }
         }
 
         public function add_menu_item() {
@@ -50,10 +59,23 @@ if ( ! class_exists( WebConfigPage::class ) ) {
             $last_build_job_id = get_option('last_build_job_id', '');
             $last_build_preview_job_id = get_option('last_build_preview_job_id', '');
 
+
+            $web_url = '';
+
+            $optionsSiteConfig = get_field('site_config', 'options');
+            if($optionsSiteConfig) {
+                $siteConfig = json_decode($optionsSiteConfig);
+                $web_url = $siteConfig->websiteUrl;
+            }
+
+
+
             ?>
             <script>
                 window.apps = window.apps === undefined ? {} : window.apps;
                 window.apps.base_url = "<?php echo site_url(); ?>/<?php echo $graphql; ?>";
+                window.apps.web_url = "<?php echo $web_url; ?>";
+                window.apps.site_config = <?php echo $optionsSiteConfig; ?>;
                 window.apps.user_roles = [<?php echo $rolesReadyForJs; ?>];
                 window.apps.access_token = "<?php if($access_token) { echo $access_token; } else { echo ''; } ?>";
                 window.apps.last_build_job_id = "<?php if($last_build_job_id) { echo $last_build_job_id; } else { echo ''; } ?>";

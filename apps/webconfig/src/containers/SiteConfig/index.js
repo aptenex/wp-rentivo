@@ -6,6 +6,7 @@ import Design from './Design';
 import ApisAndTracking from './ApisAndTracking';
 import Advanced from './Advanced';
 import Danger from './Danger';
+import { isAdmin, isManager } from '../../utils/role';
 
 const navLinks = [
   {
@@ -14,31 +15,47 @@ const navLinks = [
     component: Overview
   },
   {
-    slug: `settings`,
-    label: `Settings`,
-    component: Settings
-  },
-  {
     slug: `design`,
     label: `Design`,
     component: Design
-  },
-  {
-    slug: `apis-and-tracking`,
-    label: `APIs & Tracking`,
-    component: ApisAndTracking
-  },
-  {
-    slug: `advanced`,
-    label: `Advanced`,
-    component: Advanced
-  },
-  {
-    slug: `siteConfig`,
-    label: `Site Config`,
-    component: Danger
-  },
+  }
 ];
+
+if(isManager()) {
+  navLinks.push(
+    {
+      slug: `settings`,
+      label: `Settings`,
+      component: Settings
+    }
+  );
+
+  navLinks.push(
+    {
+      slug: `apis-and-tracking`,
+      label: `APIs & Tracking`,
+      component: ApisAndTracking
+    }
+  );
+}
+
+if(isAdmin()) {
+  navLinks.push(
+    {
+      slug: `advanced`,
+      label: `Advanced`,
+      component: Advanced
+    }
+  );
+
+  navLinks.push(
+    {
+      slug: `siteConfig`,
+      label: `Site Config`,
+      component: Danger
+    }
+  );
+}
 
 export default function SiteConfig() {
   return (

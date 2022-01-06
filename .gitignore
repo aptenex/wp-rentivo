@@ -11,3 +11,4 @@
 /phpunit.xml
 _DS_Store
 .history
+*.zip
